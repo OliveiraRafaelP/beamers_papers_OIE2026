@@ -1,0 +1,188 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Bresnahan e Reiss (1990)]{Entry in Monopoly Markets}
+\subtitle{{\Large}Bresnahan e Reiss (1990)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1990}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item Arcabouço Teórico: Condições de Entrada e Limiar
+  \item Razão entre Limiares e Potência Competitiva
+  \item Modelo Empírico: Probit Ordenado
+  \item Dados: Mercados Locais Isolados nos EUA
+  \item Resultados: Limiares de Entrada
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item \textbf{Questão:} quando e por que mercados locais são servidos por apenas uma firma?
+  \item \textbf{Estratégia:} explorar variação cross-seccional no número de firmas em mercados rurais isolados, assumindo equilíbrio de longo prazo
+  \item Limiares de entrada (market size mínimo para $N$ firmas) revelam informação sobre lucratividade e conduta \textit{sem} estimar explicitamente custos e demanda estruturais
+\end{itemize}
+
+\textbf{Contribuições:}
+\begin{enumerate}
+  \item Modelo estrutural de decisão de entrada com $N$ potenciais entrantes
+  \item Estimação de limiares $s_N^*$: tamanho mínimo de mercado para suportar $N$ firmas
+  \item Razões entre limiares revelam como a conduta muda com o número de firmas
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{2. Arcabouço Teórico: Condições de Entrada}
+Lucro da $N$-ésima firma no mercado $i$:
+\begin{equation}
+  \pi_N = S\,V_N(p, X, W;\,\alpha,\beta) - F_N(W;\,\gamma)
+\end{equation}
+
+Equilíbrio com $N$ firmas: firma $N$ entra; firma $N+1$ não:
+\begin{align}
+  S\,V_N &\geq F_N \\
+  S\,V_{N+1} &< F_{N+1}
+\end{align}
+
+\textbf{Limiar de entrada de $N$ firmas:}
+\begin{equation}
+  s_N^* = \frac{F_N}{V_N}
+\end{equation}
+
+\textbf{Mecanismo:} $V_N < V_{N-1}$ (a entrada de um rival erode lucros variáveis por cliente $\Rightarrow$ preço cai). Logo $s_N^* > s_{N-1}^*$: mercados maiores suportam mais firmas.
+\end{frame}
+
+%================================================
+\begin{frame}{3. Razão entre Limiares e Potência Competitiva}
+\textbf{Benchmark de conduta inalterada:} se $V_N = V_1$ para todo $N$ (sem efeitos de entrada) e $F$ constante $\Rightarrow$ $s_N^*/s_1^* = N$.
+
+\textbf{Razão chave} $s_2^*/s_1^*$ (tamanho por firma):
+\begin{itemize}
+  \item $s_2^*/s_1^* = 2$: entrada \textit{não} muda a conduta — $V_2 = V_1$
+  \item $s_2^*/s_1^* > 2$: entrada \textit{intensifica} a concorrência — $V_2 < V_1$
+  \item Quanto maior a razão, mais a competição erode lucros por cliente
+\end{itemize}
+
+\vspace{0.2cm}
+A razão $s_N^*/s_{N-1}^*$ converge para $N/(N-1)$ para $N$ grande, indicando convergência para conduta competitiva sem mudança adicional de conduta.
+
+\vspace{0.2cm}
+\textbf{Importância:} inferência sobre conduta \textit{apenas} a partir de dados de número de firmas e tamanho de mercado.
+\end{frame}
+
+%================================================
+\begin{frame}{4. Modelo Empírico: Probit Ordenado}
+\textbf{Especificação do limiar para mercado $i$:}
+\begin{equation}
+  s_{N,i}^* = \exp\!\bigl(X_i\,\beta_N + W_i\,\gamma_N\bigr)
+\end{equation}
+
+Mercado $i$ tem $N$ firmas se $s_{N,i}^* \leq S_i < s_{N+1,i}^*$.
+
+\textbf{Modelo probit ordenado:} variável dependente $N_i \in \{0, 1, 2, 3^+\}$.
+
+\begin{equation}
+  \Pr(N_i = n) = \Pr\!\left(s_{n,i}^* \leq S_i\right) - \Pr\!\left(s_{n+1,i}^* \leq S_i\right)
+\end{equation}
+
+\textbf{Estimação:} máxima verossimilhança, com parâmetros $\beta_N$ e $\gamma_N$ estimados conjuntamente para todos os limiares.
+
+\vspace{0.2cm}
+\textbf{Especificação de lucratividade:}
+\begin{equation}
+  \pi_N = \alpha_0 + \alpha_N\,\ln S + X'\alpha_X + W'\alpha_W + \varepsilon
+\end{equation}
+$\alpha_N$ captura como a lucratividade varia com o número de firmas.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Dados: Mercados Locais Isolados nos EUA}
+\begin{itemize}
+  \item Mercados rurais \textbf{isolados geograficamente}: garantia de que firmas locais são os únicos ofertantes relevantes
+  \item Indústrias: médicos, dentistas, farmácias, encanadores, revendas de pneus, hotéis, revendas de automóveis
+\end{itemize}
+
+\textbf{Variáveis:}
+\begin{itemize}
+  \item $S$: população (ajustada por renda e demografia)
+  \item $X$: características demográficas e econômicas do mercado
+  \item $W$: proxies para custos de operação
+  \item $N$: número observado de firmas (variável dependente)
+\end{itemize}
+
+\vspace{0.2cm}
+Amostra estratificada: exclui mercados muito grandes, para garantir identificação.
+\end{frame}
+
+%================================================
+\begin{frame}{6. Resultados: Limiares de Entrada}
+\textbf{Resultado central:} razões $s_N^*/s_{N-1}^*$ substancialmente maiores que o benchmark de conduta inalterada, especialmente na transição monopolio $\to$ duopólio.
+
+\vspace{0.2cm}
+\textbf{Exemplo — Médicos:}
+\begin{itemize}
+  \item $s_1^* \approx 750$ hab.\ por médico (mínimo para um médico)
+  \item $s_2^*/s_1^* \approx 2{,}65$: duopólio exige $2{,}65\times$ mais mercado por firma
+  \item Implica $V_2/V_1 \approx 0{,}60$: entrada do segundo médico erode $\sim 40\%$ dos lucros variáveis
+\end{itemize}
+
+\textbf{Padrão geral por indústria:}
+\begin{itemize}
+  \item Serviços profissionais: $s_2^*/s_1^* > 2$ (mudança de conduta intensa)
+  \item Varejo: razões mais próximas de 2
+  \item Para $N \geq 3$: razões convergem rapidamente para $N/(N-1)$ — competição aproximadamente perfeita
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{7. Conclusão e Legado}
+\textbf{Resultados:}
+\begin{enumerate}
+  \item Conduta competitiva muda substancialmente com a entrada do 2º competidor
+  \item Poucos entrantes ($2$--$3$) são suficientes para condições aproximadamente competitivas
+  \item Diferenças marcantes entre indústrias: poder de mercado monopolístico varia por tipo de serviço
+\end{enumerate}
+
+\textbf{Limitações:}
+\begin{itemize}
+  \item Não identifica $F_N$ e $V_N$ separadamente — apenas a razão $s_N^* = F_N/V_N$
+  \item Exige equilíbrio de longo prazo e mercados geograficamente isolados
+\end{itemize}
+
+\textbf{Legado:} inaugura a literatura de ``modelos de entrada'' em OI empírica. Fundamentos para Bresnahan e Reiss (1991), Ericson e Pakes (1995), Aguirregabiria e Mira (2007). Base para política antitruste: oligopólios com poucos rivais podem ser próximos de competitivos com livre entrada.
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

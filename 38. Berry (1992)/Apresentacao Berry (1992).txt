@@ -1,0 +1,242 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Berry (1992)]{Estimation of a Model of Entry in the Airline Industry}
+\subtitle{{\Large}Berry (1992)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1992}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item Modelo Formal de Entrada Oligopolística
+  \item Problema Computacional e Estimador de Simulação
+  \item Casos Especiais: Probit, Probit Ordenado e MLE Restrito
+  \item Dados: Mercados de Par de Cidades (1980)
+  \item Resultados: Presença Aeroportuária e Lucratividade
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item \textbf{Questão:} qual o impacto da presença aeroportuária (\textit{airport presence}) de uma companhia sobre a lucratividade de rotas cidade-par?
+  \item Debate pós-desregulamentação: mercados contestáveis (Bailey-Panzar) vs.\ barreiras de entrada via controle de aeroportos (Borenstein 1989)
+  \item Estende Bresnahan e Reiss (1991) para \textbf{firmas heterogêneas} e grande número de entrantes potenciais (até 26 por mercado)
+\end{itemize}
+
+\textbf{Contribuição metodológica central:}
+\begin{itemize}
+  \item Com $K = 26$ potenciais entrantes e $N = 11$ efetivos: $\binom{26}{11} > 7$ milhões de integrais multidimensionais para MLE — computacionalmente inviável
+  \item \textbf{Solução:} estimadores de simulação (McFadden 1989; Pakes e Pollard 1989) — nova justificativa para esses estimadores
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{2. Modelo Formal: Função de Lucro}
+Jogo em dois estágios: firmas decidem entrar; as entrantes jogam o jogo pós-entrada.
+
+\textbf{Lucro da firma $k$ no mercado $i$ com $N$ firmas:}
+\begin{equation}
+  \pi_{ik}(N) = X_i\beta - \delta\ln N + Z_{ik}\alpha + \rho\, u_{io} + \sqrt{1-\rho^2}\, u_{ik}
+\end{equation}
+
+\begin{itemize}
+  \item $X_i$: pop., distância, dummy turismo (características de mercado)
+  \item $-\delta\ln N$: lucros variáveis caem com a entrada de rivais ($\delta > 0$)
+  \item $Z_{ik}$: presença aeroportuária (firma-específica)
+  \item $u_{io} \sim \mathcal{N}(0,1)$: heterogeneidade de mercado (compartilhada)
+  \item $u_{ik} \sim \mathcal{N}(0,1)$: heterogeneidade de firma (idiossincrática)
+  \item $\rho$: correlação dos lucros entre firmas num mesmo mercado
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{2. Modelo Formal: Unicidade de $N^*$ (cont.)}
+\textbf{Resultado (unicidade):} dada (1) com $v_i(N)$ estritamente decrescente em $N$, \textit{todos} os equilíbrios de Nash puro envolvem o mesmo número de firmas $N^*$, embora a identidade das entrantes possa ser indeterminada.
+
+\vspace{0.2cm}
+\textbf{Construção:} ordene firmas por lucratividade $\phi_{i1} \geq \phi_{i2} \geq \ldots$;
+\begin{equation}
+  N^* = \max\bigl\{n : v_i(n) + \phi_{in} > 0\bigr\}
+\end{equation}
+
+\textbf{Intuição:} se houvesse outro equilíbrio com $N > N^*$, a $N$-ésima firma entrante teria $\phi_{iN} \leq \phi_{iN^*}$ e por construção $v_i(N) + \phi_{iN} \leq 0$ — contradição.
+
+\vspace{0.2cm}
+\textbf{Implicação empírica:} podemos basear a estimação no número único $N^*$, sem conhecer as identidades das entrantes.
+\end{frame}
+
+%================================================
+\begin{frame}{3. Problema Computacional}
+\textbf{Probabilidade de $N^*$ via MLE exige:}
+\begin{equation}
+  \Pr(N^* = N) = \sum_{J=0}^{N} H_{J,(N+1)} - \sum_{J=0}^{N-1} H_{J,N}
+\end{equation}
+onde $H_{J,N+1}$ = prob.\ de que exatamente $J$ firmas sejam lucrativas num equilíbrio com $N+1$ firmas:
+\begin{equation}
+  H_{J,(N+1)} = \sum_{s \in S(J)} \int_{A(s,N+1)} p(\varepsilon)\, d\varepsilon
+\end{equation}
+
+\begin{itemize}
+  \item $|S(J)| = \binom{K}{J}$: número de termos na soma
+  \item Para $K=26$, $N=11$: $\binom{26}{11} > 7{,}4$ milhões de integrais 26-dimensionais
+  \item Mesmo cada integral sendo simples, calcular \textit{todas} é inviável para gradientes numéricos iterativos
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{3. Estimador de Simulação (cont.)}
+\textbf{Transformação para regressão não-linear:}
+\begin{equation}
+  N_i^* = \mathbb{E}[N^* \mid w_i, \theta] + v_i, \qquad \mathbb{E}[v_i \cdot f(w_i)] = 0
+\end{equation}
+
+\textbf{Estimador de frequência (não-viesado):}
+\begin{enumerate}
+  \item Sortear $T$ vetores $(u_{io}^t, u_{i1}^t, \ldots, u_{iK}^t)$ de $\mathcal{N}(0,1)$
+  \item Para cada sorteio $t$: $\hat{N}^t = \max\{n: \#\{k: \hat{\pi}_{ik}(n)>0\} \geq n\}$
+  \item Média: $\bar{N} = (1/T)\sum_t \hat{N}^t \Rightarrow \mathbb{E}[\bar{N}] = \mathbb{E}[N^*]$
+\end{enumerate}
+
+Equação estimada: $N_i^* = \bar{N}(w_i,\theta,\omega) + \tilde{v}_i$
+
+Com condição de momento $\mathbb{E}[\tilde{v}_i \cdot f(w_i)] = 0$, estima-se $\theta$ por GMM. Com ordem de entrada imposta (incumbentes ou mais lucrativos primeiro), usa-se também a identidade das entrantes para condições adicionais.
+\end{frame}
+
+%================================================
+\begin{frame}{4. Casos Especiais}
+\begin{itemize}
+  \item \textbf{Probit ($\delta=0$, $\rho=0$):} sem interação estratégica; cada firma entra se $Z_{ik}\alpha + u_{ik} > 0$. Tratável, mas ignora efeito de $N$ nos lucros.
+  \item \textbf{Probit ordenado ($\rho=1$, sem heterogeneidade não observada entre firmas):} versão de Bresnahan-Reiss; probabilidade calculável via integral 1D. Limitação: coloca prob.\ zero nos eventos observados (identidades das entrantes restritas deterministicamente — rejeitada pelos dados).
+  \item \textbf{MLE com $\rho=0$ (sem correlação dentro do mercado):} tratável apenas para $N^* \in \{0,1,2^+\}$ (casos $N^* \geq 3$ requerem $> 2.000$ integrais). Resultado contraditório: city share com sinal negativo — atribuído à censura de $N^* > 1$.
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Identificação:} a relação $N^* \uparrow$ com tamanho de mercado é consistente tanto com $\delta > 0$ (lucros caem em $N$) quanto com heterogeneidade ($\alpha \neq 0$). Distingue-se pelo efeito do número de potenciais entrantes $K_i$ no equilíbrio.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Dados: Mercados de Par de Cidades (1980)}
+\begin{itemize}
+  \item \textbf{Fonte:} O\&D Survey (10\% amostra de bilhetes); Data Bank 4
+  \item \textbf{Mercados:} 1.219 pares entre as 50 maiores cidades dos EUA
+  \item \textbf{Período:} Q1-1980 vs.\ Q3-1980 (pós-desregulamentação; pré-greve dos controladores)
+  \item Firma serve o mercado se carrega $\geq 90$ passageiros na amostra de 10\%
+\end{itemize}
+
+\textbf{Presença aeroportuária e entrada (Tabela III):}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Cidades servidas no par & Potenciais entrantes & Taxa de entrada \\
+\midrule
+0 & 47.600 & $0{,}01\%$ \\
+1 & 12.650 & $0{,}36\%$ \\
+2 & 3.590  & $6{,}46\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Variáveis:} $X_i$ = POP, DIST, DIST$^2$, TOURIST; $Z_{ik}$ = City2 (dummy ambas as cidades), City share (quota de output nos aeroportos).
+\end{frame}
+
+%================================================
+\begin{frame}{6. Resultados: Estimativas de Simulação}
+\textbf{Modelo preferido: incumbentes entram primeiro (Tabela VII):}
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Variável & Coef.\ (EPad) \\
+\midrule
+Constante        & $-3{,}20\ (0{,}258)$ \\
+Pop              & $\ 5{,}28\ (0{,}343)$ \\
+Dist             & $-1{,}45\ (0{,}401)$ \\
+City2            & $\ 5{,}91\ (0{,}149)$ \\
+City share       & $\ 5{,}41\ (0{,}206)$ \\
+$\delta$ (ln N)  & $\ 4{,}90\ (0{,}206)$ \\
+$\rho$           & $\ 0{,}05\ (0{,}048)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+  \item GMM obj.\ fn $= 26{,}2$ com 24 g.l.\ (plausível); modelo ``mais lucrável primeiro'' $= 33{,}3$ (marginalm.\ rejeitado)
+  \item Servir \textit{ambas} as cidades com share $\approx 0$ supera servir \textit{uma} com $100\%$ de share $\Rightarrow$ vantagem de acesso à burocracia aeroportuária
+  \item $\delta = 4{,}90$: lucros caem rapidamente com $N$ $\Rightarrow$ competição limita entradas
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Simulações de Política (cont.)}
+\textbf{Efeito de aumentar acesso aeroportuário (Tabela VIII):}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Experimento & Probit & Modelo completo \\
+\midrule
+Todos com acesso às 2 cidades & $+6{,}3$ firmas & $+2{,}0$ firmas \\
+Apenas entrantes ``qualificados'' & $+2{,}7$ & $+2{,}0$ \\
+$+10\%$ city share para todos    & $+2{,}2$ & $+1{,}7$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+  \item Probit superprevê o efeito de políticas de acesso: ignora que competição dentro do mercado limita entradas adicionais
+  \item Modelo completo: predição correta de $93\%$ das decisões de entrada (vs.\ $91\%$ do probit; $88{,}6\%$ estimador ingênuo)
+  \item \textbf{Lição:} modelos que ignoram interações estratégicas exageram efeitos de políticas que aumentam o número de potenciais entrantes
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{7. Conclusão e Legado}
+\textbf{Resultados:}
+\begin{enumerate}
+  \item Presença aeroportuária tem impacto muito grande sobre a lucratividade: City2 ($+5{,}91$) e City share ($+5{,}41$)
+  \item Lucros caem rapidamente com $N$ ($\delta = 4{,}90$): competição limita entrada mesmo com acesso aumentado
+  \item Estimadores de simulação resolvem o problema computacional de $\binom{K}{N}$ integrais com $K$ grande
+\end{enumerate}
+
+\textbf{Limitações:}
+\begin{itemize}
+  \item Não modela competição pós-entrada (preços, bem-estar)
+  \item Presença aeroportuária é proxy para múltiplos mecanismos
+  \item Estrutura estática; sem dinâmica de redes
+\end{itemize}
+
+\textbf{Legado:} extensão dos modelos de Bresnahan-Reiss para firmas heterogêneas; introduz estimadores de simulação (MSM/GMM) em modelos de entrada; base para Berry-Levinsohn-Pakes (1995); modelo seminal para análise antitruste no setor aéreo.
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

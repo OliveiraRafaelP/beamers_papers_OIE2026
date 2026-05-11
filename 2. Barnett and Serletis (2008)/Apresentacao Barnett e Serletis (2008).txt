@@ -1,0 +1,456 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Abordagem Diferencial e Modelo de Rotterdam]{The Differential Approach to Demand Analysis and the Rotterdam Model}
+\subtitle{{\Large}Barnett e Serletis (2008)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2008}
+
+\begin{document}
+
+%================================================
+% SLIDE TÍTULO
+%================================================
+\begin{frame}
+\maketitle
+\end{frame}
+
+%================================================
+% SUMÁRIO
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+    \item Motivação e Problema de Pesquisa
+    \item Revisão da Literatura e Contribuição
+    \item Teoria Neoclássica do Consumidor
+    \item A Abordagem Diferencial da Análise de Demanda
+    \item Sistemas de Demanda em Preços Relativos e Absolutos
+    \item A Parametrização de Rotterdam
+    \item Estimação do Modelo de Rotterdam
+    \item Regularidade Teórica e Econométrica
+    \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+% SEÇÃO 1 — MOTIVAÇÃO
+%================================================
+\begin{frame}{Motivação e Problema de Pesquisa}
+
+\textbf{Duas tradições na análise empírica de demanda:}
+
+\vspace{0.25cm}
+\textbf{Tradição antiga:} equações de demanda sem referência a função utilidade
+\begin{itemize}
+    \item Sistema log-log:
+    \begin{equation}
+        \log x_i = \alpha_i + \eta_{iy} \log y + \sum_{j=1}^{n} \eta_{ij} \log p_j, \quad i = 1,\ldots,n
+    \end{equation}
+    $\eta_{iy}$: elasticidade-renda; $\eta_{ij}$: elasticidade-preço cruzada não compensada (Cournot)
+    \item Modelo de Working (1943):
+    \begin{equation}
+        w_i = \alpha_i + \beta_i \log y
+    \end{equation}
+    Participação orçamentária $w_i = p_i x_i / y$ como função linear de $\log y$
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Problema:} modelos univariados ignoram restrições de \textit{cross-equation} como simetria de Slutsky
+
+\end{frame}
+
+\begin{frame}{Motivação e Problema de Pesquisa (cont.)}
+
+\textbf{Abordagem moderna — sistema completo (\textit{system-wide}):}
+
+\begin{itemize}
+    \item Agente representativo maximiza utilidade sujeito à restrição orçamentária
+    \item Permite impor e testar restrições de equações cruzadas (simetria, homogeneidade)
+    \item Origem: Theil (1965) e o \textbf{Modelo de Rotterdam}
+    \item Vantagem do Rotterdam: evita especificar uma forma funcional particular para $u(\mathbf{x})$
+\end{itemize}
+
+\vspace{0.25cm}
+\textbf{Objetivo do artigo:}
+\begin{itemize}
+    \item Apresentar a abordagem diferencial e o Modelo de Rotterdam
+    \item Derivar versões em preços relativos e absolutos
+    \item Discutir estimação
+    \item Demonstrar que o Rotterdam é \textbf{econometricamente regular} — vantagem decisiva frente a sistemas concorrentes
+\end{itemize}
+
+\end{frame}
+
+%================================================
+% SEÇÃO 2 — LITERATURA
+%================================================
+\begin{frame}{Revisão da Literatura e Contribuição}
+
+\textbf{Referências fundacionais:}
+
+\begin{itemize}
+    \item \textbf{Theil (1965, 1975, 1976, 1980):} introdução e exploração da abordagem diferencial e do Rotterdam
+    \item \textbf{Barten (1964, 1966, 1969):} equação fundamental matricial; modelo em preços absolutos; estimação por ML
+    \item \textbf{Houthakker (1960):} independência de preferências e substitutos/complementos específicos
+    \item \textbf{Slutsky (1915):} decomposição efeito preço em substituição + renda
+    \item \textbf{Frisch (1932):} índice de preços ponderado por participações marginais
+    \item \textbf{Divisia (1925):} índice de preços/quantidades para agregação
+    \item \textbf{Lewbel e Ng (2005):} crítica da não-estacionariedade nos sistemas existentes
+    \item \textbf{Barnett e Serletis (2008):} survey sobre procedimentos de estimação
+\end{itemize}
+
+\vspace{0.25cm}
+\textbf{Contribuição:} Artigo didático que unifica derivação teórica rigorosa com aplicação prática do Rotterdam, explicitando sua vantagem de regularidade econométrica frente a todos os concorrentes.
+
+\end{frame}
+
+%================================================
+% SEÇÃO 3 — TEORIA NEOCLÁSSICA
+%================================================
+\begin{frame}{Teoria Neoclássica do Consumidor}
+
+O consumidor resolve:
+\begin{equation}
+    \max_{\mathbf{x}} \; u(\mathbf{x}) \quad \text{sujeito a} \quad \mathbf{p}'\mathbf{x} = y
+\end{equation}
+
+Condições de 1ª ordem via Lagrangiano $\mathcal{L} = u(\mathbf{x}) + \lambda(y - \mathbf{p}'\mathbf{x})$:
+\begin{equation}
+    \frac{\partial u(\mathbf{x})}{\partial x_i} = \lambda p_i, \quad i = 1,\ldots,n \qquad \text{e} \qquad \mathbf{p}'\mathbf{x} = y
+\end{equation}
+
+\textbf{Intuição:} $\lambda$ é a utilidade marginal da renda. No ótimo, a razão entre utilidade marginal e preço deve ser igual para todos os bens (lei de equimarginalidade).
+
+\vspace{0.25cm}
+Sistema de demanda marshalliana resultante: $x_i = x_i(\mathbf{p}, y)$
+
+\end{frame}
+
+\begin{frame}{Equação Fundamental de Barten e Slutsky}
+
+Diferenciação total das condições de 1ª ordem gera a \textbf{equação fundamental de Barten (1964)}:
+\begin{equation}
+    \begin{bmatrix} \mathbf{U} & \mathbf{p} \\ \mathbf{p}' & 0 \end{bmatrix}
+    \begin{bmatrix} d\mathbf{x} \\ -d\lambda \end{bmatrix}
+    =
+    \begin{bmatrix} \mathbf{0} & \lambda\mathbf{I} \\ 1 & -\mathbf{x}' \end{bmatrix}
+    \begin{bmatrix} dy \\ d\mathbf{p} \end{bmatrix}
+\end{equation}
+
+Resolvendo: derivadas-renda e derivadas-preço (Slutsky):
+\begin{align}
+    \mathbf{x}_y &= \lambda_y \mathbf{U}^{-1}\mathbf{p} \\
+    \mathbf{X}_p &= \underbrace{\lambda\mathbf{U}^{-1} - \frac{\lambda}{\lambda_y}\mathbf{x}_y\mathbf{x}_y'}_{\mathbf{K} \text{ (matriz de Slutsky)}} - \mathbf{x}_y\mathbf{x}'
+\end{align}
+
+\textbf{Equação de Slutsky:} $\mathbf{X}_p = \mathbf{K} - \mathbf{x}_y\mathbf{x}'$
+
+Em forma escalar: $\;\dfrac{\partial x_i}{\partial p_j} = k_{ij} - \dfrac{\partial x_i}{\partial y} x_j$
+
+\vspace{0.1cm}
+\textbf{Intuição:} Efeito total de uma variação de $p_j$ = efeito substituição compensado ($k_{ij}$) + efeito renda ($-\frac{\partial x_i}{\partial y} x_j$).
+
+\end{frame}
+
+%================================================
+% SEÇÃO 4 — ABORDAGEM DIFERENCIAL
+%================================================
+\begin{frame}{A Abordagem Diferencial da Análise de Demanda}
+
+Introduzida por \textbf{Theil (1965)} e \textbf{Barten (1966)}.
+
+\vspace{0.15cm}
+Multiplicando a demanda por $p_i/y$ e usando $dz = z \, d\log z$:
+\begin{equation}
+    w_i \, d\log x_i = \theta_i \, d\log y + \sum_{j=1}^{n} \frac{p_i p_j}{y} \frac{\partial x_i}{\partial p_j} \, d\log p_j
+\end{equation}
+
+onde $w_i = p_i x_i/y$ (participação orçamentária) e $\theta_i = p_i(\partial x_i/\partial y)$ (participação marginal).
+
+\vspace{0.25cm}
+\textbf{Propriedades:}
+\begin{itemize}
+    \item $w_i > 0$ e $\sum w_i = 1$ (participações orçamentárias)
+    \item $\theta_i \gtrless 0$ (negativo se bem inferior) e $\sum \theta_i = 1$ (participações marginais)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Índices de Divisia e Frisch}
+
+\textbf{Índice de Preços Divisia:}
+\begin{equation}
+    d\log P = \sum_{j=1}^{n} w_j \, d\log p_j \qquad \text{(ponderado por } w_j\text{)}
+\end{equation}
+
+\textbf{Índice de Quantidade Divisia:}
+\begin{equation}
+    d\log Q = \sum_{j=1}^{n} w_j \, d\log x_j \quad \Rightarrow \quad d\log Q + d\log P = d\log y
+\end{equation}
+
+\textbf{Índice de Frisch:}
+\begin{equation}
+    d\log P^f = \sum_{j=1}^{n} \theta_j \, d\log p_j \qquad \text{(ponderado por } \theta_j\text{)}
+\end{equation}
+
+\textbf{Diferença-chave:} Divisia usa $w_j$ (participações orçamentárias); Frisch usa $\theta_j$ (participações marginais). O índice Frisch transforma preços absolutos em preços relativos.
+
+\vspace{0.15cm}
+Definindo $v_{ij} = \lambda p_i p_j u_{ij}/y$ e $\phi = (\lambda/y)/(\partial\lambda/\partial y)$, com a propriedade $\sum_j v_{ij} = \phi\theta_i$, o sistema diferencial geral é:
+\begin{equation}
+    w_i \, d\log x_i = \theta_i \, d\log Q + \sum_j v_{ij} \, d\log p_j - \phi\theta_i \sum_j \theta_j \, d\log p_j
+\end{equation}
+
+\end{frame}
+
+%================================================
+% SEÇÃO 5 — PREÇOS RELATIVOS E ABSOLUTOS
+%================================================
+\begin{frame}{Sistema de Demanda em Preços Relativos}
+
+Usando $\sum_j v_{ij} = \phi\theta_i$ e o índice de Frisch:
+\begin{equation}
+    w_i \, d\log x_i = \theta_i \, d\log Q + \sum_{j=1}^{n} v_{ij} \left(d\log p_j - d\log P^f\right)
+\end{equation}
+
+$v_{ij}$ mede o efeito substituição específico do preço relativo de $j$ sobre $x_i$: bens $i$ e $j$ são \textbf{substitutos específicos} se $v_{ij} > 0$ e \textbf{complementos específicos} se $v_{ij} < 0$ (Houthakker, 1960).
+
+\vspace{0.25cm}
+\textbf{Independência de preferências:} Se $u(\mathbf{x}) = \sum_i u_i(x_i)$, então $u_{ij} = 0$ para $i \neq j$, implicando $v_{ij} = 0$ para $i \neq j$:
+\begin{equation}
+    w_{it}^* Dx_{it} = \theta_i DQ_t + \phi\theta_i\left(Dp_{it} - DP_t^f\right)
+\end{equation}
+
+Apenas o preço próprio aparece em cada equação. Parâmetros: de ordem $n^2$ para ordem $2n$.
+
+\vspace{0.1cm}
+\textbf{Advertência:} Conceitos como substitutos/complementos específicos são cardinais — não invariantes a transformações monótonas de $u$. Apenas conclusões ordinais são válidas ao final.
+
+\end{frame}
+
+\begin{frame}{Sistema de Demanda em Preços Absolutos}
+
+Expressando os termos de substituição em preços não deflacionados:
+\[
+\sum_j v_{ij}\left(d\log p_j - d\log P^f\right) = \sum_j \pi_{ij} \, d\log p_j
+\]
+onde $\pi_{ij} = v_{ij} - \phi\theta_i\theta_j$ é o \textbf{coeficiente de Slutsky}.
+
+\vspace{0.15cm}
+O sistema em preços absolutos:
+\begin{equation}
+    w_i \, d\log x_i = \theta_i \, d\log Q + \sum_{j=1}^{n} \pi_{ij} \, d\log p_j
+\end{equation}
+
+\textbf{Vantagem cardinal:} $\pi_{ij}$ é invariante a transformações monótonas de $u$ — todas as inferências são \textbf{ordinais}. Não é necessária normalização cardinal.
+
+\vspace{0.25cm}
+\textbf{Elasticidades:}
+\begin{align}
+    \eta_{iy} &= \frac{d\log x_i}{d\log Q} = \frac{\theta_i}{w_i} \qquad \text{(elasticidade-renda)} \\
+    \eta_{ij}^* &= \frac{d\log x_i}{d\log p_j} = \frac{\pi_{ij}}{w_i} \qquad \text{(elasticidade-preço compensada)}
+\end{align}
+
+\end{frame}
+
+%================================================
+% SEÇÃO 6 — PARAMETRIZAÇÃO DE ROTTERDAM
+%================================================
+\begin{frame}{A Parametrização de Rotterdam — Versões em Mudanças Finitas}
+
+Dados econômicos estão em intervalos finitos. Convertendo com participações médias $w_{it}^* = \frac{1}{2}(w_{it} + w_{i,t-1})$ e o operador $Dz_t = \log z_t - \log z_{t-1}$:
+
+\vspace{0.15cm}
+\textbf{Índices de Törnqvist-Theil:}
+\begin{align}
+    DQ_t &= \sum_j w_{jt}^* Dx_{jt} \quad \text{(quantidade Divisia)} \\
+    DP_t &= \sum_j w_{jt}^* Dp_{jt} \quad \text{(preço Divisia)} \\
+    DP_t^f &= \sum_j \theta_j Dp_{jt} \quad \text{(preço Frisch)}
+\end{align}
+
+\textbf{Versão em Preços Relativos (Theil, 1975):}
+\begin{equation}
+    w_{it}^* Dx_{it} = \theta_i DQ_t + \sum_j v_{ij}\left(Dp_{jt} - DP_t^f\right)
+\end{equation}
+Não linear nos parâmetros. Exige normalização cardinal.
+
+\textbf{Versão em Preços Absolutos (Barten, 1966):}
+\begin{equation}
+    w_{it}^* Dx_{it} = \theta_i DQ_t + \sum_j \pi_{ij} Dp_{jt}
+\end{equation}
+Linear nos parâmetros. Todos os parâmetros são ordinais.
+
+\end{frame}
+
+\begin{frame}{Restrições Teóricas do Modelo de Rotterdam}
+
+Para a versão em preços absolutos, as restrições teóricas são:
+
+\vspace{0.25cm}
+\textbf{Restrições fracas (budget constraint + homogeneidade):}
+\begin{align}
+    \text{Adding-up:} &\quad \sum_{i=1}^n \theta_i = 1 \quad \text{e} \quad \sum_{j=1}^n \pi_{ji} = 0, \; \forall i \\
+    \text{Homogeneidade:} &\quad \sum_{j=1}^n \pi_{ij} = 0, \; \forall i
+\end{align}
+
+\textbf{Restrições fortes (maximização de utilidade):}
+\begin{align}
+    \text{Simetria de Slutsky:} &\quad \pi_{ij} = \pi_{ji}, \; \forall i,j \\
+    \text{Concavidade:} &\quad [\pi_{ij}] \text{ negativa semidefinida de posto } n-1
+\end{align}
+
+Na prática: adding-up, homogeneidade e simetria são \textbf{impostos} na estimação; negatividade semidefinida é \textbf{verificada empiricamente}.
+
+\end{frame}
+
+%================================================
+% SEÇÃO 7 — ESTIMAÇÃO
+%================================================
+\begin{frame}{Estimação do Modelo de Rotterdam}
+
+\textbf{Especificação estocástica:}
+\begin{equation}
+    w_{it}^* Dx_{it} = \theta_i DQ_t + \sum_{j=1}^n \pi_{ij} Dp_{jt} + \varepsilon_{it}, \quad i=1,\ldots,n;\; t=1,\ldots,T
+\end{equation}
+
+\textbf{Problema de singularidade:} Pelo adding-up, $\sum_i \varepsilon_{it} = 0$ $\forall t$ — distúrbios linearmente dependentes, covariância singular.
+
+\vspace{0.1cm}
+\textbf{Solução (Barten, 1969):} Deletar qualquer uma das $n$ equações; os parâmetros da equação deletada são recuperados pelas restrições. Estimação por \textbf{Máxima Verossimilhança}:
+
+\begin{equation}
+    \log L(\boldsymbol{\vartheta}, \boldsymbol{\Omega}) = -\frac{(n-1)T}{2}\log(2\pi) - \frac{1}{2}|\boldsymbol{\Omega}| - \frac{1}{2}\sum_{t=1}^T \left[\mathbf{s}_t - \mathbf{g}(\mathbf{v}_t;\boldsymbol{\vartheta})\right]' \boldsymbol{\Omega}^{-1} \left[\mathbf{s}_t - \mathbf{g}(\mathbf{v}_t;\boldsymbol{\vartheta})\right]
+\end{equation}
+
+Assume-se $\boldsymbol{\varepsilon} \sim N(\mathbf{0}, \boldsymbol{\Omega} \otimes \mathbf{I}_T)$, com $\boldsymbol{\Omega}$ $(n-1)\times(n-1)$ correlação contemporânea entre equações (sem autocorrelação).
+
+\end{frame}
+
+\begin{frame}{Estimação — Exemplo com $n = 4$ Bens}
+
+Deleta-se a 4ª equação. Sistema estimado com \textbf{9 parâmetros livres}: $\theta_1, \theta_2, \theta_3, \pi_{11}, \pi_{12}, \pi_{13}, \pi_{22}, \pi_{23}, \pi_{33}$.
+
+\vspace{0.15cm}
+\textbf{Recuperação dos parâmetros da equação deletada:}
+{\small
+\begin{align}
+    \theta_4 &= 1 - \theta_1 - \theta_2 - \theta_3 \\
+    \pi_{41} (= \pi_{14}) &= -\pi_{11} - \pi_{12} - \pi_{13} \\
+    \pi_{42} (= \pi_{24}) &= -\pi_{12} - \pi_{22} - \pi_{23} \\
+    \pi_{43} (= \pi_{34}) &= -\pi_{13} - \pi_{23} - \pi_{33} \\
+    \pi_{44} &= \pi_{11} + 2\pi_{12} + 2\pi_{13} + \pi_{22} + 2\pi_{23} + \pi_{33}
+\end{align}
+}
+
+\textbf{Intuição:} O estimador de MV com $\boldsymbol{\Omega}$ desconhecida é equivalente ao mínimos quadrados generalizados iterado (ISUR — \textit{Seemingly Unrelated Regressions}). A hipótese de correlação contemporânea entre equações (mas não autocorrelação serial) é razoável para sistemas de demanda.
+
+\end{frame}
+
+%================================================
+% SEÇÃO 8 — REGULARIDADE
+%================================================
+\begin{frame}{Regularidade Teórica}
+
+Para consistência com maximização de utilidade, a matriz de Slutsky $[\pi_{ij}]$ deve ser \textbf{negativa semidefinida de posto $n-1$}.
+
+\vspace{0.15cm}
+Para $n = 4$ bens, isso exige:
+\begin{itemize}
+    \item Todos os $\pi_{ii} < 0$ (substituição própria negativa)
+    \item Todos os submatrizes $2\times2$ com determinante $> 0$
+    \item Todos os submatrizes $3\times3$ com determinante $< 0$
+    \item Determinante da matriz $4\times4$ igual a zero (posto $n-1 = 3$)
+\end{itemize}
+
+\vspace{0.25cm}
+Se a regularidade \textbf{não} é obtida automaticamente, deve ser \textbf{imposta} na estimação (Barnett, 2002; Barnett e Pasupathy, 2003).
+
+\vspace{0.1cm}
+Os primeiros testes de Barten (1967, 1969) e Byron (1970) sugeriram rejeição das restrições; Deaton (1972) mostrou que as rejeições deviam-se ao uso inapropriado de critérios assintóticos — com correção para amostras finitas, o conflito foi removido, exceto para a restrição de homogeneidade.
+
+\end{frame}
+
+\begin{frame}{Regularidade Econométrica — Principal Vantagem do Rotterdam}
+
+\textbf{Problema geral:} Em economias industrializadas, séries de preços e renda são tipicamente \textbf{não-estacionárias}. Sistemas concorrentes não conseguem lidar com isso:
+
+\vspace{0.1cm}
+{\footnotesize
+\begin{itemize}
+    \item \textbf{Paramétricos:} AIDS (Deaton e Muellbauer, 1980), translog (Christensen et al., 1975), Laurent mínflex (Barnett, 1983), quadratic AIDS (Banks et al., 1997), quadrático normalizado (Diewert e Wales, 1988)
+    \item \textbf{Semi-não-paramétricos:} Fourier (Gallant, 1981), AIM (Barnett e Jonas, 1983)
+\end{itemize}
+}
+
+\vspace{0.1cm}
+Métodos padrão de cointegração \textbf{não se aplicam} à estimação não-linear de sistemas grandes.
+
+\vspace{0.25cm}
+\textbf{Vantagem do Rotterdam:} Usa \textbf{primeiras diferenças logarítmicas} ($Dx_{it}$, $Dp_{jt}$) — tipicamente estacionárias. Elimina o problema de raiz unitária sem necessitar de modelagem de cointegração.
+
+\vspace{0.1cm}
+Além disso, testes sistemáticos da estrutura de erros do Rotterdam refletem \textbf{mais favoravelmente} nas hipóteses mantidas do que qualquer outro modelo de demanda (Lewbel e Ng, 2005).
+
+\end{frame}
+
+\begin{frame}{Limitações Teóricas e Legado Pós-Rotterdam}
+
+\textbf{Limitação teórica:} Phlips (1974) e McFadden (1964) argumentaram que o Rotterdam é globalmente exato apenas se $u(\mathbf{x})$ for log-linear (Cobb-Douglas). Como o translog, é uma \textbf{aproximação local de mesma ordem} a qualquer sistema de demanda.
+
+\vspace{0.25cm}
+\textbf{Conexão com agregação sobre consumidores (Barnett, 1979a, 1981):} O Rotterdam tem uma conexão excepcionalmente rigorosa com a demanda após agregação, baseada em limites de probabilidade das equações de Slutsky quando o número de consumidores aumenta. \textbf{Nenhum outro modelo} demonstrou conexão comparável com a teoria após agregação sob hipóteses fracas.
+
+\vspace{0.25cm}
+\textbf{Contexto histórico:} Após Diewert (1971), a literatura migrou para sistemas baseados em formas funcionais flexíveis especificadas via função utilidade do agente representativo — ignorando que a teoria demonstrou que o agente representativo \textbf{não existe} sob hipóteses razoáveis.
+
+\end{frame}
+
+%================================================
+% SEÇÃO 9 — CONCLUSÃO
+%================================================
+\begin{frame}{Conclusão e Legado}
+
+O Modelo de Rotterdam marcou um \textbf{ponto de virada} na análise empírica de demanda:
+
+\vspace{0.25cm}
+\begin{enumerate}
+    \item \textbf{Fundamento teórico integral:} derivado rigorosamente via equação de Slutsky e equação fundamental de Barten
+    \item \textbf{Modelagem da matriz de substituição completa:} capta todos os efeitos cruzados entre $n$ bens
+    \item \textbf{Parâmetros com interpretação teórica direta:} $\theta_i$ (participações marginais) e $\pi_{ij}$ (coeficientes de Slutsky) relacionam-se diretamente às restrições teóricas
+    \item \textbf{Linearidade nos parâmetros:} facilita estimação por MV e testes de hipóteses
+    \item \textbf{Regularidade econométrica:} uso de primeiras diferenças logarítmicas contorna não-estacionariedade — vantagem decisiva frente a todos os concorrentes
+\end{enumerate}
+
+\vspace{0.2cm}
+O Rotterdam permanece relevante e, em aspectos-chave, \textbf{superior} aos modelos que o sucederam — especialmente em contextos de dados com séries temporais não-estacionárias.
+
+\end{frame}
+
+%================================================
+% SLIDE FINAL
+%================================================
+\begin{frame}{Obrigado}
+\centering
+\Large Obrigado!
+\end{frame}
+
+\end{document}

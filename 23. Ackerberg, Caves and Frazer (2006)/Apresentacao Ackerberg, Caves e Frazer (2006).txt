@@ -1,0 +1,534 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Ackerberg, Caves e Frazer (2006)]{Structural Identification of Production Functions}
+\subtitle{{\Large}Ackerberg, Caves e Frazer (2006)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2006}
+
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+\begin{frame}{Sumário}
+\begin{enumerate}
+    \item Visão geral e contribuição
+    \item O problema econométrico central: endogeneidade na estimação de funções de produção
+    \item Revisão das metodologias OP e LP
+    \item O problema de colinearidade: por que LP (e OP) podem falhar
+    \item Abordagem paramétrica como solução? Limitações
+    \item Procedimento ACF Alternativo 1: identificação no segundo estágio
+    \item Extensões: trabalho dinâmico e trabalho não perfeitamente variável
+    \item Procedimento ACF Alternativo 2: identificação via timing do input
+    \item Resultados empíricos
+    \item Avaliação crítica e legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+% VISAO GERAL E CONTRIBUICAO
+%================================================
+
+\begin{frame}{Visão Geral e Contribuição}
+
+O artigo de Ackerberg, Caves e Frazer (ACF) examina criticamente dois dos métodos estruturais mais influentes para identificação empírica de funções de produção: o procedimento de Olley e Pakes (OP, 1996) e o de Levinsohn e Petrin (LP, 2003).
+
+\vspace{0.25cm}
+
+A contribuição central é dupla:
+
+\begin{itemize}
+    \item \textbf{Primeiro:} demonstram que ambos os métodos — especialmente o LP — sofrem de um problema de colinearidade grave no primeiro estágio: sob as próprias hipóteses que sustentam os métodos, o trabalho ($l_{it}$) tende a ser colinear com o termo não paramétrico de controle de produtividade, inviabilizando a identificação do seu coeficiente.
+    \item \textbf{Segundo:} propõem dois procedimentos alternativos (ACF-1 e ACF-2) que preservam a intuição estrutural de OP e LP, mas deslocam a identificação dos coeficientes dos inputs variáveis para o segundo estágio, contornando o problema de colinearidade.
+\end{itemize}
+
+\vspace{0.25cm}
+
+O artigo tornou-se referência obrigatória em Organização Industrial empírica e em qualquer aplicação envolvendo estimação de produtividade total dos fatores (PTF) no nível da firma.
+
+\end{frame}
+
+%================================================
+% PROBLEMA ECONOMETRICO CENTRAL
+%================================================
+
+\begin{frame}{O Problema Econométrico Central}
+
+A função de produção básica considerada é, em log:
+
+\begin{equation}
+y_{it} = \beta_1 k_{it} + \beta_2 l_{it} + \omega_{it} + \varepsilon_{it}
+\end{equation}
+
+onde $y_{it}$ é o log do produto, $k_{it}$ o log do capital, $l_{it}$ o log do trabalho, $\omega_{it}$ o choque de produtividade observado pela firma mas não pelo econometrista, e $\varepsilon_{it}$ é ruído i.i.d.
+
+\vspace{0.25cm}
+
+O problema clássico de endogeneidade: a firma maximizadora de lucro escolhe seus inputs ($k_{it}$, $l_{it}$) como função de $\omega_{it}$. Os inputs são correlacionados com o choque de produtividade não observado, tornando o estimador de MQO viesado e inconsistente.
+
+\vspace{0.25cm}
+
+Soluções tradicionais e suas limitações:
+\begin{itemize}
+    \item \textbf{Efeitos fixos} (Mundlak, 1961): exige $\omega_{it} = \omega_{it-1}$ $\forall t$ — hipótese muito restritiva.
+    \item \textbf{Variáveis instrumentais}: requer preços de insumos ao nível da firma, frequentemente indisponíveis.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{O Problema Econométrico Central}
+
+OP e LP propõem uma abordagem mais estrutural: usar uma variável de escolha da firma como \textit{proxy} para inverter o choque de produtividade não observado $\omega_{it}$.
+
+\vspace{0.25cm}
+
+\textbf{Intuição econômica:} se a firma conhece $\omega_{it}$ ao tomar decisões de insumos, e se existe uma relação monótona entre $\omega_{it}$ e, por exemplo, o investimento $i_{it}$, então é possível recuperar $\omega_{it}$ como função observável de $i_{it}$ e $k_{it}$.
+
+\vspace{0.25cm}
+
+Com $\omega_{it}$ ``controlado'' pela inversão da função de demanda do proxy, o estimador deixa de ser viesado. Essa é a essência da identificação estrutural proposta por OP e LP.
+
+\end{frame}
+
+%================================================
+% REVISAO OP E LP
+%================================================
+
+\begin{frame}{Revisão do Método OP — Olley e Pakes (1996)}
+
+\textbf{Hipótese de timing:} $k_{it}$ é decidido em $t-1$ (input quasi-fixo); $l_{it}$ é variável e escolhido em $t$.
+
+\vspace{0.2cm}
+
+\textbf{Hipótese de monotonicidade:} o investimento ótimo é estritamente crescente em $\omega_{it}$:
+\begin{equation}
+i_{it} = f_t(\omega_{it}, k_{it})
+\end{equation}
+
+Como $f_t$ é estritamente monótona, pode ser invertida: $\omega_{it} = f_t^{-1}(i_{it}, k_{it})$. Substituindo na função de produção:
+\begin{equation}
+y_{it} = \beta_1 k_{it} + \beta_2 l_{it} + f_t^{-1}(i_{it}, k_{it}) + \varepsilon_{it}
+\end{equation}
+
+\textbf{Primeiro estágio:} estima-se esta equação com $f_t^{-1}$ não paramétrico. A colinearidade de $k_{it}$ com o não paramétrico impede identificar $\beta_1$, mas $\hat{\beta}_2$ e o composto $\hat{\Phi}_{it} = \beta_1 k_{it} + f_t^{-1}(i_{it}, k_{it})$ são obtidos.
+
+\vspace{0.2cm}
+
+\textbf{Segundo estágio:} $\omega_{it}$ segue Markov de primeira ordem, com inovação $\xi_{it}$. Pela hipótese de timing, $k_{it}$ predeterminado é ortogonal a $\xi_{it}$:
+\begin{equation}
+E[\xi_{it} \cdot k_{it}] = 0
+\end{equation}
+
+Esta condição identifica $\beta_1$. Intuição: a variação predeterminada de $k_{it}$ é ortogonal à surpresa de produtividade.
+
+\end{frame}
+
+\begin{frame}{Revisão do Método LP — Levinsohn e Petrin (2003)}
+
+\textbf{Motivação:} o investimento $i_{it}$ frequentemente é zero em microdados, violando a monotonicidade estrita de OP.
+
+\vspace{0.25cm}
+
+\textbf{Substituição:} LP usa o insumo intermediário $m_{it}$ (materiais, eletricidade) como proxy para $\omega_{it}$. A função de demanda por insumo intermediário é:
+\begin{equation}
+m_{it} = f_t(\omega_{it}, k_{it})
+\end{equation}
+
+Invertendo: $\omega_{it} = f_t^{-1}(m_{it}, k_{it})$. A função de produção bruta (\textit{gross output}) inclui $\beta_3 m_{it}$:
+\begin{equation}
+y_{it} = \beta_1 k_{it} + \beta_2 l_{it} + \beta_3 m_{it} + f_t^{-1}(m_{it}, k_{it}) + \varepsilon_{it}
+\end{equation}
+
+\textbf{Momentos de identificação no segundo estágio:}
+\begin{itemize}
+    \item $E[\xi_{it} \cdot k_{it}] = 0$ \; (idêntico ao OP)
+    \item $E[\xi_{it} \cdot m_{it-1}] = 0$ \; (momento adicional para $\beta_3$)
+\end{itemize}
+
+Intuição do segundo momento: $m_{it-1}$ pertence ao conjunto de informação em $t-1$, sendo ortogonal à inovação de produtividade $\xi_{it}$. Análogo ao uso de níveis defasados como instrumentos para diferenças no painel dinâmico.
+
+\end{frame}
+
+%================================================
+% PROBLEMA DE COLINEARIDADE
+%================================================
+
+\begin{frame}{O Problema de Colinearidade no LP}
+
+No primeiro estágio de LP, a questão central é: \textbf{$\beta_2$ é identificado?} Isso equivale a perguntar se $l_{it}$ é colinear com o termo não paramétrico $f_t^{-1}(m_{it}, k_{it})$.
+
+\vspace{0.25cm}
+
+ACF analisam três casos segundo o timing de escolha de $l_{it}$ em relação a $m_{it}$:
+
+\vspace{0.15cm}
+
+\textbf{Caso 1: $l_{it}$ e $m_{it}$ escolhidos simultaneamente.}
+
+Ambos são funções das mesmas variáveis de estado $(\omega_{it}, k_{it})$:
+\begin{equation}
+l_{it} = f_{2t}(\omega_{it}, k_{it}) = g_t(m_{it}, k_{it})
+\end{equation}
+
+Portanto $l_{it}$ é colinear com $f_t^{-1}(m_{it}, k_{it})$, e $\beta_2$ \textbf{não é identificado}.
+
+\end{frame}
+
+\begin{frame}{O Problema de Colinearidade no LP}
+
+\textbf{Caso 2: $l_{it}$ escolhido antes de $m_{it}$.}
+
+A demanda por $m_{it}$ passa a depender de $l_{it}$: $m_{it} = f_t(\omega_{it}, k_{it}, l_{it})$. A equação estimada torna-se:
+\begin{equation}
+y_{it} = \beta_1 k_{it} + \beta_2 l_{it} + \beta_3 m_{it} + f_t^{-1}(m_{it}, k_{it}, l_{it}) + \varepsilon_{it}
+\end{equation}
+
+$\beta_2$ continua não identificado: $l_{it}$ aparece tanto linearmente quanto dentro do argumento do não paramétrico.
+
+\vspace{0.25cm}
+
+\textbf{Caso 3: $l_{it}$ escolhido depois de $m_{it}$, com $\omega_{it}$ evoluindo entre as decisões.}
+
+Para que a variação em $l_{it}$ seja independente do não paramétrico, seria necessário um choque idiossincrático ao preço do trabalho que seja: (i) específico à firma, (ii) i.i.d. (sem persistência), e (iii) ocorra somente entre os momentos de escolha de $m_{it}$ e $l_{it}$.
+
+\vspace{0.2cm}
+
+ACF argumentam que essa combinação de hipóteses é extremamente improvável em dados reais.
+
+\end{frame}
+
+\begin{frame}{O Problema de Colinearidade no OP — e por que é Menos Grave}
+
+Em OP, a questão é se $l_{it}$ é colinear com $f_t^{-1}(i_{it}, k_{it})$.
+
+\vspace{0.25cm}
+
+OP oferece uma saída muito mais natural: se $l_{it}$ é escolhido em $t-b$ (com $0 < b < 1$) e $\omega_{it}$ evolui entre $t-b$ e $t$, então:
+\begin{equation}
+l_{it} = f_t(\omega_{it-b}, k_{it})
+\end{equation}
+
+Como $\omega_{it-b}$ não pode ser escrito como função de $k_{it}$ e $i_{it}$ somente, $l_{it}$ \textbf{não é colinear} com $f_t^{-1}(i_{it}, k_{it})$, e $\beta_2$ é identificado.
+
+\vspace{0.25cm}
+
+\textbf{Intuição econômica:} o movimento de $\omega_{it}$ entre o momento em que $l_{it}$ é decidido ($t-b$) e o momento de produção ($t$) é o que \textit{quebra a colinearidade}. Isso é plausível: firmas tipicamente tomam decisões de contratação com antecedência em relação ao momento em que o produto é realizado.
+
+\vspace{0.25cm}
+
+Essa saída \textbf{não funciona no LP}: se $l_{it}$ é escolhido antes de $m_{it}$ no LP, então $m_{it}$ passa a depender de $l_{it}$, e a inversão do choque de produtividade via $m_{it}$ se torna inválida. Daí o problema de colinearidade ser \textbf{mais grave no LP do que no OP}.
+
+\end{frame}
+
+%================================================
+% ABORDAGEM PARAMETRICA
+%================================================
+
+\begin{frame}{Abordagem Paramétrica como Solução? Limitações}
+
+Uma saída aparente ao problema de colinearidade em LP seria tratar $f_t^{-1}(m_{it}, k_{it})$ parametricamente. Mesmo que $l_{it}$ seja função de $m_{it}$ e $k_{it}$, se essa função for diferente de $f_t^{-1}$, a identificação seria possível.
+
+\vspace{0.25cm}
+
+ACF mostram que essa saída \textbf{falha para as funções de produção mais populares}.
+
+\vspace{0.2cm}
+
+\textbf{Caso Cobb-Douglas:} ao substituir a inversão $\omega_{it} = h(m_{it}, k_{it}, l_{it}, \beta)$ na função de produção, o coeficiente $\beta_2$ \textit{desaparece} da equação estimável:
+\begin{equation}
+y_{it} = \frac{1}{\beta_3}\ln\!\left(\frac{p_m}{p_y}\right) + m_{it} + \varepsilon_{it}
+\end{equation}
+
+Tornando a condição de momento inútil para identificar $\beta_2$.
+
+\vspace{0.2cm}
+
+\textbf{Caso Leontief em materiais:} resultado análogo — após a inversão, $\beta_2$ cai fora da equação estimável.
+
+\vspace{0.25cm}
+
+Conclusão: para as especificações mais utilizadas, mesmo com hipóteses paramétricas adicionais, a identificação de $\beta_2$ no primeiro estágio de LP permanece problemática.
+
+\end{frame}
+
+%================================================
+% PROCEDIMENTO ACF-1
+%================================================
+
+\begin{frame}{Procedimento ACF Alternativo 1 — Princípio Geral}
+
+Para contornar o problema de colinearidade, ACF propõem um procedimento que \textbf{não estima nenhum coeficiente no primeiro estágio}. Toda a identificação dos $\beta$'s ocorre no segundo estágio, usando dois momentos independentes.
+
+\vspace{0.25cm}
+
+\textbf{Função de produção (valor adicionado):}
+\begin{equation}
+y_{it} = \beta_l l_{it} + \beta_k k_{it} + \omega_{it} + \varepsilon_{it}
+\end{equation}
+
+\textbf{Primeiro estágio:} como $l_{it}$ é colinear com $f_t^{-1}(m_{it}, k_{it})$, a função de produção pode ser escrita como:
+\begin{equation}
+y_{it} = \varphi_t(m_{it}, k_{it}) + \varepsilon_{it}
+\end{equation}
+
+onde $\varphi_t$ absorve todos os termos. O objetivo do primeiro estágio é \textit{apenas} estimar $\varphi_t$ não parametricamente — para isolar o ruído $\varepsilon_{it}$ — sem tentar identificar nenhum coeficiente.
+
+\vspace{0.2cm}
+
+A diferença crítica em relação ao OP/LP: no primeiro estágio de ACF, nenhum $\beta$ é estimado. A colinearidade é simplesmente reconhecida e contornada.
+
+\end{frame}
+
+\begin{frame}{Procedimento ACF Alternativo 1 — Segundo Estágio}
+
+Dado que $\omega_{it} = \varphi_{it} - \beta_l l_{it} - \beta_k k_{it}$ e que $\omega_{it}$ segue um processo de Markov de primeira ordem, com inovação $\xi_{it} = \omega_{it} - E[\omega_{it} | \omega_{it-1}]$, os dois momentos utilizados são:
+
+\vspace{0.2cm}
+
+\textbf{Condição de Momento 1} (mesma de OP/LP):
+\begin{equation}
+E[\xi_{it} \cdot k_{it}] = 0
+\end{equation}
+
+Intuição: $k_{it}$ é predeterminado em $t-1$, portanto ortogonal à inovação de produtividade no período $t$.
+
+\vspace{0.2cm}
+
+\textbf{Condição de Momento 2} (nova em ACF):
+\begin{equation}
+E[\xi_{it} \cdot l_{it-1}] = 0
+\end{equation}
+
+Intuição: $l_{it-1}$ pertence ao conjunto de informação da firma em $t-1$, portanto deve ser ortogonal à inovação de produtividade no período $t$. Análogo ao uso de $l_{it-1}$ como instrumento em diferenças no painel dinâmico.
+
+\vspace{0.2cm}
+
+Essas duas condições, juntas, identificam os dois parâmetros desconhecidos $\beta_l$ e $\beta_k$, sem que o primeiro estágio precise estimar nenhum coeficiente diretamente.
+
+\end{frame}
+
+%================================================
+% EXTENSOES
+%================================================
+
+\begin{frame}{Extensões — Trabalho Dinâmico e Trabalho Não Variável}
+
+\textbf{Trabalho com implicações dinâmicas (hiring/firing costs):}
+
+$l_{it}$ passa a integrar o estado da firma. Tanto $m_{it}$ quanto $l_{it}$ dependem de $l_{it-1}$:
+\begin{equation}
+m_{it} = f_t(\omega_{it}, k_{it}, l_{it-1}), \quad l_{it} = g_t(\omega_{it}, k_{it}, l_{it-1})
+\end{equation}
+
+O primeiro estágio torna-se: $y_{it} = \varphi_t(m_{it}, k_{it}, l_{it-1}) + \varepsilon_{it}$.
+
+A identificação no segundo estágio usa os mesmos momentos, com $l_{it-1}$ e $k_{it}$ como instrumentos.
+
+\vspace{0.3cm}
+
+\textbf{Trabalho não perfeitamente variável (escolhido antes dos materiais):}
+
+Se $l_{it}$ é escolhido em $t-b$ antes de $m_{it}$ (escolhido em $t$), então $m_{it}$ depende de $l_{it}$:
+\begin{equation}
+m_{it} = f_t(\omega_{it}, k_{it}, l_{it})
+\end{equation}
+
+O LP padrão falha, mas o procedimento ACF funciona — seu primeiro estágio incorpora $l_{it}$ como argumento de $\varphi$:
+\begin{equation}
+y_{it} = \varphi_t(m_{it}, k_{it}, l_{it}) + \varepsilon_{it}
+\end{equation}
+
+O procedimento ACF-1 é, portanto, \textbf{mais robusto ao timing de escolha dos inputs} do que o LP padrão.
+
+\end{frame}
+
+%================================================
+% PROCEDIMENTO ACF-2
+%================================================
+
+\begin{frame}{Procedimento ACF Alternativo 2 — Identificação via Timing}
+
+Este procedimento é mais complexo, mas permite aprender sobre o \textit{timing} de escolha do trabalho.
+
+\vspace{0.2cm}
+
+\textbf{Hipóteses de timing:} $k_{it}$ decidido em $t-1$; $l_{it}$ decidido em $t-b$ (com $0 < b < 1$); $m_{it}$ perfeitamente variável e decidido em $t$.
+
+\vspace{0.2cm}
+
+$\omega_{it}$ evolui em dois subperíodos: de $t-1$ para $t-b$ (choque $\eta_{it}^b$) e de $t-b$ para $t$ (choque $\eta_{it}$). A escolha de trabalho é função de $\omega_{it-b}$:
+\begin{equation}
+l_{it} = f_{1t}(\omega_{it-b}, k_{it})
+\end{equation}
+
+E a escolha de materiais incorpora $l_{it}$:
+\begin{equation}
+m_{it} = f_{2t}(\omega_{it}, k_{it}, l_{it})
+\end{equation}
+
+O primeiro estágio é: $y_{it} = \varphi(m_{it}, k_{it}, l_{it}) + \varepsilon_{it}$ — idêntico ao ACF-1 com trabalho não variável.
+
+\end{frame}
+
+\begin{frame}{Procedimento ACF Alternativo 2 — Condição de Momento}
+
+A novidade está na \textbf{condição de momento para identificar $\beta_l$}:
+\begin{equation}
+E[\xi_{it}^b \cdot l_{it}] = 0
+\end{equation}
+
+onde $\xi_{it}^b = \omega_{it} - E[\omega_{it} | \omega_{it-b}]$ é a inovação de produtividade entre $t-b$ e $t$.
+
+\vspace{0.25cm}
+
+Como $l_{it}$ foi decidido em $t-b$, deve ser ortogonal a essa inovação posterior. Essa é a chave de identificação: a variação exógena em $\omega$ após a decisão de trabalho, mas antes da produção, fornece a variação necessária.
+
+\vspace{0.25cm}
+
+Para construir $\xi_{it}^b$ dado um vetor de parâmetros $(\beta_k, \beta_l)$, os autores usam os métodos de Matzkin (1999) para inverter não parametricamente a função de demanda de trabalho e recuperar $\eta_{it}^b$ — o que permite construir a expectativa condicional necessária.
+
+\vspace{0.25cm}
+
+A condição de momento para capital permanece:
+\begin{equation}
+E[\xi_{it}(\beta_k, \beta_l) \cdot k_{it}] = 0
+\end{equation}
+
+\end{frame}
+
+%================================================
+% RESULTADOS EMPIRICOS
+%================================================
+
+\begin{frame}{Resultados Empíricos}
+
+O paper apresenta resultados preliminares para quatro indústrias, com função de produção de valor adicionado com dois inputs de trabalho (qualificado e não qualificado) e capital.
+
+\vspace{0.2cm}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Método} & \textbf{Capital} & \textbf{Trab. Não Qualif.} & \textbf{Trab. Qualif.} & \textbf{Soma} \\
+\midrule
+\multicolumn{5}{l}{\textit{Indústria 381 (n = 1.569)}} \\
+MQO                & 0,20 & 0,55 & 0,60 & 1,35 \\
+LP – Materiais     & 0,20 & 0,39 & 0,40 & 1,00 \\
+ACF (KM)           & 0,29 & 0,29 & 0,48 & 1,06 \\
+ACF (KML)          & 0,17 & 0,47 & 0,64 & 1,28 \\
+\midrule
+\multicolumn{5}{l}{\textit{Indústria 311 (n = 5.372)}} \\
+MQO                & 0,36 & 0,46 & 0,50 & 1,31 \\
+LP – Materiais     & 0,36 & 0,28 & 0,24 & 0,88 \\
+ACF (KM)           & 0,32 & 0,34 & 0,52 & 1,18 \\
+ACF (KML)          & 0,24 & 0,33 & 0,80 & 1,36 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\vspace{0.2cm}
+
+Padrão consistente: o LP gera coeficientes de trabalho \textbf{menores} do que os demais métodos — consistente com a hipótese ACF de viés para zero sob colinearidade.
+
+\end{frame}
+
+\begin{frame}{Resultados Empíricos — Interpretação}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Método} & \textbf{Capital} & \textbf{Trab. Não Qualif.} & \textbf{Trab. Qualif.} & \textbf{Soma} \\
+\midrule
+\multicolumn{5}{l}{\textit{Indústria 321 (n = 1.566)}} \\
+MQO                & 0,25 & 0,42 & 0,53 & 1,19 \\
+LP – Materiais     & 0,25 & 0,31 & 0,43 & 0,99 \\
+ACF (KM)           & 0,36 & 0,39 & 0,19 & 0,95 \\
+ACF (KML)          & 0,20 & 0,48 & 0,49 & 1,17 \\
+\midrule
+\multicolumn{5}{l}{\textit{Indústria 331 (n = 1.291)}} \\
+MQO                & 0,23 & 0,56 & 0,56 & 1,35 \\
+LP – Materiais     & 0,23 & 0,41 & 0,28 & 0,92 \\
+ACF (KM)           & 0,30 & 0,18 & 0,64 & 1,12 \\
+ACF (KML)          & 0,16 & 0,51 & 0,70 & 1,37 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\vspace{0.2cm}
+
+O método ACF gera coeficientes de trabalho mais próximos do MQO, mas com coeficientes de capital maiores — corrigindo o viés de simultaneidade. A soma dos coeficientes ACF é sistematicamente mais próxima de 1 do que a do LP, sugerindo que o LP subestima os retornos ao trabalho devido ao problema de colinearidade.
+
+\end{frame}
+
+%================================================
+% AVALIACAO CRITICA E LEGADO
+%================================================
+
+\begin{frame}{Avaliação Crítica e Legado}
+
+\textbf{Contribuição central:} ACF mostra que o problema de identificação nos métodos populares de estimação de funções de produção não é meramente numérico — é \textit{estrutural}, decorrendo das próprias hipóteses que fundamentam os métodos.
+
+\vspace{0.2cm}
+
+As mesmas hipóteses que justificam usar $m_{it}$ como proxy para $\omega_{it}$ implicam que $l_{it}$ é colinear com esse proxy, invalidando a identificação de $\beta_l$ no primeiro estágio do LP.
+
+\vspace{0.25cm}
+
+\textbf{Legado metodológico:}
+\begin{itemize}
+    \item O procedimento ACF tornou-se o padrão atual para estimação estrutural de funções de produção.
+    \item Disponível em pacotes: \texttt{prodest} (Stata) e \texttt{acf} (R).
+    \item Amplamente citado em estudos de produtividade em OI, Economia do Trabalho e Comércio Internacional.
+    \item Publicado na \textit{Econometrica} em 2015, após circular como working paper por uma década.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Avaliação Crítica e Legado — Limitações}
+
+\begin{itemize}
+    \item O resultado empírico apresentado no paper é apenas preliminar — o paper circulou como working paper por uma década antes de ser publicado.
+    \item O procedimento ACF-2 é computacionalmente mais exigente e raramente implementado na prática.
+    \item A hipótese de Markov de primeira ordem para $\omega_{it}$, herdada de OP e LP, permanece como restrição estrutural de todos os métodos.
+    \item O paper não discute com profundidade as propriedades assintóticas formais dos estimadores propostos — lacuna preenchida pela versão publicada em 2015.
+    \item A escolha entre usar investimento ($i_{it}$) ou insumo intermediário ($m_{it}$) como proxy ainda depende da disponibilidade de dados: $i_{it}$ frequentemente tem zeros, enquanto $m_{it}$ pode ser endógeno de formas diferentes dependendo da indústria.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Obrigado}
+
+\begin{center}
+\Large Obrigado!
+\end{center}
+
+\end{frame}
+
+\end{document}

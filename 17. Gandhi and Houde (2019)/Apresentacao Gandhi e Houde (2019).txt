@@ -1,0 +1,396 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Gandhi e Houde (2019)]{Measuring Substitution Patterns in Differentiated-Products Industries}
+\subtitle{{\Large}Gandhi e Houde (2019)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2019}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+% SUMÁRIO
+%================================================
+
+\begin{frame}{Sumário}
+\begin{enumerate}
+    \item Motivação e Problema de Pesquisa
+    \item Revisão da Literatura e Contribuição
+    \item Arcabouço Teórico e Modelo de Demanda
+    \item Identificação e o Problema de Instrumentos Fracos
+    \item Proposições Centrais: Forma Reduzida como Função Simétrica
+    \item Instrumentos de Diferenciação (\textit{Differentiation IVs})
+    \item Implicações Adicionais: IV Ótimo, Estimação Não-Paramétrica e Teste IIA
+    \item Simulações de Monte Carlo
+    \item Aplicação: Demanda por Automóveis
+    \item Limitações, Extensões e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+% SEÇÃO 1: MOTIVAÇÃO E PROBLEMA DE PESQUISA
+%================================================
+
+\begin{frame}{Motivação e Problema de Pesquisa}
+\begin{itemize}
+    \item Modelos de demanda por produtos diferenciados são essenciais para política antitruste, regulação e análise de bem-estar
+    \item A abordagem dominante — o modelo BLP (Berry, Levinsohn e Pakes, 1995) — estima coeficientes aleatórios via GMM não-linear com dados agregados de participação de mercado
+    \item \textbf{Problema central}: os instrumentos tradicionais do BLP frequentemente falham em identificar padrões de substituição, gerando estimativas imprecisas dos coeficientes de heterogeneidade
+\end{itemize}
+\vspace{0.25cm}
+\begin{block}{Questão de pesquisa}
+Por que os instrumentos usuais do BLP são fracos? Quais instrumentos alternativos resolvem esse problema?
+\end{block}
+\end{frame}
+
+\begin{frame}{Motivação e Problema de Pesquisa (cont.)}
+\begin{itemize}
+    \item Com instrumentos fracos: GMM não-linear produz RMSEs elevados, mínimos locais e soluções de canto ($\hat{\lambda} \to 0$, colapsando ao logit simples)
+    \item Estimativas ruins de $\lambda$ implicam padrões de substituição errados — fundamentais para simulações de fusão e cálculo de margem
+    \item Os autores propõem novos instrumentos baseados na \textbf{distribuição de diferenças de características} entre produtos rivais
+    \item Contribuição: fundamentação teórica (por que esses IVs identificam $\lambda$) + evidência empírica de sua superioridade
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 2: REVISÃO DA LITERATURA E CONTRIBUIÇÃO
+%================================================
+
+\begin{frame}{Revisão da Literatura e Contribuição}
+\begin{itemize}
+    \item \textbf{Berry (1994)}: inversão da demanda com dados agregados — base para estimação GMM
+    \item \textbf{BLP (1995)}: coeficientes aleatórios para capturar heterogeneidade; instrumentos de soma de características rivais (\textit{Sum IVs})
+    \item \textbf{Nevo (2001)}: instrumentos baseados em características de produtos em outros mercados (\textit{Hausman-style})
+    \item \textbf{Reynaert e Verboven (2014)}: primeiros a documentar fraqueza dos instrumentos BLP clássicos em simulações
+\end{itemize}
+\vspace{0.25cm}
+\begin{block}{Contribuição de Gandhi e Houde}
+Derivação formal de por que os IVs tradicionais são fracos + proposta de \textit{Differentiation IVs} com fundamento teórico na forma reduzida da demanda
+\end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura e Contribuição (cont.)}
+\begin{itemize}
+    \item \textbf{Problema dos Sum IVs}: somam características de rivais sem capturar a \textit{distribuição} dessas diferenças — informação insuficiente para identificar $\lambda$
+    \item Conexão com literatura de variáveis instrumentais ótimas: Chamberlain (1987), Newey (1990) — o IV ótimo é a derivada esperada do momento em relação aos parâmetros
+    \item Literatura de mercados com substituição local: Pinkse, Slade e Brett (2002); Petrin (2002)
+    \item Gandhi e Houde unificam a lógica de identificação com a estrutura do modelo BLP, tornando os resultados diretamente aplicáveis a qualquer estimação de demanda com dados agregados
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 3: ARCABOUÇO TEÓRICO E MODELO DE DEMANDA
+%================================================
+
+\begin{frame}{Arcabouço Teórico e Modelo de Demanda}
+\begin{itemize}
+    \item Mercados $t = 1, \ldots, T$; produtos $j = 1, \ldots, J_t$; consumidores $i = 1, \ldots, N_t$
+    \item Utilidade indireta do consumidor $i$ pelo produto $j$ no mercado $t$:
+\end{itemize}
+\begin{equation}
+    u_{ijt} = x_{jt}'\beta_i - \alpha_i p_{jt} + \xi_{jt} + \varepsilon_{ijt}
+\end{equation}
+\begin{itemize}
+    \item $x_{jt}$: vetor de características observáveis; $p_{jt}$: preço; $\xi_{jt}$: inobservável; $\varepsilon_{ijt} \sim$ Tipo I VE
+    \item Coeficientes aleatórios: $(\beta_i, \alpha_i) = (\bar{\beta}, \bar{\alpha}) + \Pi \nu_i$, com $\nu_i \sim F(\nu; \lambda)$
+\end{itemize}
+\vspace{0.25cm}
+\begin{block}{Intuição}
+Heterogeneidade nos gostos ($\lambda$) gera substituição não-proporcional entre produtos com características similares — o que o logit simples não captura
+\end{block}
+\end{frame}
+
+\begin{frame}{Arcabouço Teórico e Modelo de Demanda (cont.)}
+\begin{itemize}
+    \item Participação de mercado do produto $j$:
+\end{itemize}
+\begin{equation}
+    s_{jt}(x_t, p_t, \xi_t; \lambda) = \int \frac{\exp(x_{jt}'\beta_i - \alpha_i p_{jt} + \xi_{jt})}{1 + \sum_k \exp(x_{kt}'\beta_i - \alpha_i p_{kt} + \xi_{kt})} \, dF(\nu_i; \lambda)
+\end{equation}
+\begin{itemize}
+    \item Condições de momentos GMM: $\mathbb{E}[\xi_{jt}(\lambda) \cdot z_{jt}] = 0$, onde $\xi_{jt}(\lambda) = \sigma_{jt}^{-1}(s_t; \lambda) - x_{jt}'\beta$
+    \item \textbf{Hipótese de exclusão}: instrumentos $z_{jt}$ não correlacionados com $\xi_{jt}$
+    \item Estimação por Mínimos Quadrados Generalizados Iterativos (GNR — Gauss-Newton Regression)
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 4: IDENTIFICAÇÃO E O PROBLEMA DE INSTRUMENTOS FRACOS
+%================================================
+
+\begin{frame}{Identificação e o Problema de Instrumentos Fracos}
+\begin{itemize}
+    \item \textbf{Premissa}: $\lambda$ só é identificado se os IVs geram variação suficiente nos momentos $\mathbb{E}[\xi_{jt}(\lambda) \cdot z_{jt}]$ ao redor do valor verdadeiro $\lambda_0$
+    \item Com $\lambda \to 0$ (logit): $\sigma_{jt}^{-1}(s_t; \lambda) \approx \ln s_{jt} - \ln s_{0t}$ — IVs não precisam de informação sobre rivalidade
+    \item IVs fracos falham em rejeitar $H_0: \lambda = 0$ — modelo colapsa ao logit com IIA (\textit{Independence of Irrelevant Alternatives})
+\end{itemize}
+\vspace{0.25cm}
+\begin{block}{IIA e problema de identificação}
+Sob IIA, todos os produtos competem igualmente — o instrumento não precisa capturar quem é rival próximo. Identificar $\lambda \neq 0$ requer IVs que reflitam a \textit{localização} dos rivais no espaço de características
+\end{block}
+\end{frame}
+
+\begin{frame}{Identificação e o Problema de Instrumentos Fracos (cont.)}
+\begin{itemize}
+    \item \textbf{Sum IVs} (BLP clássico): $z_{jt}^{sum,k} = \sum_{l \neq j} x_{kt}^l$ — soma de características dos rivais
+    \item Problema: a soma é insensível à \textit{distribuição} das diferenças de características — dois produtos podem ter a mesma soma com distribuições completamente distintas
+    \item Consequências empíricas documentadas: RMSEs muito elevados; múltiplos mínimos locais na função objetivo; estimativas de $\lambda$ concentradas em zero
+    \item \textbf{Solução proposta}: instrumentos baseados em $d_{jt,k} = x_{kt}^l - x_{kt}^j$ — diferenças de características de cada rival em relação a $j$
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 5: PROPOSIÇÕES CENTRAIS
+%================================================
+
+\begin{frame}{Proposições Centrais: Forma Reduzida como Função Simétrica}
+\begin{itemize}
+    \item \textbf{Proposição 1 — Demanda inversa}: Sob as Suposições 1--3 do modelo,
+\end{itemize}
+\begin{equation}
+    \sigma_{jt}^{-1}(s_t; \lambda) = f(\omega_{jt}; \lambda) + C_t(\lambda)
+\end{equation}
+\begin{itemize}
+    \item $\omega_{jt} = \{d_{jt,k}^l\}_{l \neq j, k}$: conjunto de diferenças de características de $j$ em relação a todos os rivais
+    \item $f(\cdot)$: função simétrica nas diferenças — intercambiabilidade dos rivais
+    \item $C_t(\lambda)$: constante de mercado, absorvida por efeito fixo de mercado
+    \item \textbf{Intuição}: a demanda inversa de $j$ depende apenas de \textit{quão diferente} $j$ é dos rivais, não de suas características em nível
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Proposições Centrais: Forma Reduzida como Função Simétrica (cont.)}
+\begin{itemize}
+    \item \textbf{Proposição 2 — Forma reduzida de preços}: O preço reduzido satisfaz
+\end{itemize}
+\begin{equation}
+    \pi_{jt}(x_t; \lambda) = g(d_{jt}; \lambda) + c_t(\lambda)
+\end{equation}
+\begin{itemize}
+    \item $g(\cdot)$: função simétrica nas diferenças $d_{jt}$ — mesma estrutura da demanda inversa
+    \item \textbf{Implicação}: a forma reduzida depende apenas das diferenças, não das características em nível dos rivais
+    \item Quebra a ``maldição da dimensionalidade'': em vez de condicionar em $x_t$ inteiro ($J_t \times K$ dimensões), basta condicionar em $d_{jt}$ ($K$ dimensões de diferenças por produto)
+    \item Isso motiva diretamente os \textit{Differentiation IVs}: funções de $d_{jt}$ são válidas e relevantes por construção
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 6: INSTRUMENTOS DE DIFERENCIAÇÃO
+%================================================
+
+\begin{frame}{Instrumentos de Diferenciação (\textit{Differentiation IVs})}
+\begin{itemize}
+    \item Derivados diretamente das Proposições 1 e 2: IVs devem ser funções das diferenças de características $d_{jt,k}^l = x_{kt}^l - x_{kt}^j$
+    \item \textbf{Differentiation IV Quadrático} (captura dispersão dos rivais):
+\end{itemize}
+\begin{equation}
+    z_{jt,k}^{quad} = \sum_{l \neq j} \left(x_{kt}^l - x_{kt}^j\right)^2
+\end{equation}
+\begin{itemize}
+    \item Soma dos quadrados das diferenças em característica $k$ — maior valor indica que $j$ está mais isolado no espaço de características
+    \item \textbf{Differentiation IV Local} (captura rivalidade próxima):
+\end{itemize}
+\begin{equation}
+    z_{jt,k}^{local} = \sum_{l \neq j} \mathbf{1}\left(|x_{kt}^l - x_{kt}^j| < sd_k\right)
+\end{equation}
+\end{frame}
+
+\begin{frame}{Instrumentos de Diferenciação (cont.)}
+\begin{itemize}
+    \item IV Local: conta o número de rivais com características próximas (dentro de 1 desvio-padrão) — proxy direta para concorrência local
+    \item \textbf{Validade}: IVs são funções de $x_{kt}^l$ (características dos rivais), excluídas da equação de demanda de $j$ sob hipótese de exogeneidade das características
+    \item \textbf{Relevância}: por Proposição 2, a forma reduzida é função de $d_{jt}$, logo qualquer função de $d_{jt}$ é correlacionada com $\xi_{jt}(\lambda)$ quando $\lambda \neq 0$
+    \item IVs podem ser empilhados em vetor: $z_{jt} = (z_{jt,1}^{quad}, \ldots, z_{jt,K}^{quad}, z_{jt,1}^{local}, \ldots, z_{jt,K}^{local})$
+\end{itemize}
+\vspace{0.25cm}
+\begin{block}{Comparação com Sum IVs}
+Sum IVs capturam apenas a média dos rivais; Differentiation IVs capturam a \textit{distribuição} — informação muito mais rica para identificar heterogeneidade
+\end{block}
+\end{frame}
+
+%================================================
+% SEÇÃO 7: IMPLICAÇÕES ADICIONAIS
+%================================================
+
+\begin{frame}{IV Ótimo e Estimação Não-Paramétrica}
+\begin{itemize}
+    \item \textbf{IV Ótimo} (Chamberlain 1987; Newey 1990): minimiza variância assintótica do estimador GMM
+    \item Para o modelo BLP, o IV ótimo é:
+\end{itemize}
+\begin{equation}
+    z_{jt}^* = \mathbb{E}\left[\frac{\partial \xi_{jt}(\lambda_0)}{\partial \lambda} \,\middle|\, x_t\right]
+\end{equation}
+\begin{itemize}
+    \item Por Proposição 2: $z_{jt}^*$ é função de $d_{jt}$ — confirma que Differentiation IVs são aproximações do IV ótimo
+    \item \textbf{Estimação não-paramétrica}: aproximar $z_{jt}^*$ por séries de polinômios em $d_{jt}$ sem especificar forma funcional
+    \item Benefício: não requer conhecer $F(\nu; \lambda)$ para construir o IV — procedimento robusto à especificação
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Teste de Independência de Alternativas Irrelevantes (IIA)}
+\begin{itemize}
+    \item \textbf{Hipótese IIA}: sob logit simples ($\lambda = 0$), a razão de participações não depende da presença de outros produtos
+    \item O artigo propõe um teste formal de IIA baseado nos Differentiation IVs:
+\end{itemize}
+\begin{equation}
+    \ln(s_{jt}/s_{0t}) = x_{jt}'\beta + \gamma_1 z_{jt}^{sum} + \gamma_2 z_{jt}^{diff} + \varepsilon_{jt}
+\end{equation}
+\begin{itemize}
+    \item $H_0: \gamma_2 = 0$ — IVs de diferenciação não têm poder explicativo adicional além dos Sum IVs
+    \item Rejeição de $H_0$ indica que os Differentiation IVs são instrumentos fortes — heterogeneidade identificável
+    \item \textbf{Interpretação}: se IIA não vale, a localização relativa dos produtos importa para a demanda, e os Diff IVs capturam isso
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 8: SIMULAÇÕES DE MONTE CARLO
+%================================================
+
+\begin{frame}{Simulações de Monte Carlo — Desenho}
+\begin{itemize}
+    \item Ambiente simulado: $T = 50$ mercados, $J = 25$ produtos por mercado, $K = 2$ características ($x_1, x_2$) distribuídas uniformemente
+    \item Parâmetro verdadeiro de heterogeneidade: $\lambda_0 = 1$
+    \item Cinco cenários de instrumentos comparados:
+    \begin{enumerate}
+        \item \textbf{Sum IV}: instrumento BLP clássico ($\sum_{l \neq j} x_k^l$)
+        \item \textbf{Diff IV Quadrático}: $\sum_{l\neq j}(x_k^l - x_k^j)^2$
+        \item \textbf{Diff IV Local}: $\sum_{l\neq j}\mathbf{1}(|x_k^l - x_k^j| < sd_k)$
+        \item \textbf{IV Ótimo Não-Paramétrico}: séries em $d_{jt}$
+        \item \textbf{IV Ótimo Paramétrico}: derivada analítica (benchmark)
+    \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Simulações de Monte Carlo — Resultados}
+\begin{itemize}
+    \item Critério de avaliação: RMSE de $\hat{\lambda}$, frequência de mínimos locais e frequência de soluções de canto ($\hat{\lambda} < 0.01$)
+\end{itemize}
+\vspace{0.25cm}
+{\footnotesize
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lcccc}
+\toprule
+Instrumento & RMSE & Mínimos Locais (\%) & Soluções de Canto (\%) & Rejeição IIA (\%) \\
+\midrule
+Sum IV & 0.85 & 42 & 38 & 8 \\
+Diff IV Quadrático & 0.05 & 0 & 0 & 97 \\
+Diff IV Local & 0.04 & 0 & 0 & 98 \\
+IV Ótimo Não-Param. & 0.03 & 0 & 0 & 99 \\
+IV Ótimo Paramétrico & 0.02 & 0 & 0 & 100 \\
+\bottomrule
+\end{tabular}
+}
+}
+\vspace{0.25cm}
+\begin{itemize}
+    \item Differentiation IVs reduzem o RMSE em $\approx 17\times$ em relação ao Sum IV
+    \item Eliminam completamente mínimos locais e soluções de canto
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Simulações de Monte Carlo — Interpretação}
+\begin{itemize}
+    \item \textbf{Por que Sum IV falha?} Dois mercados com mesma soma de características podem ter distribuições de rivalidade completamente distintas — o instrumento não discrimina entre eles
+    \item \textbf{Por que Diff IVs funcionam?} Capturam a variação na distribuição de $d_{jt}$ — quando $\lambda \neq 0$, essa distribuição é diretamente mapeada na demanda inversa
+    \item \textbf{IV Local vs.\ Quadrático}: ambos têm desempenho similar; Local é mais intuitivo (conta vizinhos próximos); Quadrático é mais fácil de computar
+    \item \textbf{IV Ótimo Não-Paramétrico}: desempenho próximo ao paramétrico — confirmação de que séries em $d_{jt}$ aproximam bem o IV ótimo
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 9: APLICAÇÃO — DEMANDA POR AUTOMÓVEIS
+%================================================
+
+\begin{frame}{Aplicação: Demanda por Automóveis — Dados}
+\begin{itemize}
+    \item Base: dados BLP originais de automóveis dos EUA, 1971--1990 (2.217 observações produto-mercado)
+    \item Variáveis de características: preço, número de portas, ar-condicionado, potência, tamanho
+    \item Três coeficientes aleatórios estimados: preço ($\alpha_i$), número de portas ($\beta_i^{doors}$), ar-condicionado ($\beta_i^{air}$)
+    \item IVs utilizados: Differentiation IVs Quadrático e Local para cada característica com coeficiente aleatório
+\end{itemize}
+\vspace{0.25cm}
+\begin{block}{Comparação com BLP (1995)}
+Mesmos dados e estrutura de modelo — permite comparação direta dos resultados com e sem Differentiation IVs
+\end{block}
+\end{frame}
+
+\begin{frame}{Aplicação: Demanda por Automóveis — Resultados}
+\begin{itemize}
+    \item \textbf{Elasticidades preço próprias}: mediana de $-1.2$ (BLP clássico: $-3.0$ a $-6.0$, muito elevadas)
+    \item \textbf{Heterogeneidade estimada}: coeficientes aleatórios significativamente diferentes de zero para preço e ar-condicionado
+    \item Sum IVs produzem $\hat{\lambda} \approx 0$ para portas — colapso ao logit; Diff IVs identificam heterogeneidade significativa
+    \item \textbf{Padrões de substituição}: com Diff IVs, produtos similares substituem-se mais entre si — resultado economicamente plausível
+\end{itemize}
+\vspace{0.25cm}
+\begin{block}{Teste IIA na aplicação}
+Fortemente rejeitado ($p < 0.001$) para os três coeficientes aleatórios — Diff IVs são instrumentos fortes nos dados reais
+\end{block}
+\end{frame}
+
+\begin{frame}{Aplicação: Demanda por Automóveis — Implicações}
+\begin{itemize}
+    \item Elasticidades mais baixas (em módulo) com Diff IVs implicam \textbf{margens de Lerner maiores} — consistente com evidência de rentabilidade da indústria automotiva
+    \item Padrões de substituição precisos são cruciais para: análise de fusão (unilateral effects), simulação de pricing pós-fusão, avaliação de inovação de produto
+    \item \textbf{Resultado de política}: uso de Sum IVs tende a superestimar elasticidades e subestimar poder de mercado — viés com implicações para análise antitruste
+    \item Resultados são robustos a diferentes especificações de coeficientes aleatórios e diferentes conjuntos de IVs baseados em diferenças
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 10: LIMITAÇÕES, EXTENSÕES E LEGADO
+%================================================
+
+\begin{frame}{Limitações, Extensões e Legado}
+\begin{itemize}
+    \item \textbf{Limitações}: resultados baseados em características observáveis — se há características latentes relevantes, as diferenças $d_{jt}$ podem não capturar toda a rivalidade relevante
+    \item Suposição de Intercambiabilidade (Assumption 3): identidade dos rivais não importa além das diferenças de características — restritiva em mercados com forte diferenciação vertical
+    \item Dados agregados: sem dados individuais de compra, a heterogeneidade só é identificada através da variação entre mercados
+\end{itemize}
+\vspace{0.25cm}
+\begin{block}{Extensões naturais}
+\begin{itemize}
+    \item IV Ótimo com características latentes (combinação com micro-dados)
+    \item Extensão para modelos de oferta com conduct parameters
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Legado e Impacto}
+\begin{itemize}
+    \item \textbf{Adoção na prática}: Differentiation IVs tornaram-se instrumentos padrão em estimações BLP — implementados em pacotes como \texttt{PyBLP} (Conlon e Gortmaker, 2020)
+    \item \textbf{Impacto metodológico}: artigo demonstra que a escolha de IVs em modelos não-lineares não é arbitrária — má escolha invalida inferência sobre parâmetros-chave
+    \item \textbf{Resultado teórico durável}: conexão entre a estrutura de substituição local no espaço de características e a identificação de $\lambda$ — válida além do modelo BLP específico
+    \item \textbf{Implicação para pesquisa empírica}: antes de interpretar estimativas BLP, verificar fortaleza dos IVs via teste IIA proposto no artigo
+\end{itemize}
+\end{frame}
+
+%================================================
+% SLIDE FINAL
+%================================================
+
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

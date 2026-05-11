@@ -1,0 +1,650 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Discrimina\c{c}\~{a}o Internacional de Pre\c{c}os]{International Price Discrimination in the European Car Market}
+\subtitle{{\Large}Verboven (1996)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administra\c{c}\~{a}o e Contabilidade (FEA-USP)}}
+\date{1996}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sum\'{a}rio}
+\begin{enumerate}
+  \item Motiva\c{c}\~{a}o e Problema de Pesquisa
+  \item Revis\~{a}o da Literatura e Contribui\c{c}\~{a}o
+  \item Estrutura do Mercado Europeu de Autom\'{o}veis em 1990
+  \item Modelo de Oligop\'{o}lio para o Mercado de Autom\'{o}veis
+  \item Formas Funcionais: Custo Marginal, Pre\c{c}o e Demanda
+  \item Modelo de Demanda: Logit Aninhado
+  \item M\'{e}todos Econom\'{e}tricos e Estrat\'{e}gia de Identifica\c{c}\~{a}o
+  \item Dados
+  \item Resultados Emp\'{i}ricos: Estimativas do Modelo
+  \item Discrimina\c{c}\~{a}o Internacional de Pre\c{c}os: Markups e \'{I}ndice de Lerner
+  \item Conclus\~{o}es, Limita\c{c}\~{o}es e Extens\~{o}es
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{Motiva\c{c}\~{a}o: O Puzzle dos Pre\c{c}os de Autom\'{o}veis na Europa}
+\begin{itemize}
+  \item Pre\c{c}os pr\'{e}-impostos de modelos \textit{id\^{e}nticos} variam mais de \textbf{90\%} entre pa\'{i}ses europeus (BEUC 1981--1992)
+  \item Mertens e Ginsburgh (1985): \'{i}ndice hed\^{o}nico ajustado por qualidade mostra diferen\c{c}as de at\'{e} 30\% nos n\'{i}veis de pre\c{c}o entre B\'{e}lgica, Fran\c{c}a, Alemanha, It\'{a}lia e Reino Unido
+  \item Flam (1992): em 1990, diferen\c{c}as de 90\% ainda n\~{a}o s\~{a}o exce\c{c}\~{a}o
+  \item \'{I}ndice de pre\c{c}os hed\^{o}nico estimado (B\'{e}lgica = 100):
+\end{itemize}
+\vspace{0.2cm}
+\begin{center}
+{\footnotesize
+\begin{tabular}{lccccc}
+\toprule
+ & B\'{e}lgica & Fran\c{c}a & Alemanha & It\'{a}lia & Reino Unido \\
+\midrule
+\'{I}ndice de Pre\c{c}o Hed\^{o}nico & 100 & 105 & 110 & 116 & 120 \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+\vspace{0.15cm}
+\begin{itemize}
+  \item \textbf{Quest\~{a}o central:} por que firmas maximizadoras de lucro desejam essas diferen\c{c}as?
+  \begin{itemize}
+    \item Custos de opera\c{c}\~{a}o distintos por pa\'{i}s? (regulac\~{o}es, log\'{i}stica)
+    \item Markups distintos por pa\'{i}s? $\Rightarrow$ \textbf{discrimina\c{c}\~{a}o internacional de pre\c{c}os}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Motiva\c{c}\~{a}o: Fontes de Discrimina\c{c}\~{a}o e Abordagem}
+\begin{itemize}
+  \item Verboven (1996) constr\'{o}i e estima um \textbf{modelo estrutural de oligop\'{o}lio} para o mercado europeu de autom\'{o}veis
+  \item Tr\^{e}s fontes de discrimina\c{c}\~{a}o internacional de pre\c{c}os s\~{a}o consideradas simultaneamente:
+  \begin{enumerate}
+    \item \textbf{Elasticidades-pre\c{c}o distintas} entre pa\'{i}ses (poder de mercado dom\'{e}stico)
+    \item \textbf{Cotas de importa\c{c}\~{a}o vinculantes} sobre carros japoneses
+    \item \textbf{Comportamento colusivo} entre firmas
+  \end{enumerate}
+  \vspace{0.2cm}
+  \item Condi\c{c}\~{a}o necess\'{a}ria: \textbf{segmenta\c{c}\~{a}o geogr\'{a}fica de mercados} (custos de arbitragem proibitivos)
+  \begin{itemize}
+    \item Regulamento EC 123/85: sistema de distribui\c{c}\~{a}o seletiva e exclusiva
+    \item Obstaculos legais/administrativos para compras cross-border
+    \item Importa\c{c}\~{o}es paralelas baixas (m\'{a}x.\ 3\% na It\'{a}lia)
+  \end{itemize}
+  \vspace{0.2cm}
+  \item Dados: pre\c{c}os, vendas e caracter\'{i}sticas f\'{i}sicas de 512 modelos nos 5 pa\'{i}ses em 1990
+  \item Estimador: NL3SLS (Gallant e Jorgenson, 1979) com extens\~{o}es do m\'{e}todo de Berry (1994)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Revis\~{a}o da Literatura}
+\textbf{Literatura descritiva/forma reduzida:}
+\begin{itemize}
+  \item Mertens e Ginsburgh (1985): \'{i}ndice hed\^{o}nico; alertam para necessidade de an\'{a}lise formal de elasticidades
+  \item De Melo e Messerlin (1988), Gual (1993), Flam e Nordstrom (1994): cotas de importa\c{c}\~{a}o influenciam diferen\c{c}as de pre\c{c}o (forma reduzida)
+  \item Kirman e Schueller (1990): \^{e}nfase em diferen\c{c}as de custo
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Literatura de m\'{e}todos estruturais:}
+\begin{itemize}
+  \item Berry (1994): m\'{e}todo econom\'{e}trico trat\'{a}vel para oligop\'{o}lio com diferencia\c{c}\~{a}o; firmas monoproduto, sem cotas
+  \item Berry, Levinsohn e Pakes (1995): modelo mais flex\'{i}vel, computacionalmente custoso
+  \item Goldberg (1995): logit aninhado com microdados, mercado americano
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Contribui\c{c}\~{a}o de Verboven (1996)}
+\begin{itemize}
+  \item \textbf{Primeiro modelo estrutural de oligop\'{o}lio} para explicar \textit{sistematicamente} as diferen\c{c}as de pre\c{c}o no mercado europeu de autom\'{o}veis
+  \vspace{0.25cm}
+  \item Incorpora simultaneamente em um \'{u}nico framework:
+  \begin{itemize}
+    \item Firmas \textbf{multiproduto} (vs.\ monoproduto de Berry 1994)
+    \item Cotas de importa\c{c}\~{a}o absolutas e percentuais sobre japoneses
+    \item Coius\~{a}o espec\'{i}fica por pa\'{i}s
+  \end{itemize}
+  \vspace{0.25cm}
+  \item Quantifica as tr\^{e}s fontes de discrimina\c{c}\~{a}o via \textbf{markups relativos} e \textbf{\'{I}ndice de Lerner} estimados estruturalmente
+  \vspace{0.25cm}
+  \item Referência cl\'{a}ssica em OI emp\'{i}rica: influenciou diretamente Goldberg e Verboven (2001, 2004) e a literatura sobre discrimina\c{c}\~{a}o de pre\c{c}os em mercados internacionais
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Estrutura do Mercado Europeu de Autom\'{o}veis em 1990}
+\begin{itemize}
+  \item 5 pa\'{i}ses: 10,2 milh\~{o}es de registros (84\% da CE); amostra de 512 modelos base
+  \item \'{I}ndice de pre\c{c}o hed\^{o}nico: equa\c{c}\~{a}o (1) estimada por MQO:
+\end{itemize}
+\begin{equation}
+  p_{jm}/(1+t_m) = \exp\!\bigl(w_{jm}\,\gamma + \omega_m + \omega_{jm}\bigr)
+\end{equation}
+\begin{itemize}
+  \item $\omega_m$: efeito fixo de mercado -- parte sistem\'{a}tica do pre\c{c}o n\~{a}o explicada por caracter\'{i}sticas f\'{i}sicas
+  \item \textbf{Segmenta\c{c}\~{a}o de mercado} (condi\c{c}\~{a}o necess\'{a}ria para discrimina\c{c}\~{a}o):
+  \begin{itemize}
+    \item Reg.\ EC 123/85: distribui\c{c}\~{a}o seletiva e exclusiva -- dif\'{i}cil para atacadistas independentes
+    \item Aprova\c{c}\~{a}o nacional de modelos; dire\c{c}\~{a}o \`{a} esquerda no RU
+    \item Importa\c{c}\~{o}es paralelas baixas apesar das altas diferen\c{c}as de pre\c{c}o
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Estrutura do Mercado Europeu de Autom\'{o}veis em 1990 (cont.)}
+\textbf{Concentra\c{c}\~{a}o e penetra\c{c}\~{a}o internacional:}
+\begin{itemize}
+  \item Produtores dom\'{e}sticos: Fiat (It\'{a}lia), PSA/Renault (Fran\c{c}a), VW/GM/Ford/Mercedes/BMW (Alemanha), Rover/Ford/GM (RU)
+  \vspace{0.2cm}
+  \item \'{I}ndice C4 por pa\'{i}s:
+  \begin{itemize}
+    \item Fran\c{c}a = 76,1\%; It\'{a}lia = 77,9\%; Alemanha = 61,1\%; RU = 64,5\%
+  \end{itemize}
+  \vspace{0.2cm}
+  \item Cotas sobre carros japoneses:
+  \begin{itemize}
+    \item Vinculantes: Fran\c{c}a (3\% do mercado) e It\'{a}lia ($<$1\%)
+    \item Moderadas: Alemanha (15\%) e RU (11\%)
+    \item Bélgica: sem cota -- serve como grupo de controle
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Modelo de Oligop\'{o}lio: Lucro da Firma}
+\begin{itemize}
+  \item $F$ firmas multiproduto em $M$ mercados; firma $f$ vende subconjunto $\mathcal{F}_{fm}$ no mercado $m$
+  \item Vendas $q_{jm}(p_m)$ dependem apenas de $p_m$ (arbitragem proibitiva ao consumidor)
+  \item Lucro da firma $f$:
+\end{itemize}
+\begin{equation}
+  \Pi_f = \sum_{m=1}^{M}\sum_{j\in\mathcal{F}_{fm}} p^w_{jm}\,q_{jm}(p_m) - \sum_{j\in\mathcal{F}_{fm}} C_j\!\bigl(q_{j1},\ldots,q_{jM}\bigr)
+\end{equation}
+\begin{itemize}
+  \item $p^w_{jm}$: pre\c{c}o de atacado ($\neq$ pre\c{c}o ao consumidor $p_{jm}$, separados por impostos e margens de distribuidores)
+  \item Custos $C_j$ dependem das quantidades em \textbf{todos} os mercados: firmas internalizam economias de escala globais ao precificar
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Modelo de Oligop\'{o}lio: Condi\c{c}\~{o}es de Primeira Ordem}
+\begin{itemize}
+  \item CPO sem cota / com cota percentual $\lambda^r_{fm}$:
+\end{itemize}
+\begin{equation}
+  \sum_{k\in\mathcal{F}_{fm}}\!\!\left(p^w_{km} - \frac{\partial C_k}{\partial q_{km}} - \lambda^a_{fm}\right)\frac{\partial q_{km}}{\partial p^w_{jm}} + q_{jm} = 0
+\end{equation}
+\begin{itemize}
+  \item $\lambda^a_{fm}$: multiplicador de Lagrange para cota absoluta; $\lambda^r_{fm}$: para cota percentual
+  \item $\lambda = 0$: sem cota (Bertrand-Nash livre); $\lambda > 0$: cota vinculante
+  \item Maior $\lambda$ $\Rightarrow$ cota mais restritiva $\Rightarrow$ maior pre\c{c}o de equil\'{i}brio
+  \vspace{0.2cm}
+  \item Cota absoluta: aumenta pre\c{c}o ótimo de cada modelo japonês diretamente
+  \item Cota percentual: redefine a condi\c{c}\~{a}o de \'{o}timo relativa \`{a} participa\c{c}\~{a}o de mercado total
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Modelo de Oligop\'{o}lio: Decomposi\c{c}\~{a}o do Pre\c{c}o}
+\begin{itemize}
+  \item Invertendo o sistema de CPOs, o pre\c{c}o de atacado decompõe-se em:
+\end{itemize}
+\begin{equation}
+  p^w_{jm} = \underbrace{\frac{\partial C_j}{\partial q_{jm}}}_{\text{custo marginal}} + \underbrace{\bm{\Delta}^{-1}_{jm}\,\mathbf{q}_m + \lambda^a_{fm}}_{\text{markup}}
+\end{equation}
+\begin{itemize}
+  \item $\bm{\Delta}_m$: matriz $J_m\times J_m$ com $\Delta_{jkm} = -\partial q_{km}/\partial p^w_{jm}$ se $k,j$ mesma firma; 0 caso contr\'{a}rio
+  \item O markup depende inversamente das elasticidades-pre\c{c}o percebidas (via $\bm{\Delta}^{-1}_{jm}$) e aumenta com a cota (via $\lambda$)
+  \item Markup relativo de atacado (equa\c{c}\~{a}o 14):
+\end{itemize}
+\begin{equation}
+  m_{jm} = \frac{p^w_{jm} - \partial C_j/\partial q_{jm}}{p^w_{jm}}
+\end{equation}
+\end{frame}
+
+\begin{frame}{Modelo de Oligop\'{o}lio: Tr\^{e}s Fontes de Discrimina\c{c}\~{a}o}
+\textbf{Tr\^{e}s fontes de discrimina\c{c}\~{a}o internacional de pre\c{c}os:}
+\begin{enumerate}
+  \item \textbf{Elasticidades-pre\c{c}o distintas:} firmas dom\'{e}sticas enfrentam curvas de demanda menos el\'{a}sticas no mercado dom\'{e}stico $\Rightarrow$ maior markup dom\'{e}stico (via $\bm{\Delta}^{-1}_{jm}$ menor)
+  \vspace{0.2cm}
+  \item \textbf{Cotas de importa\c{c}\~{a}o:} firmas japonesas sob cota vinculante cobram pre\c{c}os mais altos (renda de cota via $\lambda > 0$)
+  \vspace{0.2cm}
+  \item \textbf{Coius\~{a}o:} redefine $\mathcal{F}_{fm}$ como coaliz\~{a}o de maximiza\c{c}\~{a}o conjunta de lucro; markups s\~{a}o ampliados pois a firma internaliza efeitos sobre rivais coludentes
+\end{enumerate}
+\vspace{0.2cm}
+\begin{alertblock}{Condi\c{c}\~{a}o necess\'{a}ria}
+As tr\^{e}s fontes só geram discrimina\c{c}\~{a}o se os mercados s\~{a}o geograficamente segmentados (arbitragem proibitiva ao consumidor).
+\end{alertblock}
+\end{frame}
+
+%================================================
+\begin{frame}{Formas Funcionais: Custo Marginal}
+\textbf{Custo marginal (equa\c{c}\~{a}o 5):}
+\begin{equation}
+  \frac{\partial C_j}{\partial q_{jm}} = \exp\!\bigl(w_{jm}\,\gamma_w + \gamma_q\ln Q_j + \omega_m + \omega_{jm}\bigr)
+\end{equation}
+\begin{itemize}
+  \item $Q_j = \sum_m q_{jm}$: produ\c{c}\~{a}o mundial total do modelo $j$
+  \begin{itemize}
+    \item $\gamma_q < 0$: economias de escala globais (aumentar $Q_j$ em 10\% eleva custo total em menos de 10\%)
+  \end{itemize}
+  \vspace{0.2cm}
+  \item $\omega_m$: custo n\~{a}o observado espec\'{i}fico do pa\'{i}s (regulac\~{o}es, catalisadores obrigat\'{o}rios, distribui\c{c}\~{a}o)
+  \vspace{0.2cm}
+  \item $\omega_{jm}$: custo n\~{a}o observado espec\'{i}fico do modelo-pa\'{i}s (ca\'{i} no erro da equa\c{c}\~{a}o de pre\c{c}os)
+  \vspace{0.2cm}
+  \item $w_{jm}$: caracter\'{i}sticas f\'{i}sicas em log (HP, peso, largura, altura) + dummies de origem
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Formas Funcionais: Pre\c{c}o e Identifica\c{c}\~{a}o}
+\textbf{Rela\c{c}\~{a}o pre\c{c}o atacado -- consumidor (equa\c{c}\~{a}o 6):}
+\begin{equation}
+  p^w_{jm} = \frac{p_{jm}}{(1+t_m)(1+\tau_m)}
+\end{equation}
+\begin{itemize}
+  \item $t_m$: impostos sobre valor agregado (observ\'{a}veis)
+  \item $\tau_m$: efeito fixo de margens de distribuidores (n\~{a}o observado); calculadas como \% do pre\c{c}o de tabela pr\'{e}-imposto
+\end{itemize}
+\vspace{0.25cm}
+\begin{alertblock}{Limita\c{c}\~{a}o de Identifica\c{c}\~{a}o}
+$\omega_m$ (custo espec\'{i}fico do pa\'{i}s) e $\tau_m$ (margem do distribuidor) n\~{a}o s\~{a}o separadamente identificados -- os efeitos fixos capturam ambos. O markup \textbf{relativo} $m_{jm}$ é identificado apesar disso, pois \'{e} definido em termos de pre\c{c}os de atacado e custo marginal.
+\end{alertblock}
+\end{frame}
+
+%================================================
+\begin{frame}{Modelo de Demanda: Logit Aninhado -- Estrutura}
+\begin{itemize}
+  \item $L_m$ consumidores potenciais; escolhem entre $J_m$ modelos ou ``bem externo''
+  \item Modelos particionados em \textbf{dois n\'{i}veis de ninhos}:
+  \begin{itemize}
+    \item \textbf{Grupos} por \textbf{classe}: mini/pequeno, m\'{e}dio, grande, executivo, luxo, esporte
+    \item \textbf{Subgrupos} por \textbf{pa\'{i}s de origem} dentro de cada classe: dom\'{e}stico vs.\ estrangeiro
+  \end{itemize}
+  \item Demanda agregada (equa\c{c}\~{a}o 7):
+\end{itemize}
+\begin{equation}
+  q_{jm} = \frac{e^{\delta_{jm}/(1-\sigma_1)}\cdot e^{I_{hgm}/(1-\sigma_2)}\cdot e^{I_{gm}}}{e^{I_{hgm}/(1-\sigma_1)}\cdot e^{I_{gm}/(1-\sigma_2)}\cdot\displaystyle\sum_{g=0}^{G_m}e^{I_{gm}}}\cdot L_m
+\end{equation}
+\end{frame}
+
+\begin{frame}{Modelo de Demanda: Logit Aninhado -- Valores Inclusivos e Utilidade}
+\textbf{Valores inclusivos (equa\c{c}\~{a}o 8):}
+\begin{equation}
+  I_{hgm} = (1-\sigma_1)\ln\!\sum_{l\in\mathcal{V}_{hgm}}e^{\delta_{lm}/(1-\sigma_1)}, \quad I_{gm} = (1-\sigma_2)\ln\!\sum_{h\in\mathcal{V}_{gm}}e^{I_{hgm}/(1-\sigma_2)}
+\end{equation}
+\vspace{0.1cm}
+\textbf{Utilidade m\'{e}dia (equa\c{c}\~{a}o 9):}
+\begin{equation}
+  \delta_{jm} = x_{jm}\beta - \alpha\,\frac{(p_{jm})^\mu - 1}{\mu} + \xi_m + \xi_{jm}
+\end{equation}
+\begin{itemize}
+  \item $\mu$: par\^{a}metro de especifica\c{c}\~{a}o do pre\c{c}o na utilidade ($\mu \to 0$: log-pre\c{c}o; $\mu = 1$: pre\c{c}o linear)
+  \item $\xi_m$: efeito fixo de demanda por mercado; $\xi_{jm}$: caracter\'{i}stica n\~{a}o observada da demanda (cai no erro)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Modelo de Demanda: Par\^{a}metros de Correla\c{c}\~{a}o}
+\begin{itemize}
+  \item Par\^{a}metros de substitui\c{c}\~{a}o: $0\le\sigma_2\le\sigma_1\le 1$ (condi\c{c}\~{a}o de McFadden)
+  \begin{itemize}
+    \item $\sigma_1 = \sigma_2 = 0$: logit simples (competi\c{c}\~{a}o sim\'{e}trica entre todos os modelos)
+    \item $\sigma_1 > 0, \sigma_2 = 0$: competi\c{c}\~{a}o localizada dentro do subgrupo (pa\'{i}s de origem)
+    \item $\sigma_1 > \sigma_2 > 0$: correla\c{c}\~{a}o adicional dentro da classe
+    \item $\sigma_1 \to 1$: substitutos perfeitos dentro do subgrupo
+  \end{itemize}
+  \vspace{0.2cm}
+  \item Elasticidades cruzadas decrescentes conforme dist\^{a}ncia na \'{a}rvore:
+  \begin{itemize}
+    \item Maior impacto: carros do mesmo subgrupo (mesmo pa\'{i}s de origem e classe)
+    \item Menor impacto: carros de subgrupos distintos da mesma classe
+    \item M\'{i}nimo impacto: carros de classes distintas
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Modelo de Demanda: Intuição e Especificações Rejeitadas}
+\begin{itemize}
+  \item \textbf{Mecanismo de poder de mercado dom\'{e}stico:}\\
+    $\sigma_1$ elevado $\Rightarrow$ subgrupos dom\'{e}sticos pouco concorridos $\Rightarrow$ firmas dom\'{e}sticas enfrentam baixa elasticidade-pre\c{c}o pr\'{o}pria $\Rightarrow$ cobram markups maiores no mercado dom\'{e}stico (\textit{discrimina\c{c}\~{a}o contra o consumidor nacional})
+  \vspace{0.25cm}
+  \item Especifica\c{c}\~{o}es \textbf{rejeitadas} pelos dados:
+  \begin{itemize}
+    \item Logit simples (ignora padr\~{o}es de substitui\c{c}\~{a}o)
+    \item Estrutura de ninhos invertida (grupos por origem $\Rightarrow$ $\sigma_1 < \sigma_2$, inconsistente com McFadden)
+    \item Ninhos adicionais (mais de dois n\'{i}veis)
+    \item Coius\~{a}o geral em todos os pa\'{i}ses
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{M\'{e}todos Econom\'{e}tricos: NL3SLS}
+\begin{itemize}
+  \item \textbf{NL3SLS} (Gallant e Jorgenson, 1979): estima sistema de equa\c{c}\~{o}es simult\^{a}neas, n\~{a}o-lineares, impl\'{i}citas
+  \begin{itemize}
+    \item Permite correla\c{c}\~{a}o entre $\omega_{jm}$ e $\xi_{jm}$ (caracter\'{i}sticas n\~{a}o observadas afetam custo e demanda simultaneamente)
+    \item Trata endogeneidade de pre\c{c}os e vendas via vari\'{a}veis instrumentais
+  \end{itemize}
+  \vspace{0.25cm}
+  \item Transforma\c{c}\~{a}o linear (Berry, 1994): equa\c{c}\~{o}es transformadas para que os erros entrem \textbf{linearmente}, tornando a estima\c{c}\~{a}o tratável mesmo com equil\'{i}brio impl\'{i}cito
+  \vspace{0.25cm}
+  \item V\'{a}rios par\^{a}metros entram n\~{a}o-linearmente ($\sigma_1, \sigma_2, \alpha, \mu, \lambda_{fm}$): valores iniciais obtidos via vers\~{a}o simplificada do modelo ($\mu=0$)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{M\'{e}todos Econom\'{e}tricos: Equa\c{c}\~{o}es Estimadas}
+\textbf{Equa\c{c}\~{a}o de demanda transformada (equa\c{c}\~{a}o 10):}
+\begin{equation}
+  \ln\!\frac{q_j}{L_m} = \ln\!\!\left[1 - \frac{Q_m}{L_m}\right] + \sigma_1\ln\frac{q_j}{Q_{hgm}} + \sigma_2\ln\frac{Q_{hgm}}{Q_{gm}} + x_{jm}\beta - \alpha\frac{p_{jm}^\mu - 1}{\mu} + \xi_m + \xi_{jm}
+\end{equation}
+\vspace{0.1cm}
+\textbf{Equa\c{c}\~{a}o de pre\c{c}os transformada (equa\c{c}\~{a}o 11):}
+\begin{equation}
+  \ln p_{jm} + \ln(1 - m_{jm}) = w_{jm}\gamma + \gamma_q Q_j + \ln(1+t_m) + \tau_m + \omega_m + \omega_{jm}
+\end{equation}
+\begin{itemize}
+  \item $m_{jm}$: markup relativo de atacado, fun\c{c}\~{a}o n\~{a}o-linear de $\sigma_1, \sigma_2, \alpha, \mu, \lambda_{fm}$
+  \item As duas equa\c{c}\~{o}es s\~{a}o estimadas conjuntamente pelo NL3SLS
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Estrat\'{e}gia de Identifica\c{c}\~{a}o: Vari\'{a}veis Instrumentais}
+\textbf{Por que instrumentos s\~{a}o necess\'{a}rios?}
+\begin{itemize}
+  \item Pre\c{c}os e participa\c{c}\~{o}es de mercado s\~{a}o end\'{o}genos (determinados no equil\'{i}brio de Bertrand-Nash)
+  \item Caracter\'{i}sticas f\'{i}sicas afetam tanto custo \textit{quanto} demanda $\Rightarrow$ n\~{a}o servem como instrumentos tradicionais
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Solu\c{c}\~{a}o (Pakes; BLP 1995): fun\c{c}\~{o}es das caracter\'{i}sticas dos competidores:}
+\begin{itemize}
+  \item Elementos de $x_{jm}$ e $w_{jm}$ (pr\'{o}prios)
+  \item M\'{e}dia de $x_{jm}$ e $w_{jm}$ para outros carros da \textbf{mesma firma}
+  \item M\'{e}dia de $x_{jm}$ e $w_{jm}$ para carros de \textbf{outras firmas}
+  \item N\'{u}mero de revendedores por firma em cada pa\'{i}s (exógeno no est\'{a}gio de precifica\c{c}\~{a}o)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Estrat\'{e}gia de Identifica\c{c}\~{a}o: Multiplicadores e Teste de Coius\~{a}o}
+\textbf{Multiplicadores de Lagrange (cotas japonesas):}
+\begin{itemize}
+  \item Identificados por dummies de carros japoneses interagidas com cada pa\'{i}s
+  \item Valida\c{c}\~{a}o: dummy para B\'{e}lgica (sem cota) \'{e} insignificante $\Rightarrow$ multiplicadores capturam efeito da cota, n\~{a}o custos espec\'{i}ficos de firmas japonesas
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Teste de coius\~{a}o:}
+\begin{itemize}
+  \item Par\^{a}metro $\phi_m$: $\phi_m = 0$ (Bertrand-Nash) vs.\ $\phi_m = 1$ (coius\~{a}o total no subgrupo)
+  \item Coius\~{a}o geral em todos os pa\'{i}ses: \textbf{rejeitada}
+  \item Coius\~{a}o espec\'{i}fica para Alemanha e RU: \textbf{n\~{a}o rejeitada}
+  \item Resultado sugere terceira fonte de discrimina\c{c}\~{a}o: precifica\c{c}\~{a}o coordenada em dois pa\'{i}ses com cotas ``volunt\'{a}rias'' brandas
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Dados: Amostra e Caracter\'{i}sticas F\'{i}sicas}
+\begin{itemize}
+  \item \textbf{Amostra:} 512 observa\c{c}\~{o}es -- quase todos os modelos base nos 5 pa\'{i}ses em 1990
+  \begin{itemize}
+    \item Fontes p\'{u}blicas: l'Argus, Autogids, Katalog der Automobil Revue, MVRIS, etc.
+  \end{itemize}
+  \vspace{0.2cm}
+  \item \textbf{Caracter\'{i}sticas f\'{i}sicas} ($w_{jm}$ e $x_{jm}$) em duas categorias:
+  \begin{itemize}
+    \item T\'{e}cnicas (em log): cavalos de pot\^{e}ncia (HP), peso, largura, altura
+    \item Dummies de pa\'{i}s de origem: franc\^{e}s, alem\~{a}o, italiano, brit\^{a}nico, americano, japon\^{e}s (refer\^{e}ncia: leste-europeu)
+    \item Dummy de desvantagem de firma estrangeira no mercado dom\'{e}stico
+  \end{itemize}
+  \vspace{0.2cm}
+  \item \textbf{Defini\c{c}\~{a}o de dom\'{e}stico:} produ\c{c}\~{a}o local -- Ford e GM s\~{a}o dom\'{e}sticos na Alemanha e no RU; Nissan Primera/Bluebird tratados como brit\^{a}nicos no RU
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Dados: Pre\c{c}os, Vendas e Produ\c{c}\~{a}o Mundial}
+\begin{itemize}
+  \item \textbf{Pre\c{c}os:} tabela pr\'{e}-imposto convertidos para ECUs
+  \item \textbf{Vendas:} registros anuais de novos autom\'{o}veis por modelo e pa\'{i}s
+  \vspace{0.2cm}
+  \item \textbf{Produ\c{c}\~{a}o mundial por modelo} ($Q_j$):
+  \begin{itemize}
+    \item Participac\~{a}o do modelo nas vendas da firma $\times$ produ\c{c}\~{a}o mundial total da firma
+    \item Resultados robustos a medidas alternativas de produ\c{c}\~{a}o
+  \end{itemize}
+  \vspace{0.2cm}
+  \item \textbf{Potenciais compradores} ($L_m$):
+  \begin{itemize}
+    \item Total de domic\'{i}lios no pa\'{i}s (seguindo BLP 1995)
+    \item Resultados robustos a $L_m = 25\%$ dos domic\'{i}lios
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Resultados Emp\'{i}ricos: Par\^{a}metros Principais}
+\textbf{Par\^{a}metros comuns \`{a} demanda e precifica\c{c}\~{a}o (Tabela 2):}
+\vspace{0.15cm}
+\begin{center}
+{\footnotesize
+\begin{tabular}{lcc}
+\toprule
+Par\^{a}metro & Estimativa & Erro Padr\~{a}o \\
+\midrule
+$\mu$ (especifica\c{c}\~{a}o do pre\c{c}o na utilidade) & $-0{,}278$ & $(0{,}036)$ \\
+$\alpha$ (sensibilidade ao pre\c{c}o) & $71{,}812$ & $(27{,}994)$ \\
+$\sigma_1$ (correla\c{c}\~{a}o dentro do subgrupo) & $0{,}522$ & $(0{,}062)$ \\
+$\sigma_2$ (correla\c{c}\~{a}o entre subgrupos da mesma classe) & $-0{,}081$ & $(0{,}162)$ \\
+\midrule
+$\gamma_q$ (retornos de escala) & $-0{,}116$ & $(0{,}011)$ \\
+\midrule
+Efeito fixo demanda -- Fran\c{c}a ($\hat{\xi}_m$) & $0{,}463$ & $(0{,}172)$ \\
+Efeito fixo demanda -- RU ($\hat{\xi}_m$) & $1{,}408$ & $(0{,}207)$ \\
+Efeito fixo custo -- Alemanha ($\hat{\omega}_m$) & $0{,}060$ & $(0{,}028)$ \\
+Efeito fixo custo -- RU ($\hat{\omega}_m$) & $0{,}116$ & $(0{,}029)$ \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+\vspace{0.15cm}
+\begin{itemize}
+  \item $\sigma_1 = 0{,}522$: forte correla\c{c}\~{a}o dentro do subgrupo $\Rightarrow$ \textbf{poder de mercado dom\'{e}stico}
+  \item $\gamma_q = -0{,}116$: produção em 10\% $\Rightarrow$ custo total $+8{,}9\%$ (economias de escala)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Resultados Emp\'{i}ricos: Multiplicadores de Lagrange e Cotas}
+\textbf{Multiplicadores de Lagrange sobre firmas japonesas (Tabela 2):}
+\vspace{0.15cm}
+\begin{center}
+{\footnotesize
+\begin{tabular}{lcc}
+\toprule
+Pa\'{i}s & Estimativa ($\hat{\lambda}_m$) & Erro Padr\~{a}o \\
+\midrule
+Fran\c{c}a & $826{,}5$ & $(248{,}3)$ *** vinculante \\
+Alemanha & $-176{,}9$ & $(248{,}1)$ n\~{a}o vinculante \\
+It\'{a}lia & $1.820{,}8$ & $(293{,}1)$ *** muito vinculante \\
+Reino Unido & $214{,}3$ & $(244{,}1)$ n\~{a}o vinculante \\
+B\'{e}lgica (controle, sem cota) & insignificante & -- \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+\vspace{0.15cm}
+\begin{itemize}
+  \item \textbf{It\'{a}lia:} maior multiplicador -- cota absoluta de $<1\%$, extremamente restritiva
+  \item \textbf{Fran\c{c}a:} cota percentual de 3\%, vinculante e bem identificada
+  \item Alemanha e RU: cotas ``volunt\'{a}rias'', n\~{a}o vinculantes
+  \item B\'{e}lgica insignificante $\Rightarrow$ multiplicadores capturam efeito da cota
+  \item Coius\~{a}o espec\'{i}fica para \textbf{Alemanha e RU n\~{a}o rejeitada}
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Discrimina\c{c}\~{a}o de Pre\c{c}os: Markups Relativos por Modelo e Pa\'{i}s}
+\vspace{0.1cm}
+\begin{center}
+{\footnotesize\color{black}
+\resizebox{0.85\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+Modelo & B\'{e}lgica & Fran\c{c}a & Alemanha & It\'{a}lia & Reino Unido \\
+\midrule
+Fiat Uno & 7,6 & 8,7 & 9,8 & \textbf{21,7} & 8,7 \\
+Fiat Tipo & 8,4 & 9,2 & 9,0 & \textbf{20,8} & 9,1 \\
+Fiat Croma & 9,0 & 9,6 & 9,7 & \textbf{21,2} & 9,8 \\
+Renault 5 & 8,0 & \textbf{10,4} & 8,4 & 8,8 & 8,4 \\
+Renault 19 & 8,9 & \textbf{13,0} & 9,2 & 9,5 & 9,0 \\
+Nissan Micra & 8,1 & \textbf{23,1} & 8,9 & \textbf{36,1} & 12,5 \\
+Toyota Corolla & 9,7 & \textbf{19,6} & 13,0 & \textbf{24,2} & 13,6 \\
+VW Golf & 9,3 & 10,3 & \textbf{12,2} & 11,0 & 10,0 \\
+Mercedes 190 & 14,3 & 14,4 & \textbf{17,2} & 15,6 & 12,3 \\
+BMW 7-series & 15,7 & 15,7 & 14,7 & 19,0 & \textbf{21,5} \\
+\bottomrule
+\end{tabular}%
+}}
+\end{center}
+\vspace{0.1cm}
+\begin{itemize}
+  \item \textbf{Poder dom\'{e}stico:} Fiat cobra o dobro do markup na It\'{a}lia; Renault carrega sobrepre\c{c}o na Fran\c{c}a
+  \item \textbf{Renda de cota:} Nissan e Toyota com markups muito altos na Fran\c{c}a e It\'{a}lia
+  \item \textbf{Classes superiores:} markups crescem com a classe do ve\'{i}culo
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{\'{I}ndice de Lerner por Pa\'{i}s e Segmento}
+\begin{itemize}
+  \item \'{I}ndice de Lerner: m\'{e}dia ponderada pelas vendas dos markups relativos
+\end{itemize}
+\vspace{0.1cm}
+\begin{center}
+{\footnotesize\color{black}
+\resizebox{0.90\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+Segmento & B\'{e}lgica & Fran\c{c}a & Alemanha & It\'{a}lia & Reino Unido \\
+\midrule
+Mini e pequeno & 8,1 & 10,4 & 9,5 & \textbf{16,4} & 10,2 \\
+M\'{e}dio & 9,2 & 11,5 & 11,3 & \textbf{16,1} & 11,0 \\
+Grande & 9,8 & 12,1 & 12,2 & \textbf{15,6} & 11,8 \\
+Executivo & 10,4 & 13,2 & 11,4 & 14,6 & 12,5 \\
+Luxo & 13,4 & 13,4 & \textbf{15,9} & \textbf{18,8} & 14,2 \\
+Esporte & 14,4 & 15,3 & 15,2 & 17,5 & \textbf{19,9} \\
+\textbf{Ind\'{u}stria total} & \textbf{9,4} & \textbf{11,4} & \textbf{11,9} & \textbf{16,3} & \textbf{11,4} \\
+\bottomrule
+\end{tabular}%
+}}
+\end{center}
+\end{frame}
+
+\begin{frame}{\'{I}ndice de Lerner: Interpreta\c{c}\~{a}o}
+\begin{itemize}
+  \item \textbf{It\'{a}lia (16,3\%):} maior \'{i}ndice -- Fiat quase monopolista nas classes baixas + cota japonesa muito restritiva
+  \vspace{0.2cm}
+  \item \textbf{B\'{e}lgica (9,4\%):} menor -- nenhum produtor dom\'{e}stico, nenhuma cota
+  \vspace{0.2cm}
+  \item Discrimina\c{c}\~{a}o \textbf{mais pronunciada nas classes baixas}: poder dom\'{e}stico + cota restringe n\'{u}mero de ve\'{i}culos (n\~{a}o valor), induzindo firmas japonesas a subir pre\c{c}os mais em modelos baratos
+  \vspace{0.2cm}
+  \item Efeitos fixos de custo residuais (Alemanha, RU): coius\~{a}o, catalisadores/assist\^{e}ncia e margens de distribuidores n\~{a}o captadas pelo modelo
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Conclus\~{o}es: Fontes de Discrimina\c{c}\~{a}o}
+\begin{itemize}
+  \item \textbf{Discrimina\c{c}\~{a}o internacional de pre\c{c}os confirmada} no mercado europeu de autom\'{o}veis em 1990
+\end{itemize}
+\vspace{0.15cm}
+\textbf{Fonte 1 -- Elasticidades-pre\c{c}o (poder dom\'{e}stico):}
+\begin{itemize}
+  \item Firmas dom\'{e}sticas na Fran\c{c}a, Alemanha, RU e It\'{a}lia enfrentam elasticidades muito menores
+  \item $\sigma_1$ elevado $\Rightarrow$ prefer\^{e}ncias correlacionadas dentro do subgrupo (origem $\times$ classe) $\Rightarrow$ subgrupos dom\'{e}sticos pouco concorridos $\Rightarrow$ markups dom\'{e}sticos mais altos
+\end{itemize}
+\vspace{0.15cm}
+\textbf{Fonte 2 -- Cotas de importa\c{c}\~{a}o:}
+\begin{itemize}
+  \item Cotas vinculantes na Fran\c{c}a e It\'{a}lia (multiplicadores de Lagrange significativos)
+  \item Firmas japonesas obtêm renda de cota, especialmente em classes baixas (cota restringe unidades, n\~{a}o valor)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Conclus\~{o}es: Coius\~{a}o e Robustez}
+\textbf{Fonte 3 -- Coius\~{a}o:}
+\begin{itemize}
+  \item Especifica\c{c}\~{a}o com coius\~{a}o espec\'{i}fica n\~{a}o pode ser rejeitada para Alemanha e RU
+  \item Coius\~{a}o geral em todos os pa\'{i}ses \'{e} rejeitada pelos dados
+  \item Sugere precifica\c{c}\~{a}o coordenada em mercados com cotas ``volunt\'{a}rias'' (menor press\~{a}o competitiva japonesa)
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Robustez:}
+\begin{itemize}
+  \item Resultados robustos a medidas alternativas de produ\c{c}\~{a}o mundial ($Q_j$)
+  \item Robustez a proxy de pre\c{c}o de transa\c{c}\~{a}o e especifica\c{c}\~{o}es de $L_m$
+  \item Limita\c{c}\~{a}o principal: corte transversal \'{u}nico (1990) -- n\~{a}o captura din\^{a}mica cambial nem mudan\c{c}as estruturais p\'{o}s-integra\c{c}\~{a}o
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Limita\c{c}\~{o}es}
+\begin{itemize}
+  \item Corte transversal \'{u}nico (1990): n\~{a}o captura pass-through din\^{a}mico de c\^{a}mbio nem mudan\c{c}as estruturais
+  \vspace{0.15cm}
+  \item Hip\'{o}tese de exogeneidade das caracter\'{i}sticas f\'{i}sicas: v\'{a}lida no curto prazo; question\'{a}vel no longo prazo
+  \vspace{0.15cm}
+  \item $\tau_m$ (margens de distribuidores) n\~{a}o separadamente identificado de $\omega_m$ (custos de pa\'{i}s)
+  \vspace{0.15cm}
+  \item Multiplicadores de Lagrange assumidos iguais entre todas as firmas japonesas dentro de cada pa\'{i}s
+  \vspace{0.15cm}
+  \item Aus\^{e}ncia de dados detalhados sobre margens de distribuidores e demogr\'{a}ficos por pa\'{i}s
+  \vspace{0.15cm}
+  \item Modelo est\'{a}tico -- n\~{a}o modela durabilidade dos autom\'{o}veis nem estoque de ve\'{i}culos em uso
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Extens\~{o}es Sugeridas e Legado}
+\textbf{Extens\~{o}es sugeridas:}
+\begin{itemize}
+  \item Dados longitudinais (1970--1995): pass-through cambial, decl\'{i}nio do poder de mercado dom\'{e}stico, remo\c{c}\~{a}o das cotas ap\'{o}s o Acordo de Auto (1991)
+  \vspace{0.15cm}
+  \item An\'{a}lise de bem-estar via simula\c{c}\~{o}es: harmoniza\c{c}\~{a}o tribut\'{a}ria, elimina\c{c}\~{a}o de cotas, redu\c{c}\~{a}o de custos de arbitragem
+  \vspace{0.15cm}
+  \item Modelos mais flex\'{i}veis (BLP 1995, Feenstra e Levinsohn 1995) para melhor estimativa das elasticidades e redu\c{c}\~{a}o dos efeitos fixos residuais
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Legado:}
+\begin{itemize}
+  \item Referência cl\'{a}ssica em OI emp\'{i}rica -- influenciou diretamente Goldberg e Verboven (2001, 2004) e a literatura sobre discrimina\c{c}\~{a}o de pre\c{c}os em mercados internacionais
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

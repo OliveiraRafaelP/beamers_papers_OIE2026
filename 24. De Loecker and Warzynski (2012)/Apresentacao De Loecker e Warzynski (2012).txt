@@ -1,0 +1,296 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[De Loecker e Warzynski (2012)]{Markups and Firm-Level Export Status}
+\subtitle{{\Large}De Loecker e Warzynski (2012)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2012}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item Revisão da Literatura e Contribuição
+  \item Arcabouço Teórico: Derivação do Markup
+  \item Metodologia Econométrica: Estimação da Função de Produção
+  \item Exportadores, Produtividade e Markups: Hipóteses Teóricas
+  \item Dados e Estatísticas Descritivas
+  \item Resultados: Nível dos Markups e Especificações
+  \item Resultados: Markups e Status de Exportação
+  \item Implicações Agregadas e Robustez
+  \item Limitações, Extensões e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item Como mensurar markup ($\mu = P/CMg$) ao nível da firma sem dados de preços e quantidades por produto?
+  \item Método de referência — Hall (1986): estima markup \textit{médio por indústria}, sem controlar para produtividade não observada
+  \item Viés fundamental: choque de produtividade $\omega_{it}$ é correlacionado com escolhas de insumos, contaminando a estimativa do markup
+  \item Liberalização comercial afeta produtividade e markup simultaneamente — identificar apenas o efeito no markup requer controle adequado
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Contribuições:} (i) método firma-nível controlando para produtividade não observada; (ii) estudo empírico da relação markup--status de exportação.
+\end{frame}
+
+%================================================
+\begin{frame}{2. Revisão da Literatura e Contribuição}
+\begin{itemize}
+  \item \textbf{Markups via função de produção:} Hall (1986), Domowitz et al.\ (1988), Roeger (1995), Klette (1999) — nenhum controla para $\omega_{it}$; Klette em primeiras diferenças amplifica erro de medição e gera viés para baixo
+  \item \textbf{Estimação da FP com proxy:} Olley--Pakes (1996) e Levinsohn--Petrin (2003) usam investimento/materiais como proxy; ACF (2006) resolve colinearidade no 1º estágio
+  \item \textbf{Contribuição central:} combina condições de 1ª ordem da minimização de custos com métodos de proxy — sem especificar modelo de competição, sem impor CRS, sem medir custo de uso do capital
+  \item \textbf{Vantagem adicional:} estimação em níveis (não em primeiras diferenças) — maior eficiência, menor papel do erro de medição
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{3. Arcabouço Teórico: Derivação do Markup}
+Firma $i$ no período $t$ minimiza custos dado $Q_{it} = Q_{it}(X^1_{it},\ldots,X^V_{it}, K_{it}, \omega_{it})$.
+
+\vspace{0.2cm}
+Condição de 1ª ordem para insumo variável $X^v$ (sem custos de ajuste):
+\begin{equation}
+  \frac{\partial Q_{it}}{\partial X^v_{it}} \cdot \frac{X^v_{it}}{Q_{it}} = \frac{1}{\lambda_{it}} \cdot \frac{P^{X^v}_{it}\, X^v_{it}}{P_{it}\, Q_{it}}
+\end{equation}
+
+Definindo $\mu_{it} \equiv P_{it}/\lambda_{it}$ (markup) e $\alpha^X_{it} \equiv P^X_{it} X_{it}/(P_{it} Q_{it})$ (participação na receita):
+\begin{equation}
+  \boxed{\mu_{it} = \theta^X_{it} \cdot \left(\alpha^X_{it}\right)^{-1}}
+\end{equation}
+
+\textbf{Intuição:} sob competição perfeita ($P = CMg$), elasticidade-produto $=$ participação na receita. Competição imperfeita cria uma cunha — o markup.
+\end{frame}
+
+%================================================
+\begin{frame}{3. Arcabouço Teórico: Derivação do Markup (cont.)}
+\begin{itemize}
+  \item \textbf{Capital:} tem custos de ajuste — condição estática não se aplica; a cunha captura markup \textit{mais} custos de ajuste ($\Rightarrow$ markups estimados via capital $\approx 1{,}5$--$1{,}6$ vs.\ $\approx 1{,}2$--$1{,}3$ com trabalho/materiais)
+  \item \textbf{Cobb-Douglas:} elasticidade-produto constante ($\beta_\ell$); toda variação em $\alpha^X_{it}$ se traduz diretamente em variação no markup; firmas ranqueadas pela participação na receita corrigida
+  \item \textbf{Markup constante (caso Hall):} caso especial $\mu_{it} = \mu$; tomando primeiras diferenças da função de produção recupera-se o estimador de Hall (1986)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{4. Metodologia Econométrica: Estimação da Função de Produção}
+Função de produção com produtividade Hicks-neutra escalar:
+\begin{equation}
+  y_{it} = f(x_{it}, k_{it};\, \beta) + \omega_{it} + \varepsilon_{it}
+\end{equation}
+
+Especificação \textbf{translog} (preferida pelos autores):
+\begin{equation}
+  y_{it} = \beta_\ell \ell_{it} + \beta_k k_{it} + \beta_{\ell\ell} \ell^2_{it} + \beta_{kk} k^2_{it} + \beta_{\ell k} \ell_{it} k_{it} + \omega_{it} + \varepsilon_{it}
+\end{equation}
+
+\textbf{1º estágio (proxy ACF):} inverte-se $m_{it} = m_t(k_{it}, \omega_{it}, z_{it})$ para obter $\omega_{it} = h_t(m_{it}, k_{it}, z_{it})$, onde $z_{it}$ inclui status de exportação.
+
+\vspace{0.15cm}
+\textbf{2º estágio (GMM):} usando $\omega_{it} = g_t(\omega_{it-1}) + \xi_{it}$, os momentos de identificação são:
+\begin{equation}
+  \mathbb{E}\!\left[\xi_{it}(\beta)\cdot\left(\ell_{it-1},\, k_{it},\, \ell^2_{it-1},\, k^2_{it},\, \ell_{it-1}k_{it}\right)^{\!\top}\right] = 0
+\end{equation}
+\end{frame}
+
+%================================================
+\begin{frame}{4. Metodologia Econométrica: Estimação da FP (cont.)}
+\textbf{Elasticidade-produto sob translog:}
+\begin{equation}
+  \theta^L_{it} = \hat{\beta}_\ell + 2\hat{\beta}_{\ell\ell}\,\ell_{it} + \hat{\beta}_{\ell k}\,k_{it}
+\end{equation}
+
+\textbf{Correção da participação na receita} (observa-se $\tilde{Q}_{it} = Q_{it}\,e^{\varepsilon_{it}}$):
+\begin{equation}
+  \hat{\alpha}^X_{it} = \frac{P^X_{it}\,X_{it}}{P_{it}\,\tilde{Q}_{it}\,/\,e^{\hat{\varepsilon}_{it}}}
+\end{equation}
+
+\begin{itemize}
+  \item Correção elimina variação no produto não correlacionada com escolhas de insumos (choque não antecipado $\varepsilon_{it}$)
+  \item Monotonicidade de $m_{it}$ em $\omega_{it}$ verificada empiricamente para CES, Cournot e outras formas de competição imperfeita
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{5. Exportadores, Produtividade e Markups: Hipóteses Teóricas}
+\begin{itemize}
+  \item \textbf{Bernard et al.\ (2003):} Bertrand com heterogeneidade de produtividade; firmas mais produtivas cobram markups maiores; exportadores auto-selecionados $\Rightarrow$ markups médios maiores no corte transversal
+  \item \textbf{Melitz--Ottaviano (2008):} markup cresce com distância do custo de corte do mercado; firmas mais produtivas exportam e cobram markups maiores
+  \item \textbf{Kugler--Verhoogen (2008):} exportadores usam insumos de maior qualidade, produzem bens mais sofisticados e cobram preços mais altos
+  \item \textbf{Série temporal — Cosar, Guner e Tybout (2009):} fricções no mercado de fatores impedem ajuste pleno da capacidade; exportadores cobram markup maior porque a oferta não acompanha a demanda externa
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Dados e Estatísticas Descritivas}
+\begin{itemize}
+  \item \textbf{Fonte:} painel não balanceado, 7.915 firmas, manufatura eslovena, 1994--2000 (AJPES)
+  \item \textbf{Por que Eslovênia?} Economia em transição (ex-Iugoslávia): reorientação massiva para a UE, quadruplicação do número de exportadores e +42\% nas exportações $\Rightarrow$ variação suficiente para identificação
+\end{itemize}
+\vspace{0.2cm}
+{\small
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Estatística & 1995 & 2000 \\
+\midrule
+N.º de firmas & 3.820 & 4.906 \\
+Taxa de entrada & 13,14\% & 3,38\% \\
+N.º de exportadores & 1.738 & 2.335 \\
+Produtividade do trabalho (tolares) & 14.710 & 21.260 \\
+\bottomrule
+\end{tabular}
+\end{center}
+}
+\end{frame}
+
+%================================================
+\begin{frame}{7. Resultados: Nível dos Markups e Especificações}
+{\footnotesize
+\begin{center}
+\begin{tabular}{llc}
+\toprule
+Grupo & Especificação & Markup mediano \\
+\midrule
+\multirow{2}{*}{Benchmark} & Hall (1986) & 1,03 \\
+                           & Klette (1999) & 1,12 \\
+\midrule
+\multirow{8}{*}{Método proposto} & I (CD, valor adicionado) & 1,17 \\
+                                  & II (I + produt.\ endógena) & 1,10 \\
+                                  & III (I + momentos capital) & 1,23 \\
+                                  & IV (Translog, VA) & 1,28 \\
+                                  & V (CD + export.\ como insumo) & 1,23 \\
+                                  & VI (Gross Output — trabalho) & 1,26 \\
+                                  & VII (markup constante, nível) & 1,16 \\
+                                  & VIII (markup constante, 1ª dif.) & 1,11 \\
+\bottomrule
+\end{tabular}
+\end{center}
+}
+\end{frame}
+
+%================================================
+\begin{frame}{7. Resultados: Nível dos Markups e Especificações (cont.)}
+\begin{itemize}
+  \item Métodos que controlam para produtividade geram markups até 12\% maiores que Hall/Klette — viés para baixo em 1ª diferenças amplifica erro de medição
+  \item Desvio padrão dos markups $\approx 0{,}5$ em todas as especificações: enorme heterogeneidade entre firmas, impossível capturar com markup único por indústria
+  \item Comparar VII (nível, 1,16) vs.\ VIII (1ª dif., 1,11) isola o impacto do controle para produtividade
+  \item Markups via elasticidade do capital ($\approx 1{,}5$--$1{,}6$) muito maiores: cunha captura markup \textit{mais} custos de ajuste do capital
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{8. Resultados: Markups e Status de Exportação}
+Regressão log-linear do markup sobre status de exportação:
+\begin{equation}
+  \ln\mu_{it} = \delta_0 + \delta_1 e_{it} + \mathbf{b}_{it}\boldsymbol{\sigma} + \nu_{it}
+\end{equation}
+
+{\small
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Especificação & Prêmio ($\delta_1$ em nível) \\
+\midrule
+Hall (1986) & 0,016\phantom{***} (não sig.) \\
+Klette (1999) & 0,050\phantom{***} (não sig.) \\
+CD (I) & 0,163*** \\
+CD c/ prod.\ endógena (II) & 0,161*** \\
+Translog (IV) & 0,130*** \\
+CD + export.\ como insumo (V) & 0,183*** \\
+\bottomrule
+\end{tabular}
+\end{center}
+}
+\vspace{0.1cm}
+Métodos tradicionais \textbf{não detectam} diferença de markup. Método proposto: prêmio de \textbf{13--18\%} para exportadores.
+\end{frame}
+
+%================================================
+\begin{frame}{8. Resultados: Markups e Status de Exportação (cont.)}
+\textbf{Dinâmica de entrada no mercado externo:}
+\begin{equation}
+  \ln\mu_{it} = \gamma_0 + \gamma_1\,\text{Entry}_{it} + \gamma_2\,\text{Exit}_{it} + \gamma_3\,\text{Always}_i + \mathbf{b}_{it}\boldsymbol{\sigma} + \nu_{it}
+\end{equation}
+
+\begin{itemize}
+  \item Efeito de entrada: CD $+4{,}67\%$ ($+0{,}094$ em nível); Translog $+4{,}81\%$ ($+0{,}080$ em nível)
+  \item Exportadores para Europa Ocidental: markup 0,045 superior vs.\ outras regiões (hipótese de qualidade)
+  \item Firmas com share de exportação $<1\%$: aumento de markup quase nulo ($+0{,}001\%$) — markup doméstico não muda; o aumento é efeito de composição
+  \item Controlando para produtividade: $\delta_1$ cai de 0,076 para 0,021 — $\sim$70\% explicado por diferenças de custo marginal; $\sim$30\% reflete fatores de demanda (qualidade, elasticidades distintas)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{9. Implicações Agregadas e Robustez}
+\textbf{Crescimento de produtividade agregada (arcabouço de Hall):}
+\begin{equation}
+  \Delta y_{it} - \hat{\mu}\,\Delta\tilde{x}_{it} - \hat{\beta}_k\,\Delta k_{it} = \Delta\omega_{it}
+\end{equation}
+
+\begin{itemize}
+  \item Markups subestimados $\Rightarrow$ crescimento de produtividade superestimado
+  \item Com quadruplicação dos exportadores eslovenos, o viés de estimação do crescimento de produtividade \textit{aumenta} ao longo do tempo
+  \item Crescimento médio anual de produtividade eslovena estimado: 1,5\%--3\%
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{9. Implicações Agregadas e Robustez (cont.)}
+\textbf{Robustez a preços não observados (viés de Klette--Griliches, 1996):}
+\begin{itemize}
+  \item Correlação insumos--preços esperada ser negativa $\Rightarrow$ elasticidades-produto viesadas para baixo $\Rightarrow$ markup subestimado, \textit{não} superestimado
+  \item O viés de preços afeta apenas o nível do markup, não a correlação com status de exportação
+  \item Sob CD, coeficiente $\delta_1$ permanece consistente com preços não observados (viés vai para intercepto $\delta_0$)
+  \item CD e Translog produzem resultados muito similares $\Rightarrow$ preços não observados não comprometem os resultados principais
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{10. Limitações e Extensões}
+\begin{itemize}
+  \item Sem dados de alocação de insumos por destino: impossível decompor markup doméstico vs.\ externo sem hipóteses adicionais
+  \item Resultados correlacionais, não causais: auto-seleção de firmas mais produtivas para exportar é o mecanismo central
+  \item Sem separação entre efeito de qualidade e efeito de poder de mercado puro nas diferenças de markup
+  \item O método requer ao menos um insumo variável livre de custos de ajuste; se trabalho também tiver custos de ajuste, materiais servem como alternativa
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{10. Legado e Impacto}
+\begin{itemize}
+  \item Referência padrão para estimação de markups ao nível da firma: $\mu_{it} = \theta^X_{it}\,(\alpha^X_{it})^{-1}$
+  \item De Loecker, Eeckhout e Unger (2020, QJE): aplicam o método a dados globais de empresas listadas para documentar aumento expressivo dos markups desde os anos 1980
+  \item O resultado de que markups crescem com entrada no mercado externo exige releitura dos prêmios de produtividade de exportadores: parte do que era atribuído a ganhos de eficiência reflete, na verdade, markups maiores
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

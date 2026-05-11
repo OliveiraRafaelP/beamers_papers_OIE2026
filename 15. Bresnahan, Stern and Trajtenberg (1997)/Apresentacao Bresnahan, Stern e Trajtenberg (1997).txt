@@ -1,0 +1,355 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Segmentação e Rendas da Inovação em PCs]{Market Segmentation and the Sources of Rents from Innovation: Personal Computers in the Late 1980's}
+\subtitle{{\Large}Bresnahan, Stern e Trajtenberg (1997)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1997}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+% SUMÁRIO
+%================================================
+\begin{frame}{Sumário}
+  \begin{enumerate}
+    \item Motivação e Problema de Pesquisa
+    \item Revisão da Literatura e Contribuição
+    \item O Mercado de PCs no Final dos Anos 1980: Heterogeneidade e Clusters
+    \item Dados: Amostra, Variáveis e Estatísticas Descritivas
+    \item O Modelo de Demanda: Utilidade Aleatória e o PD GEV
+    \item A Função $G(\cdot)$ do PD GEV e a Equação de Participação de Mercado
+    \item PD GEV versus Modelos Alternativos: NML e VPD
+    \item Implementação GMM e Estratégia de Instrumentos
+    \item Resultados Principais: Estimativas do PD GEV e Robustez
+    \item Curvas de Demanda e Simulações Contrafactuais
+    \item Conclusões e Legado do Artigo
+  \end{enumerate}
+\end{frame}
+
+%================================================
+% SEÇÃO 1: MOTIVAÇÃO
+%================================================
+\begin{frame}{Motivação e Problema de Pesquisa}
+  \begin{itemize}
+    \item Paradoxo: mercado de PCs (EUA, 1987--88) é simultaneamente inovador e altamente competitivo
+    \item Arrow (1962): inovadores precisam de poder de mercado \textit{transitório} para cobrir custos de inovação
+    \item Patentes irrelevantes: padrão aberto IBM-compatible facilitou imitação
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Dois mecanismos alternativos de apropriabilidade:}
+  \begin{itemize}
+    \item \textbf{Frontier (F):} adoção pioneira do processador Intel 80386
+    \item \textbf{Branded (B):} reputação de marca (IBM, Compaq, AT\&T, HP)
+  \end{itemize}
+  \vspace{0.25cm}
+  \begin{block}{Pergunta Central}
+    Em que medida F e B proporcionavam isolamento da concorrência? O artigo estima modelo estrutural para quantificar padrões de substituição entre os clusters $\{B,F\}$, $\{B,NF\}$, $\{NB,F\}$ e $\{NB,NF\}$.
+  \end{block}
+\end{frame}
+
+%================================================
+% SEÇÃO 2: LITERATURA
+%================================================
+\begin{frame}{Revisão da Literatura e Contribuição}
+  \textbf{Literatura prévia:}
+  \begin{itemize}
+    \item Berry (1994): GMM para modelos de escolha discreta com dados agregados; endogeneidade de preços
+    \item BLP (1995): preferências heterogêneas com distribuição mista (integração numérica)
+    \item Bresnahan (1981, 1987), Trajtenberg (1990): modelos estruturais de demanda diferenciada
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Contribuição deste artigo:}
+  \begin{itemize}
+    \item \textbf{PD GEV}: modelo GEV não-hierárquico, baseado em McFadden (1978), que trata F e B simetricamente
+    \item Sem integração numérica (forma fechada) $\Rightarrow$ menor custo computacional que BLP
+    \item Instrumentos ``locais'' (dentro do cluster) exploram variação diferencial de entrada entre grupos
+  \end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 3: MERCADO DE PCS
+%================================================
+\begin{frame}{O Mercado de PCs: Clusters e Heterogeneidade}
+  \textbf{Contexto (1987--88):} adoção do 386 exigia P\&D intensivo; apenas as firmas mais capazes o fizeram inicialmente.
+  \vspace{0.25cm}
+  \textbf{Heterogeneidade dos compradores:}
+  \begin{itemize}
+    \item \textit{Frontier}: alguns viam 386 como versão mais rápida do 286; outros (usuários de Windows) como plataforma necessária
+    \item \textit{Branded}: Fortune 500 valorizavam IBM/Compaq por serviço e confiabilidade; pequenas firmas preferiam clones baratos
+  \end{itemize}
+  \vspace{0.25cm}
+  \begin{alertblock}{Por que apenas F e B segmentam?}
+    RAM, DISK e MHZ são reempacotáveis no mercado pós-venda $\Rightarrow$ diferencial de preço é arbitrado. Reputação de marca e processador integrado não são reempacotáveis $\Rightarrow$ fontes genuínas de segmentação.
+  \end{alertblock}
+\end{frame}
+
+%================================================
+% SEÇÃO 4: DADOS
+%================================================
+\begin{frame}{Dados: Amostra e Estatísticas Descritivas}
+  
+  \textbf{Amostra:} top 25 vendedores; 121 modelos (1987) e 137 (1988); mínimo 300 unidades vendidas
+  
+  \vspace{0.25cm}
+  \textbf{Fontes:} COMTEC (quantidades), GML MicroComputer Guide (preços e características), Berndt e Griliches (1993)
+  
+  \vspace{0.25cm}
+
+    \begin{center}
+    {\footnotesize{
+    \begin{tabular}{lcccc}
+    \toprule
+    & \multicolumn{2}{c}{\textbf{1987}} & \multicolumn{2}{c}{\textbf{1988}} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+    & Média & D.P. & Média & D.P. \\
+    \midrule
+    Preço (US\$) & 3.226 & 1.692 & 3.205 & 1.933 \\
+    Frontier (\%) & 10 & -- & 15 & -- \\
+    Branded (\%) & 30 & -- & 30 & -- \\
+    RAM (KB) & 611 & 404 & 688 & 504 \\
+    MHZ & 8,55 & 3,75 & 9,49 & 4,67 \\
+    DISK (MB) & 11,7 & 17,3 & 15,4 & 22,2 \\
+    \bottomrule
+  \end{tabular}
+  }}
+  \end{center}
+  \vspace{0.1cm}
+  \begin{itemize}
+    \item Preço médio estável; RAM e DISK crescem $>10\%$ em 1 ano
+  \end{itemize}
+  
+\end{frame}
+
+%================================================
+% SEÇÃO 5: MODELO DE DEMANDA
+%================================================
+\begin{frame}{O Modelo de Demanda: Utilidade Aleatória}
+  \textbf{Utilidade indireta do comprador $i$ para o produto $j$:}
+  \begin{equation}
+    V_{ij} = X_j'\beta + \alpha p_j + \xi_j + \eta_{ij}
+  \end{equation}
+  \begin{itemize}
+    \item $\xi_j$: qualidade não observada (média da população); $\eta_{ij}$: componente idiossincrático
+    \item A distribuição de $\eta$ determina os padrões de elasticidade cruzada no mercado
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Utilidade média:}
+  \begin{equation}
+    \delta_j = X_j'\beta + \alpha p_j + \xi_j
+  \end{equation}
+  \vspace{0.25cm}
+  \begin{block}{Intuição: dependência em $\eta$ e segmentação}
+    Se $\eta_{ij}$ e $\eta_{ik}$ são positivamente correlacionados para produtos $j,k$ que compartilham F ou B, então compradores que preferem qualquer produto F tendem a preferir todos os produtos F --- tornando-os substitutos próximos.
+  \end{block}
+\end{frame}
+
+%================================================
+% SEÇÃO 6: FUNÇÃO G E EQUAÇÃO DE PARTICIPAÇÃO
+%================================================
+\begin{frame}{A Função $G(\cdot)$ do PD GEV}
+  \textbf{Proposição (McFadden 1978):} Para $G: \mathbb{R}^{J+1} \to \mathbb{R}$ não-negativa, homogênea de grau 1, a participação de mercado é:
+  \begin{equation}
+    s_j = \frac{e^{\delta_j} G_j(e^{\delta_0}, \ldots, e^{\delta_J})}{G(e^{\delta_0}, \ldots, e^{\delta_J})}
+  \end{equation}
+  \vspace{0.25cm}
+  \textbf{Especificação PD GEV (equação 6):}
+  \footnotesize{
+  \begin{equation}
+    G(e^\delta) = a_F\!\left[\!\left(\sum_{j\in F}\!e^{\delta_j/\rho_F}\!\right)^{\!\rho_F}\!\!+\!\left(\sum_{j\in NF}\!e^{\delta_j/\rho_F}\!\right)^{\!\rho_F}\right] + 
+    a_B\!\left[\!\left(\sum_{j\in B}\!e^{\delta_j/\rho_B}\!\right)^{\!\rho_B}\!\!+\!\left(\sum_{j\in NB}\!e^{\delta_j/\rho_B}\!\right)^{\!\rho_B}\right] + e^{\delta_0}
+  \end{equation}}
+  \begin{itemize}
+    \item $\rho_F, \rho_B \in [0,1]$: quanto menor $\rho$, mais segmentado o mercado
+    \item $\rho \to 1$: colapsa para o logit multinomial simples (sem segmentação)
+  \end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 7: PD GEV vs NML
+%================================================
+\begin{frame}{PD GEV versus NML: Padrões de Elasticidade Cruzada}
+  
+  \textbf{Problema do NML de dois níveis:} a ordem de aninhamento força assimetria.
+  
+  \vspace{0.25cm}
+  Com B/NB no topo: mudança de preço em $\{B,F\}$ tem \textit{mesmo} efeito sobre $\{NB,F\}$ e $\{NB,NF\}$ (ignora que F compartilhado deveria aproximar).
+  
+  \vspace{0.25cm}
+  \textbf{PD GEV produz padrão de cross-elasticidades correto:}
+  
+  \vspace{0.1cm}
+  \begin{equation}
+    \varepsilon_{bf,bf} \geq \left(\varepsilon_{nbf,bf},\; \varepsilon_{bnf,bf}\right) \geq \varepsilon_{nbnf,bf}, \quad \text{com}\;\; \varepsilon_{nbf,bf} \neq \varepsilon_{bnf,bf}
+  \end{equation}
+  \begin{itemize}
+    \item F e B são tratados simetricamente --- sem impor qual é mais importante
+    \item Modelos NML (Tabela 7): $\rho_B \ll \rho_F$ com B no topo; $\rho_F \ll \rho_B$ com F no topo
+    \item Resultados contraditórios e sem critério de escolha --- PD GEV resolve o impasse
+  \end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 8: GMM E INSTRUMENTOS
+%================================================
+\begin{frame}{Implementação GMM: Inversão e Estimador}
+  \textbf{Procedimento (Berry 1994):} inverter o sistema de equações de participação para isolar $\xi_j$:
+  \begin{equation}
+    \hat{\xi}_j = \delta_j(s, \hat{\rho}) - \left(X_j'\hat{\beta} + \hat{\alpha} p_j\right)
+  \end{equation}
+  \textbf{Estimador GMM:}
+  \begin{equation}
+    \min_{\rho,\alpha,\beta}\; \hat{\xi}'(Z\Omega^{-1}Z')\hat{\xi}
+  \end{equation}
+  \begin{itemize}
+    \item PD GEV admite forma fechada $\Rightarrow$ sem integração numérica (vantagem sobre BLP 1995)
+    \item Procedimento em dois passos: primeiro resolve $\delta(s,\rho)$ numericamente; depois estima $(\alpha,\beta)$ por IV linear
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Estratégia de Instrumentos}
+  \textbf{Dois desafios:} endogeneidade de preços ($E[p\xi]>0$) e das participações de grupo.
+  \vspace{0.25cm}
+  \textbf{Instrumentos (Tabela 5):}
+  \begin{itemize}
+    \item \textit{Cluster (PD-específicos):} contagens e médias de $X$ para produtos que compartilham $F(j)$ ou $B(j)$
+    \item \textit{Ownership:} contagens e médias de $X$ para outros produtos da mesma firma (derivados da CPO Nash-Bertrand)
+    \item \textit{Interseção:} contagens de produtos que compartilham cluster \textit{e} firma
+  \end{itemize}
+  \vspace{0.25cm}
+  \begin{alertblock}{Identificação}
+    Cluster Frontier teve muito mais entrada entre 1987 e 1988 $\Rightarrow$ variação exógena na pressão competitiva local. Robustez (Tabela 8): remover IVs de ownership \textit{ou} PD-específicos colapsa a precisão das estimativas.
+  \end{alertblock}
+\end{frame}
+
+%================================================
+% SEÇÃO 9: RESULTADOS
+%================================================
+\begin{frame}{Resultados: Parâmetros de Substituição e Nível de Demanda}
+  \textbf{Modelo base (Modelo 1, com DISK):}
+  \vspace{0.25cm}
+  \begin{center}
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Parâmetro} & \textbf{Estimativa} & \textbf{(E.P.)} \\
+    \midrule
+    $\rho_F$ & 0,13 & (0,18) \\
+    $\rho_B$ & 0,34 & (0,08) \\
+    $\alpha$ (preço) & $-0,00017$ & (0,00008) \\
+    $\beta_{\text{BRANDED}}$ & $+0,57$ & (0,10) \\
+    $\beta_{\text{FRONTIER}}$ & $-0,03$ & (0,32) \\
+    $\beta_{\text{IBM}}$ & $+0,27$ & (0,15) \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  
+  \vspace{0.1cm}
+  \begin{itemize}
+    \item $\rho_F, \rho_B \ll 1$: alta segmentação ao longo das duas dimensões
+    \item Branded desloca demanda para fora ($\beta_B > 0$); Frontier não ($\beta_F \approx 0$)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Resultados: Robustez e Teste de Hipóteses}
+  \begin{itemize}
+    \item Rejeição de $H_0$: $\rho_F = \rho_B,\;\beta_F = \beta_B$ a 90\% (Wald = 5,22; $\chi^2_{(0,90;2)} = 4{,}61$)
+    \item Parâmetros estáveis entre Modelos 1--4 (variando controles técnicos)
+    \item Modelo sem IV (Modelo 7): $|\hat{\alpha}|$ muito menor $\Rightarrow$ confirma endogeneidade de preços
+  \end{itemize}
+  \vspace{0.25cm}
+  \begin{block}{NML versus PD GEV (Tabela 7)}
+    NML com B no topo: $\rho_B = 0{,}04$, $\rho_F = 0{,}23$. NML com F no topo: $\rho_B = 0{,}94$, $\rho_F = 0{,}42$. Resultados contraditórios --- PD GEV produce $\rho_F = 0{,}13$ e $\rho_B = 0{,}34$ de forma robusta e simétrica.
+  \end{block}
+  \vspace{0.25cm}
+  \begin{itemize}
+    \item $\rho_{\text{MHZ}} = 0{,}9998$ (Modelo 4): sem segmentação relevante ao longo de MHZ
+  \end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 10: CURVAS DE DEMANDA E CONTRAFACTUAIS
+%================================================
+\begin{frame}{Curvas de Demanda: Branded vs.\ Frontier}
+  \textbf{Figura 2 do artigo:} curvas hipotéticas para produto típico IBM/NF e produto típico NB/Frontier.
+  \vspace{0.25cm}
+  \begin{itemize}
+    \item \textbf{IBM/NF:} curva com nível alto e inclinação moderada $\Rightarrow$ estratégia de \textit{volume} (preço abaixo do hedônico)
+    \item \textbf{NB/Frontier:} curva íngreme e nível baixo $\Rightarrow$ estratégia de \textit{nicho} (preço premium para público seleto)
+  \end{itemize}
+  \vspace{0.25cm}
+  \begin{block}{Dois mecanismos de apropriabilidade}
+    Branded $\Rightarrow$ curva de demanda grande (deslocada para fora). Frontier $\Rightarrow$ curva de demanda íngreme (compradores com alta DAP). Ambos geram rendas, mas por mecanismos distintos.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Simulações Contrafactuais: Segmentação e Roubo de Mercado}
+  \textbf{Metodologia:} introduzir produto hipotético com $\delta$ igual à média do cluster; recalcular participações mantendo demais $\delta$'s fixos.
+  \vspace{0.25cm}
+  \begin{center}
+  {\footnotesize
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Produto Introduzido} & \textbf{Unidades Vendidas} & \textbf{\% de mercado-stealing intra-cluster} \\
+    \midrule
+    $\{F,B\}$ & 8.569 & 63\% \\
+    $\{NF,NB\}$ (clone) & 2.502 & 64\% \\
+    $\{F,NB\}$ & 1.578 & 54\% \\
+    $\{NF,B\}$ & 7.940 & 66\% \\
+    \bottomrule
+  \end{tabular}
+  }
+  \end{center}
+  \vspace{0.1cm}
+  \begin{itemize}
+    \item Clone $\{NF,NB\}$: rouba apenas 31 unidades de produtos Branded $\Rightarrow$ clones não ameaçavam IBM/Compaq
+  \end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 11: CONCLUSÕES
+%================================================
+\begin{frame}{Conclusões e Legado}
+  \begin{itemize}
+    \item Concorrência no mercado de PCs era \textit{localizada dentro de clusters} --- não um fenômeno universal
+    \item Branded conferia vantagem de nível de demanda (volume); Frontier conferia isolamento da concorrência (inclinação)
+    \item Declínio da IBM causado por erosão dentro do cluster $\{B,NF\}$ (Compaq, Dell), não pela concorrência dos clones
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Legado metodológico do PD GEV:}
+  \begin{itemize}
+    \item Trata múltiplos PDs simetricamente sem hierarquia imposta
+    \item Forma fechada para participações $\Rightarrow$ eficiência computacional
+    \item Precursor de modelos GEV não-aninhados e de literatura sobre identificação com múltiplas dimensões
+  \end{itemize}
+\end{frame}
+
+%================================================
+% SLIDE FINAL
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

@@ -1,0 +1,341 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Goldberg e Verboven (2001)]{The Evolution of Price Dispersion in the European Car Market}
+\subtitle{{\Large}Goldberg e Verboven (2001)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2001}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+% SUMÁRIO
+%================================================
+\begin{frame}{Sumário}
+  \begin{enumerate}
+    \item Motivação e Problema de Pesquisa
+    \item Revisão da Literatura e Contribuição
+    \item Dados e Análise Descritiva: Dispersão de Preços Ajustada por Qualidade
+    \item Papel das Taxas de Câmbio: Pricing-to-Market
+    \item Modelo de Oligopólio: Demanda com Logit Aninhado Bi-Nível
+    \item Custo Marginal: Especificação Cobb-Douglas e Componente Local
+    \item Estratégia de Estimação GMM e Identificação
+    \item Resultados: Estimativas da Demanda e Estrutura de Mercado
+    \item Resultados: Custos, Cotas Japonesas e Efeitos Fixos por País
+    \item Fontes das Diferenças de Preço: Decomposição Estrutural
+    \item Estabilidade de Preços em Moeda Local e Implicações para a UME
+  \end{enumerate}
+\end{frame}
+
+%================================================
+% SEÇÃO 1: MOTIVAÇÃO
+%================================================
+\begin{frame}{Motivação e Problema de Pesquisa}
+  \begin{itemize}
+    \item Integração europeia pressupõe convergência de preços entre países-membros
+    \item Mercado automobilístico: disparidades sistemáticas e persistentes (1970--1993)
+    \item Bélgica: menores preços; Reino Unido e Itália: maiores preços
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Três perguntas centrais:}
+  \begin{enumerate}
+    \item Qual a magnitude da dispersão ajustada por qualidade e como evoluiu?
+    \item Quais fatores explicam as diferenças: câmbio, custos, cotas, segmentação?
+    \item O mercado europeu exibe sinais de integração ao longo do período?
+  \end{enumerate}
+  \vspace{0.25cm}
+  \begin{block}{Relevância}
+    Contribui para debates sobre pass-through cambial, discriminação de preços e integração de mercados --- especialmente relevante para a criação da UME.
+  \end{block}
+\end{frame}
+
+%================================================
+% SEÇÃO 2: REVISÃO DA LITERATURA
+%================================================
+\begin{frame}{Revisão da Literatura e Contribuição}
+  \textbf{Literatura prévia:}
+  \begin{itemize}
+    \item \textbf{Lei do Preço Único (LOP):} preços igualizados em mercados integrados
+    \item \textbf{Pricing-to-Market (PTM):} Krugman (1987), Knetter (1989, 1993) --- ajuste de margens em resposta ao câmbio
+    \item \textbf{Verboven (1996):} modelo estrutural de oligopólio para diferenças de preços, mas apenas corte transversal
+    \item Goldberg e Knetter (1997), Feenstra (1989), Gagnon e Knetter (1995): pass-through em diferentes setores
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Contribuição tríplice deste artigo:}
+  \begin{enumerate}
+    \item Painel longo (1970--1993): análise de convergência temporal
+    \item Modelo estrutural de demanda (logit aninhado bi-nível) estimado por GMM
+    \item Decomposição estrutural: quantifica contribuição de câmbio, custos locais, cotas e segmentação
+  \end{enumerate}
+\end{frame}
+
+%================================================
+% SEÇÃO 3: DADOS
+%================================================
+\begin{frame}{Dados: Painel 1970--1993}
+  \begin{itemize}
+    \item 5 países: Alemanha (DE), França (FR), Itália (IT), Bélgica (BE), Reino Unido (UK)
+    \item Fonte: revista \textit{Autovisie} (Holanda) e complementos
+    \item $\approx 130$ modelos/ano; total $\approx 7.212$ observações
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Regressão hedônica para índice de preço ajustado por qualidade:}
+  \begin{equation}
+    \ln(p_{jmt}^{\text{ECU}}) = w_{jmt}'\gamma + \delta \cdot \text{tax}_{mt} + \theta_c + \theta_f + \theta_{st} + \theta_{mt} + \varepsilon_{jmt}
+  \end{equation}
+  \begin{itemize}
+    \item $w_{jmt}$: características físicas (cilindrada, potência, peso, comprimento)
+    \item $\theta_c, \theta_f, \theta_{st}, \theta_{mt}$: efeitos fixos de classe, fabricante, estado estável, mercado-ano
+    \item Preços ajustados = resíduos em relação aos efeitos fixos de mercado-ano
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Padrões descritivos:} Bélgica sistematicamente mais barata; UK/Itália com prêmio de 20--30\%; convergência leve após 1987, sem eliminação das diferenças.
+\end{frame}
+
+%================================================
+% SEÇÃO 4: PRICING-TO-MARKET
+%================================================
+\begin{frame}{Pricing-to-Market (PTM) e Pass-Through Cambial}
+  \textbf{Equação de PTM por par (fabricante, mercado destino):}
+  \begin{equation}
+    \ln(p_{jmt}^m) = w_{jmt}'\gamma_m + \beta_{sm} \cdot \ln(e_{sm,t}) + \lambda_t + \varepsilon_{jmt}
+  \end{equation}
+  \begin{itemize}
+    \item $e_{sm,t}$: taxa de câmbio bilateral origem $s$ $\to$ destino $m$
+    \item $\beta_{sm} = 0$: pass-through completo (preço local sobe 1\% com depreciação de 1\%)
+    \item $\beta_{sm} = 1$: sem pass-through (preço do exportador constante, margem absorve tudo)
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Resultados (Tabela 3):} $\hat{\beta}_{sm} \in [0{,}30;\; 0{,}65]$, média ponderada $\approx 0{,}46$
+  \begin{itemize}
+    \item 54\% do choque cambial repassado ao consumidor; 46\% absorvido na margem
+    \item PTM mais intenso: fabricantes alemães exportando para UK e Itália
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Pricing-to-Market (PTM) e Pass-Through Cambial}
+  \begin{alertblock}{Decomposição do PTM}
+    37--39 p.p. dos 46\% de PTM são explicados por custos marginais locais (LWAGELOC): apreciação da moeda local reduz custos de distribuição, justificando compressão parcial da margem.
+  \end{alertblock}
+\end{frame}
+
+%================================================
+% SEÇÃO 5: MODELO DE DEMANDA
+%================================================
+\begin{frame}{Modelo de Demanda: Logit Aninhado Bi-Nível (GEV)}
+  \textbf{Estrutura de grupos:} Classes (pequeno, médio, grande, luxo, sport) $\to$ subgrupos (doméstico/estrangeiro)
+  \vspace{0.25cm}
+  \textbf{Utilidade indireta do consumidor $i$ para o produto $j$:}
+  \begin{equation}
+    u_{ijmt} = \alpha p_{jmt} + x_{jmt}'\beta + \xi_{jmt} + \zeta_{igmt} + (1-\rho_c)\zeta_{ihmt} + (1-\rho_f)\varepsilon_{ijmt}
+  \end{equation}
+  \begin{itemize}
+    \item $\rho_c \in [0,1]$: correlação intra-classe; $\rho_f \in [0,1]$: correlação intra-subgrupo
+    \item $\rho \to 1$: substitutos quase-perfeitos dentro do grupo/subgrupo
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Modelo de Demanda: Logit Aninhado Bi-Nível (GEV)}
+  \textbf{Equação de demanda linearizada (para estimação IV/GMM):}
+  \begin{equation}
+    \ln(s_{jmt}) - \ln(s_{0mt}) = \alpha p_{jmt} + x_{jmt}'\beta + \rho_c \ln(s_{j|gmt}) + (\rho_f - \rho_c)\ln(s_{j|hmt}) + \xi_{jmt}
+  \end{equation}
+  \vspace{0.25cm}
+  \textbf{Processo AR(1) para qualidade não observada:}
+  \begin{equation}
+    \xi_{jmt} = \rho\,\xi_{jm,t-1} + \omega_{jmt}
+  \end{equation}
+  Captura persistência temporal da reputação/qualidade de cada modelo.
+\end{frame}
+
+%================================================
+% SEÇÃO 6: CUSTO MARGINAL
+%================================================
+\begin{frame}{Custo Marginal: Especificação e Componente Local}
+  \textbf{Especificação do custo marginal (Cobb-Douglas log-linear):}
+  \begin{equation}
+    \ln(\text{mc}_{jmt}) = w_{jmt}'\gamma + \phi \cdot \text{LWAGELOC}_{jmt} + \theta_f + \theta_c + \omega_{jmt}
+  \end{equation}
+  \begin{itemize}
+    \item LWAGELOC: salário-hora local ponderado pelo conteúdo de trabalho local (distribuição/pós-venda)
+    \item $\phi > 0$: apreciação da moeda local reduz custo marginal em moeda do exportador
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Custo Marginal: Especificação e Componente Local}
+  \textbf{Condições de primeira ordem (Nash-Bertrand):}
+  \begin{equation}
+    p_{jmt} - \text{mc}_{jmt} = -\left[\sum_{k \in J_f} s_{kmt} \cdot \frac{\partial s_{kmt}}{\partial p_{jmt}}\right]^{-1}
+  \end{equation}
+  \vspace{0.25cm}
+  \begin{block}{Markup no logit aninhado}
+    Na estrutura GEV, a matriz de derivadas de participações admite inversão analítica, produzindo expressão fechada para o markup em função de $\alpha$, $\rho_c$, $\rho_f$ e das participações de mercado.
+  \end{block}
+\end{frame}
+
+%================================================
+% SEÇÃO 7: ESTIMAÇÃO GMM
+%================================================
+\begin{frame}{Estratégia de Estimação GMM e Identificação}
+  \textbf{Sistema de momentos (demanda + oferta):}
+  \begin{equation}
+    \mathbb{E}[Z_{jmt}^D \cdot \xi_{jmt}(\theta)] = 0, \qquad \mathbb{E}[Z_{jmt}^S \cdot \omega_{jmt}(\theta)] = 0
+  \end{equation}
+  \textbf{Estimador GMM:}
+  \begin{equation}
+    \hat{\theta} = \arg\min_\theta\; m(\theta)' W\, m(\theta)
+  \end{equation}
+  onde $W$ = inversa da matriz de variância-covariância dos momentos (2ª etapa).
+  \vspace{0.25cm}
+  \textbf{Instrumentos para endogeneidade de preços:}
+  \begin{itemize}
+    \item BLP-style: número e características dos rivais por mercado
+    \item Taxa de câmbio bilateral: afeta custos mas não choques de demanda idiossincráticos
+    \item Características médias dos rivais no mesmo subgrupo/grupo
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Identificação separada de PTM:}
+  \begin{itemize}
+    \item Variação cambial identifica pass-through total
+    \item Variação em LWAGELOC identifica PTM de custo $\Rightarrow$ separa discriminação pura
+  \end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 8: RESULTADOS DEMANDA
+%================================================
+\begin{frame}{Resultados: Estimativas da Demanda (Tabela 4)}
+  \textbf{Parâmetros de correlação estimados:}
+  \begin{itemize}
+    \item $\hat{\rho}_c \approx 0{,}55$--$0{,}70$ (intra-classe): todos sign.\ e $\in [0,1]$ ✓
+    \item $\hat{\rho}_f \approx 0{,}70$--$0{,}80$ (intra-subgrupo dom./estrang.): todos sign.\ e $\in [0,1]$ ✓
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Elasticidades-preço próprias:} entre $-3{,}5$ e $-6{,}8$
+  \begin{itemize}
+    \item Mais negativas: segmento pequeno (maior sensibilidade)
+    \item Menos negativas: segmento luxo (menor sensibilidade)
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Ajuste do modelo:} correlação entre participações simuladas e observadas $> 0{,}90$ em todos os mercados (Tabela 5).
+  \vspace{0.25cm}
+  \textbf{Parâmetros de custo (Tabela 6):}
+  \begin{itemize}
+    \item Características físicas (cilindrada, peso): coef.\ positivos e sign.\ $\checkmark$
+    \item $\hat{\phi} > 0$: $\approx 15$--$20\%$ do custo marginal de veículos importados provém de insumos locais
+  \end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 9: COTAS E EFEITOS FIXOS
+%================================================
+\begin{frame}{Cotas Japonesas e Efeitos Fixos por País}
+  \textbf{Cotas de importação:} Itália e França tinham cotas absolutas; DE, BE, UK tinham acordos brandos.
+  \vspace{0.25cm}
+  \textbf{Condição de otimidade com cota absoluta:}
+  \begin{equation}
+    p_{jmt} = \text{mc}_{jmt} + \mu_{jmt} + \frac{\lambda^a_{mt}}{s_{jmt}}
+  \end{equation}
+  \textbf{Com cota percentual:}
+  \begin{equation}
+    p_{jmt} = \frac{\text{mc}_{jmt} + \mu_{jmt}}{1 - \lambda^r_{mt}}
+  \end{equation}
+  onde $\lambda^a > 0$ e $\lambda^r > 0$ indicam cotas vinculantes.
+  \vspace{0.25cm}
+  \textbf{Resultados:}
+  \begin{itemize}
+    \item Cotas vinculantes na Itália e França durante $\approx$ 1970--1990
+    \item Prêmio de preço implícito: 5--10\% acima do contrafactual sem cota
+    \item Após Acordo de Auto (1991): multiplicadores convergem a zero
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Markups por país:} UK e Itália $\approx$ 20--25\% do preço; Bélgica $\approx$ 15--18\% --- diferenças persistem após controle de custos e impostos.
+\end{frame}
+
+%================================================
+% SEÇÃO 10: DECOMPOSIÇÃO
+%================================================
+\begin{frame}{Decomposição Estrutural das Fontes de Dispersão (Tabela 7)}
+  
+   Simulações contrafactuais isolam contribuição de cada fator para a dispersão de preços em ECU:
+  
+  \vspace{0.3cm}
+  {\footnotesize
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Fonte} & \textbf{Contribuição (\%)} & \textbf{Mecanismo} \\
+    \midrule
+    Taxas de câmbio + PTM & $\approx 35\%$ & Flutuações cambiais absorvidas nas margens \\
+    Custos locais (LWAGELOC) & $\approx 15\%$ & Salários e insumos de distribuição locais \\
+    Cotas de importação japonesas & $\approx 10\%$ & Renda de cota em IT e FR \\
+    Discriminação de preços pura & $\approx 40\%$ & Diferenças de markup entre mercados \\
+    \bottomrule
+  \end{tabular}%
+  }}
+  \vspace{0.25cm}
+  \begin{alertblock}{Implicação para política}
+    A maior fonte de dispersão (40\%) é discriminação de preços pura. A eliminação das flutuações cambiais (UME) reduz apenas $\sim$35\% da dispersão --- insuficiente para equalizar preços sem complementos de política de concorrência.
+  \end{alertblock}
+\end{frame}
+
+%================================================
+% SEÇÃO 11: UME E ESTABILIDADE
+%================================================
+\begin{frame}{Estabilidade de Preços em Moeda Local e Implicações para a UME}
+  \textbf{Evidência descritiva:}
+  \begin{itemize}
+    \item Preços em moeda local: desvio padrão muito menor do que o das taxas de câmbio
+    \item Fabricantes ajustam margens para estabilizar preços ao consumidor local
+    \item Elasticidades simuladas dos preços locais em relação ao câmbio $\approx 0$
+  \end{itemize}
+  \vspace{0.25cm}
+  \textbf{Implicações da UME:}
+  \begin{itemize}
+    \item Câmbio fixo elimina um mecanismo de ajuste dos fabricantes (markup por mercado)
+    \item Pode aumentar concorrência se segmentação se torna insustentável
+    \item Pode aumentar volatilidade de quantidades se choques de custo não absorvidos via markup
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Estabilidade de Preços em Moeda Local e Implicações para a UME}
+  \begin{block}{Condições para convergência de preços pós-UME}
+    \begin{enumerate}
+      \item Autoridades de concorrência europeias fazerem cumprir livre revenda entre países
+      \item Reforma do Regulamento de Isenção por Categoria para facilitar importações paralelas
+    \end{enumerate}
+    Sem esses complementos, integração monetária é insuficiente para equalizar preços.
+  \end{block}
+\end{frame}
+
+%================================================
+% SLIDE FINAL
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}
+

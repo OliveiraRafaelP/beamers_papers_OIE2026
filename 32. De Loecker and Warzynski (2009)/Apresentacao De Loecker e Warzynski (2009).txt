@@ -1,0 +1,252 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[De Loecker e Warzynski (2009)]{Markups and Firm-Level Export Status}
+\subtitle{{\Large}De Loecker e Warzynski (2009)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2009}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item Arcabouço Teórico: Recuperando Markups de Dados de Produção
+  \item Metodologia Econométrica: Função de Controle para Produtividade
+  \item Exportadores e Hipóteses Teóricas
+  \item Dados: Manufatura Eslovena 1994--2000
+  \item Resultados: Estimação dos Markups
+  \item Dinâmica dos Markups e Status de Exportação
+  \item Implicações para Crescimento de Produtividade
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item Métodos tradicionais de OI exigem dados detalhados de mercado (preços, quantidades, características) — frequentemente indisponíveis
+  \item Hall (1986): markups identificados a partir de dados de produção sem impor retornos constantes de escala, mas ignora produtividade não observada
+  \item Este artigo: derivar equação de estimação de markups usando dados padrão de plantas industriais com função de controle de Olley e Pakes (1996)
+\end{itemize}
+
+\textbf{Hipóteses empíricas testadas (manufatura eslovena, 1994--2000):}
+\begin{enumerate}
+  \item Markups mais altos ao controlar produtividade não observada
+  \item Exportadores cobram markups maiores em média
+  \item Markups aumentam (diminuem) ao entrar (sair) em mercados de exportação
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{2. Arcabouço Teórico: Markup de Hall (1986)}
+Condição de otimalidade de insumos + expansão de Taylor da produção:
+\begin{equation}
+  \Delta q_{it} = \mu_{it}\!\left(\alpha_{Lit}\,\Delta l_{it} + \alpha_{Mit}\,\Delta m_{it} + \alpha_{Kit}\,\Delta k_{it}\right) + \Delta\omega_{it}
+\end{equation}
+
+onde $\alpha_{Xit} = \frac{w_{Xit}\,X_{it}}{P_{it}\,Q_{it}}$ é a participação do insumo $X$ na receita total.
+
+\vspace{0.2cm}
+\textbf{Intuição:} se $\mu=1$ (preço $=$ custo marginal), a participação de cada insumo no crescimento do produto $=$ participação na receita. Sob concorrência imperfeita, $\mu$ cria uma cunha entre participações de custo e de receita.
+
+\vspace{0.2cm}
+\textbf{Generalização:} consistente com Cournot, Bertrand diferenciado (BLP, 1995) e outros modelos — o markup estimado tem interpretação distinta por modelo.
+\end{frame}
+
+%================================================
+\begin{frame}{3. Metodologia: Função de Controle para Produtividade}
+\textbf{Problema:} $\Delta\omega_{it}$ correlacionado com uso de insumos $\Rightarrow$ viés de simultaneidade.
+
+\textbf{Abordagem 1 — diferença pura} (OP, 1996): proxy $\omega_{it} = h_t(i_{it}, k_{it})$, logo:
+\begin{equation}
+  \Delta q_{it} = \mu\,\Delta x_{it} + \Delta\phi_t(i_{it}, k_{it}) + \Delta\varepsilon_{it}
+\end{equation}
+onde $\Delta x_{it} = \alpha_L\,\Delta l + \alpha_M\,\Delta m$ e capital coletado em $\phi_t(\cdot)$.
+
+\textbf{Abordagem 2 — seleção} (OP + Markov): incorpora sobrevivência $P_{it}$:
+\begin{equation}
+  \Delta\omega_{it} = g(i_{t-1}, k_{t-1}, P_{it}) + \xi_{it}
+\end{equation}
+GMM com $l_{it-1}$, $m_{it-1}$ como instrumentos para corrigir $E(l_{it}\,\xi_{it}) \neq 0$.
+
+\textbf{Abordagem 3 — ACF (2006):} inclui trabalho como variável de estado no primeiro estágio; markup identificado em segundo estágio via momento sobre crescimento de produtividade.
+\end{frame}
+
+%================================================
+\begin{frame}{4. Exportadores e Hipóteses Teóricas}
+\textbf{Mecanismo 1 — Vantagem de custo:}
+\begin{itemize}
+  \item Bernard et al.\ (2003): firmas mais produtivas cobram markups maiores e têm maior probabilidade de exportar
+  \item Melitz e Ottaviano (2008): markup $= f$(custo marginal da firma $-$ média da indústria) $\Rightarrow$ firmas mais produtivas cobram preços mais baixos, mas markups mais altos
+\end{itemize}
+
+\textbf{Mecanismo 2 — Qualidade:}
+\begin{itemize}
+  \item Exportadores com produtos de maior qualidade cobram preços e markups maiores (Kugler e Verhoogen, 2008)
+\end{itemize}
+
+\textbf{Implicação para produtividade medida:}
+\begin{itemize}
+  \item TFP (residual de função de produção com receita) \textbf{contém efeitos de markup}
+  \item Prêmio de produtividade de exportadores é parcialmente ilusório: reflete poder de mercado, não apenas eficiência produtiva
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{5. Dados: Manufatura Eslovena 1994--2000}
+\begin{itemize}
+  \item Fonte: Escritório Central de Estatísticas da Eslovênia
+  \item 7.915 firmas, painel não balanceado; contas completas + status de exportação
+  \item Status de exportação observado: doméstico, entrante, sainte, sempre-exportador
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{center}
+{\small
+\begin{tabular}{lrrrr}
+\toprule
+Ano & Nº de firmas & Taxa saída & \#Exportadores & Prod.\ trabalho \\
+\midrule
+1995 & 3820 & 3,32 & 1738 & 14,71 \\
+1997 & 4339 & 3,43 & 1906 & 18,22 \\
+1999 & 4695 & 3,26 & 2192 & 21,02 \\
+2000 & 4906 & 2,69 & 2335 & 21,26 \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\vspace{0.1cm}
+Exportadores cresceram $+35\%$; exportações totais cresceram $+42\%$; produtividade do trabalho $+45\%$ no período.
+\end{frame}
+
+%================================================
+\begin{frame}{6. Resultados: Estimação dos Markups}
+\begin{center}
+{\small
+\begin{tabular}{lcc}
+\toprule
+Especificação & Markup & E.P. \\
+\midrule
+Hall Padrão                      & 1,03* & 0,004 \\
+Função de Controle I             & 1,11* & 0,007 \\
+Função de Controle II            & 1,13* & 0,006 \\
+F.\ de Controle II + Seleção    & 1,11* & 0,007 \\
+F.\ de Controle III (labor)     & 1,14* & 0,008 \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\textbf{Exportadores vs.\ domésticos:}
+\begin{itemize}
+  \item Hall padrão: efeito exportador $= 0{,}016$ (não significativo)
+  \item Função de Controle I: markup médio $= 1{,}054^*$; efeito exportador $= +0{,}126^*$
+\end{itemize}
+
+Sem controlar produtividade: sem diferença. Com controle: exportadores cobram markups $\approx 12$--13 pp maiores.
+\end{frame}
+
+%================================================
+\begin{frame}{7. Dinâmica dos Markups e Status de Exportação}
+Equação estimada com dummies de status (equação 27):
+\begin{equation}
+  \Delta q_{it} = \mu\,\Delta x_{it} + \text{status}_{it}\cdot\Delta x_{it} + \Delta\phi_t(i,k) + \Delta\varepsilon_{it}
+\end{equation}
+
+\begin{center}
+{\small
+\begin{tabular}{lcc}
+\toprule
+Grupo & Coef. & E.P. \\
+\midrule
+Base (doméstico)              & 1,04* & 0,012 \\
+Iniciantes — antes de entrar  & $+$0,08** & 0,033 \\
+Iniciantes — após entrar      & $+$0,15*  & 0,021 \\
+Sempre-exportadores           & $+$0,14*  & 0,020 \\
+Saintes — antes de sair       & $+$0,03   & 0,020 \\
+Saintes — após sair           & $-$0,11*  & 0,030 \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\textbf{Auto-seleção + aprendizagem:} markups maiores antes ($+8$ pp) \textit{e} após ($+15$ pp) a entrada na exportação.
+\end{frame}
+
+%================================================
+\begin{frame}{8. Implicações para Produtividade Agregada}
+Equação de produtividade implícita (retornos de escala $\lambda$):
+\begin{equation}
+  \Delta\omega_{it} = \Delta q_{it} - \mu\!\left(\alpha_L\,\Delta l + \alpha_M\,\Delta m + (\lambda - \alpha_L - \alpha_M)\,\Delta k\right)
+\end{equation}
+
+\begin{center}
+{\small
+\begin{tabular}{lcccccc}
+\toprule
+ & \multicolumn{2}{c}{CRS} & \multicolumn{2}{c}{IRS} & \multicolumn{2}{c}{DRS} \\
+ & I & II & I & II & I & II \\
+\midrule
+Manufatura (A) & 3,52 & 2,16 & 3,01 & 1,58 & 4,03 & 2,75 \\
+Indústria (B)  & 3,21 & 1,57 & 2,77 & 1,03 & 3,73 & 2,11 \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+{\footnotesize I = sem correção; II = função de controle. Valores em \% ao ano.}
+
+\vspace{0.2cm}
+Sem correção, crescimento de produtividade é \textbf{superestimado em $\approx 50\%$}. O viés cresce com o aumento da participação de exportadores no output total.
+\end{frame}
+
+%================================================
+\begin{frame}{9. Conclusão e Legado}
+\textbf{Síntese metodológica:}
+\begin{itemize}
+  \item Hall (1986) + OP (1996) $\Rightarrow$ markups firma-a-firma sem dados de mercado, sem custo de capital, sem CRS
+  \item Sem controle de produtividade: markups subestimados; sem diferença exportadores/domésticos
+\end{itemize}
+
+\textbf{Principais resultados:}
+\begin{enumerate}
+  \item Markups $\approx 8$--11 pp maiores ao controlar produtividade
+  \item Exportadores cobram $\approx 12$--15 pp a mais que produtores domésticos
+  \item Auto-seleção + aprendizagem: markups crescem com entrada em exportação
+  \item Produtividade agregada superestimada em $\approx 50\%$ sem correção
+\end{enumerate}
+
+\textbf{Relação com DLW (2012):} este working paper (2009) é a versão preliminar do AER (2012), que expande para outros países e formaliza $\mu = \theta^X / \alpha^X$. A metodologia ``DLW'' tornou-se referência padrão para estimação de markups em nível de firma.
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

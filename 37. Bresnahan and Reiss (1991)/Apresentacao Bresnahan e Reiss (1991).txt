@@ -1,0 +1,285 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Bresnahan e Reiss (1991)]{Entry and Competition in Concentrated Markets}
+\subtitle{{\Large}Bresnahan e Reiss (1991)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1991}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item Arcabouço Teórico: Limiares com Custos em Forma de U
+  \item Modelo Econométrico: Probit Ordenado Estrutural
+  \item Dados: 202 Mercados Locais Isolados
+  \item Resultados: Razões de Limiares por Indústria
+  \item Validação com Preços de Pneus
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item \textbf{Questão:} com que velocidade a conduta competitiva muda à medida que o número de firmas cresce em mercados oligopolísticos?
+  \item Estratégia: estimar \textbf{limiares de entrada} $s_N$ (tamanho mínimo de mercado para $N$ firmas) sem observar preços ou margens
+  \item Razões $s_{N+1}/s_N$ revelam mudanças de conduta de forma escala-livre
+\end{itemize}
+
+\textbf{Extensão em relação a Bresnahan e Reiss (1990):}
+\begin{enumerate}
+  \item Custos médios em \textbf{forma de U} (vs.\ custo marginal constante)
+  \item Limiares estimados para $N = 1, 2, 3, 4, 5+$ firmas
+  \item Validação com dados de preços na indústria de pneus
+\end{enumerate}
+
+\vspace{0.2cm}
+\textbf{Resultado antecipado:} a maior intensificação competitiva ocorre com o 2º e 3º entrante; a partir de $3$–$5$ firmas, o mercado é aproximadamente competitivo.
+\end{frame}
+
+%================================================
+\begin{frame}{2. Arcabouço Teórico: Demanda, Custos e Limiares}
+\textbf{Demanda de mercado:}
+\begin{equation}
+  Q = S(Y)\cdot d(Z,P)
+\end{equation}
+$S(Y)$ = número de consumidores; $d(Z,P)$ = demanda por consumidor representativo. A demanda total é \textit{proporcional} a $S$.
+
+\vspace{0.2cm}
+\textbf{Tecnologia de custos em forma de U:}
+\[
+  \text{Custo total} = F(W) + \text{AVC}(q,W)\cdot q
+\]
+Custos médios declinam inicialmente (custos fixos $F$) e sobem depois (CMg crescente) — extensão em relação ao modelo de 1990.
+
+\vspace{0.2cm}
+\textbf{Limiar de entrada da $N$-ésima firma} ($\Pi_N = 0$):
+\begin{equation}
+  S_N = \frac{F_N + B_N}{N\,(P_N - \text{AVC}_N - b_N)\,d_N}
+\end{equation}
+$B_N \geq 0$: custos fixos adicionais de entrantes tardios; $b_N \geq 0$: custos variáveis adicionais. Quanto maiores os custos ou menores os lucros variáveis, maior o mercado necessário.
+\end{frame}
+
+%================================================
+\begin{frame}{2. Arcabouço Teórico: Razões de Limiares (cont.)}
+\textbf{Razão de limiares como medida de conduta:}
+\begin{equation}
+  \frac{s_{N+1}}{s_N} = \frac{F_{N+1}+B_{N+1}}{F_N+B_N}\cdot\frac{V_N}{V_{N+1}}
+\end{equation}
+onde $V_N = (P_N - \text{AVC}_N - b_N)\,d_N$ são os lucros variáveis por cliente.
+
+\begin{itemize}
+  \item $s_{N+1}/s_N = 1$: entrada não muda conduta ($V_{N+1} = V_N$)
+  \item $s_{N+1}/s_N > 1$: entrada intensifica competição ($V_{N+1} < V_N$)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Tabela 1 (simulação Cournot-Nash, $P = a - bQ/S$, $C = F + mq + kq^2$):}
+\begin{itemize}
+  \item $k = 0$ (CMg constante): razões declinam lentamente com $N$
+  \item $k > 0$ (CMg crescente): razões declinam mais rapidamente
+  \item \textbf{Padrão geral:} razões declinam a taxas \textit{decrescentes} — convergência gradual para conduta competitiva
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{3. Modelo Econométrico: Especificação}
+\textbf{Função de lucro da $N$-ésima firma:}
+\begin{equation}
+  \pi_N = \alpha_0 + \alpha_N\,\ln S + X'\beta + W'\gamma + \varepsilon
+\end{equation}
+$\alpha_N = V_N$ captura lucros variáveis por cliente; $\alpha_N - \alpha_{N-1} \geq 0$ mede queda de lucros com a entrada. $X$ = variáveis de demanda; $W$ = proxies de custo.
+
+\vspace{0.2cm}
+\textbf{Tamanho de mercado $S(Y,\lambda)$:}
+\begin{equation}
+  S = \text{TPOP} + \lambda_1\,\text{OPOP} + \lambda_2\,\text{PGRW} + \lambda_3\,\text{NGRW} + \lambda_4\,\text{OCTY}
+\end{equation}
+TPOP = pop.\ da cidade; OPOP = pop.\ próxima (10 milhas); PGRW/NGRW = crescimento 1970--80; OCTY = pendulares saindo (proxy de vazamento de demanda).
+
+\vspace{0.2cm}
+\textbf{Lucros variáveis e custos fixos:}
+\[
+  V_N = \alpha_0 + X\beta \quad(\text{decrescente em }N) \qquad F_N = \gamma_1 + \gamma_L W_L \quad(\text{crescente em }N)
+\]
+\end{frame}
+
+%================================================
+\begin{frame}{3. Modelo Econométrico: Probit Ordenado (cont.)}
+O mercado $i$ tem $N$ firmas quando $\pi_N > 0$ e $\pi_{N+1} < 0$.
+
+Com $\varepsilon \sim \mathcal{N}(0,\sigma^2)$ i.i.d.\ entre mercados, obtém-se um \textbf{probit ordenado} com $N_i \in \{0,1,2,3,4,5^+\}$:
+\begin{align}
+  \Pr(N_i = 0) &= 1 - \Phi(\pi_1) \\
+  \Pr(N_i = N) &= \Phi(\pi_N) - \Phi(\pi_{N+1}), \quad N=1,2,3,4 \\
+  \Pr(N_i \geq 5) &= \Phi(\pi_5)
+\end{align}
+
+\textbf{Estimação:} máxima verossimilhança. Cada indústria tem 19 parâmetros: $4X + 4W + 5\alpha_N + 6\gamma_N$.
+
+\textbf{Restrições operacionais:} $\alpha_N \geq 0$ (lucros não crescem com $N$) e $\gamma_N \geq 0$ (custos fixos não decrescem). Quando violadas, impõe-se especificação restrita de maior verossimilhança.
+\end{frame}
+
+%================================================
+\begin{frame}{4. Dados: 202 Mercados Locais Isolados}
+\begin{itemize}
+  \item 202 municípios-sede isolados no oeste dos EUA
+  \item Critérios: $\geq 20$ milhas da cidade mais próxima com $1.000+$ hab.; excluídas cidades dentro de 100 milhas de centros com $100.000+$ hab.
+  \item Firmas identificadas via \textit{American Business Lists}
+\end{itemize}
+
+\textbf{Cinco indústrias finais} (de 16 candidatas):
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Indústria & Média firmas & Máx \\
+\midrule
+Médicos          & 3,4 & 45 \\
+Dentistas        & 2,6 & 17 \\
+Drogistas        & 1,9 & 11 \\
+Encanadores      & 2,2 & 25 \\
+Pneus            & 2,6 & 13 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Variáveis-chave:} TPOP (média 3.740 hab.), PINC (\$5.910 per capita), LANDV (\$300/acre), BIRTHS (0,02), ELD (0,13).
+\end{frame}
+
+%================================================
+\begin{frame}{5. Resultados: Limiares de Monopólio e Razões}
+\textbf{Limiares de monopólio $s_1$:}
+\begin{itemize}
+  \item Pneus e drogistas: $\approx 500$ hab.\ por firma
+  \item Médicos e dentistas: $700$--$900$ hab.
+  \item Encanadores: $>1.500$ hab.\ (mais do dobro de médicos/dentistas)
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Razões de limiares sucessivos $s_{N+1}/s_N$ (Tabela 6):}
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+Indústria & $s_2/s_1$ & $s_3/s_2$ & $s_4/s_3$ & $s_5/s_4$ \\
+\midrule
+Médicos      & 1,56 & 1,11 & 1,02 & 1,08 \\
+Dentistas    & 1,51 & 1,10 & 0,98 & 1,01 \\
+Drogistas    & 1,68 & 1,55 & 1,16 & 1,09 \\
+Encanadores  & 0,99 & 0,99 & 1,07 & 1,08 \\
+Pneus        & 1,32 & 1,24 & 1,07 & 1,11 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+%================================================
+\begin{frame}{5. Resultados: Padrão de Convergência (cont.)}
+\textbf{Padrão central (Figura 4 --- razão $s_5/s_N$ por $N$):}
+\begin{itemize}
+  \item A razão $s_5/s_N \approx 1$ para $N > 2$ em todas as indústrias
+  \item Declínio para \textbf{abruptamente} em $N = 3$: $s_3 \approx s_4 \approx s_5$
+  \item Testes LR rejeitam igualdade do monopolio ao quintopólio; \textit{não} rejeitam $s_3 = s_4 = s_5$ (exceto dentistas)
+\end{itemize}
+
+\textbf{Exceção --- revendedores de automóveis:}
+\begin{itemize}
+  \item Razão $s_4/s_3$ permanece alta: 4º entrante é tipicamente um 2º revendedor GM — primeiro competidor \textit{intramarca}, intensificando abruptamente a concorrência
+\end{itemize}
+
+\textbf{Robustez:}
+\begin{itemize}
+  \item Amostras mais isoladas ($>40$ milhas): resultados similares
+  \item Amostras menos isoladas (condados $<10.000$ hab.): razões menores, consistente com vazamento de demanda
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Validação com Preços de Pneus}
+\textbf{Dados:} inverno de 1990; 165 revendedores; preço de quatro pneus 175-80-R13 (com montagem/balanceamento, sem impostos). Benchmark competitivo = mercado urbano (Baía de São Francisco).
+
+\vspace{0.2cm}
+\textbf{Preços médios por estrutura de mercado (Tabela 10):}
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Estrutura & Preço médio \\
+\midrule
+Monopólio ($N=1$)   & \$54,90 \\
+Duopólio ($N=2$)    & \$55,70 \\
+Triop.\ ($N=3$)     & \$54,40 \\
+Quadrop.\ ($N=4$)   & \$51,60 \\
+Quintop.\ ($N=5$)   & \$52,00 \\
+Mercado urbano      & \$45,60 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+%================================================
+
+%================================================
+\begin{frame}{6. Validação com Preços de Pneus}
+
+\textbf{Regressão OLS} (dummy de estrutura + mileage + salário varejo + marca):
+\begin{itemize}
+  \item Não se rejeita $\alpha_1 = \alpha_2$ (monopólio $\approx$ duopólio)
+  \item Não se rejeita $\alpha_3 = \alpha_4 = \alpha_5$ (triop.--quintop.\ similares)
+  \item Rejeita-se $\alpha_1 = \cdots = \alpha_5$ (sig.\ a 5\%)
+  \item Preço cai $\approx 8\%$ do monopólio ao quintopólio; urbano $20\%$ abaixo
+\end{itemize}
+\end{frame}
+
+%================================================
+
+
+\begin{frame}{7. Conclusão e Legado}
+\textbf{Resultados:}
+\begin{enumerate}
+  \item A conduta competitiva muda rapidamente: maior efeito com o 2º e 3º entrante
+  \item Entre $3$ e $5$ firmas, o próximo entrante tem pequeno efeito adicional
+  \item Dados de preços de pneus confirmam o padrão dos limiares de entrada
+  \item Heterogeneidade entre indústrias: encanadores têm razões $\approx 1$ em todos os $N$; profissionais de saúde e drogistas têm maiores razões no monopólio--duopólio
+\end{enumerate}
+
+\textbf{Limitações:}
+\begin{itemize}
+  \item Não distingue mudança de conduta de diferenças de custo entre entrantes
+  \item Requer mercados isolados e equilíbrio de longo prazo
+\end{itemize}
+
+\textbf{Legado:} metodologia-padrão de limiares de entrada em OI empírica. Fundamentos para Berry (1992), Berry-Levinsohn-Pakes (1995), Ericson-Pakes (1995) e Aguirregabiria-Mira (2007). Base para política antitruste: oligopólios com $3$--$5$ rivais podem ser aproximadamente competitivos com livre entrada.
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}
+

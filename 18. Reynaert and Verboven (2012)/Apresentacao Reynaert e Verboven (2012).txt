@@ -1,0 +1,469 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Instrumentos \'{O}timos em Modelos RC]{Improving the Performance of Random Coefficients Demand Models: the Role of Optimal Instruments}
+\subtitle{{\Large}Reynaert e Verboven (2012)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administra\c{c}\~{a}o e Contabilidade (FEA-USP)}}
+\date{2012}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+% SUMARIO
+%================================================
+
+\begin{frame}{Sum\'{a}rio}
+\begin{enumerate}
+  \item Motiva\c{c}\~{a}o e Problema de Pesquisa
+  \item Revis\~{a}o da Literatura e Contribui\c{c}\~{a}o
+  \item O Modelo: Demanda com Coeficientes Aleat\'{o}rios
+  \item O Estimador GMM e Estrat\'{e}gia de Identifica\c{c}\~{a}o
+  \item Instrumentos \'{O}timos de Chamberlain (1987)
+  \item Processo Gerador de Dados e Detalhes Computacionais
+  \item Vi\'{e}s e Efici\^{e}ncia: Instrumentos Padr\~{a}o vs.\ \'{O}timos
+  \item Instrumentos Fracos para Pre\c{c}o e Desempenho com Amostra
+  \item Desempenho Computacional: MPEC, Integra\c{c}\~{a}o e M\'{i}nimos Locais
+  \item Conclus\~{a}o e Avisos Cautelares
+\end{enumerate}
+\end{frame}
+
+%================================================
+% SECAO 1: MOTIVACAO
+%================================================
+
+\begin{frame}{Motiva\c{c}\~{a}o e Problema de Pesquisa}
+\begin{itemize}
+  \item O modelo logit de coeficientes aleat\'{o}rios de Berry, Levinsohn e Pakes (1995) --- BLP --- \'{e} a principal ferramenta para estimar demanda por produtos diferenciados com dados agregados
+  \item Captura heterogeneidade n\~{a}o observada nas prefer\^{e}ncias via coeficientes aleat\'{o}rios $\sigma^k$ sobre as caracter\'{i}sticas, gerando padr\~{o}es de substitui\c{c}\~{a}o flex\'{i}veis
+  \item Apesar de avan\c{c}os recentes (MPEC, integra\c{c}\~{a}o polinomial, algoritmos aprimorados), o estimador GMM frequentemente apresenta vi\'{e}s, imprecis\~{a}o e instabilidade num\'{e}rica
+\end{itemize}
+\vspace{0.25cm}
+\begin{block}{Hip\'{o}tese central}
+Os problemas decorrem do uso de instrumentos ineficientes. Os instrumentos \'{o}timos de Chamberlain (1987) resolvem simultaneamente vi\'{e}s, efici\^{e}ncia e estabilidade do estimador GMM do modelo BLP.
+\end{block}
+\end{frame}
+
+%================================================
+% SECAO 2: REVISAO DA LITERATURA
+%================================================
+
+\begin{frame}{Revis\~{a}o da Literatura e Contribui\c{c}\~{a}o}
+\textbf{Problemas documentados com o estimador BLP:}
+\begin{itemize}
+  \item \textbf{Knittel e Metaxoglou (2012):} converg\^{e}ncia global comprometida; estimativas muito sens\'{i}veis a valores iniciais
+  \item \textbf{Dub\'{e}, Fox e Su (2012):} NFP propaga erros num\'{e}ricos do loop interno; prop\~{o}em MPEC como alternativa mais r\'{a}pida
+  \item \textbf{Skrainka e Judd (2011):} integra\c{c}\~{a}o pMC imprecisa; integra\c{c}\~{a}o Sparse Grid \'{e} superior
+  \item \textbf{Armstrong (2012):} instrumentos BLP s\~{a}o fracos para o pre\c{c}o; recomendam cost shifters
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Revis\~{a}o da Literatura e Contribui\c{c}\~{a}o (cont.)}
+\begin{block}{Contribui\c{c}\~{a}o de Reynaert e Verboven (2012)}
+\begin{itemize}
+  \item Identificam o problema fundamental: instrumentos ineficientes para identificar $\sigma$ (vari\^{a}ncias dos coeficientes aleat\'{o}rios)
+  \item Instrumentos \'{o}timos de Chamberlain (1987) resolvem vi\'{e}s, efici\^{e}ncia e estabilidade simultaneamente
+  \item MPEC e integra\c{c}\~{a}o Sparse Grid s\'{o} produzem ganhos consistentes quando combinados com instrumentos \'{o}timos
+\end{itemize}
+\end{block}
+\vspace{0.25cm}
+\textbf{Compara\c{c}\~{a}o com outros trabalhos:}
+\begin{itemize}
+  \item Armstrong (2012) foca instrumentos para $\alpha$ (pre\c{c}o); Reynaert e Verboven focam instrumentos para $\sigma$ (heterogeneidade) --- contribui\c{c}\~{o}es complement\'{a}res
+  \item Abordagem bayesiana (Jiang et al., 2009) tamb\'{e}m produz estimativas mais precisas, mas \'{e} mais lenta e exige suposic\~{o}es mais fortes
+\end{itemize}
+\end{frame}
+
+%================================================
+% SECAO 3: O MODELO
+%================================================
+
+\begin{frame}{O Modelo: Utilidade e Coeficientes Aleat\'{o}rios}
+\textbf{Utilidade indireta condicional do consumidor $i$ pelo produto $j$ no mercado $t$:}
+\begin{equation}
+  u_{ijt} = x_{jt}\beta_i - \alpha p_{jt} + \xi_{jt} + \varepsilon_{ijt}
+\end{equation}
+\begin{itemize}
+  \item $x_{jt}$: caracter\'{i}sticas observ\'{a}veis;\; $p_{jt}$: pre\c{c}o;\; $\xi_{jt}$: inobserv\'{a}vel de demanda
+  \item $\alpha$: utilidade marginal da renda (homog\^{e}nea);\; $\varepsilon_{ijt}$: choque i.i.d.\ tipo I valor extremo
+  \item Coeficiente aleat\'{o}rio: $\beta_i^k = \beta^k + \sigma^k \nu_i^k$, com $\nu_i^k \sim (0,1)$
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Decomposi\c{c}\~{a}o em utilidade m\'{e}dia e heterogeneidade individual:}
+\begin{equation}
+  u_{ijt} = \underbrace{\delta_{jt}}_{\text{utilidade m\'{e}dia}} + \underbrace{\mu_{jt}(\nu_i)}_{\text{heterog.\ individual}} + \varepsilon_{ijt}
+\end{equation}
+onde $\delta_{jt} \equiv x_{jt}\beta - \alpha p_{jt} + \xi_{jt}$ e $\mu_{jt}(\nu_i) \equiv \sum_k x_{jt}^k \sigma^k \nu_i^k$.
+\end{frame}
+
+\begin{frame}{O Modelo: Quotas de Mercado e Lado da Oferta}
+\textbf{Quota de mercado predita (integral sobre a heterogeneidade dos consumidores):}
+\begin{equation}
+  s_{jt}(\delta_t, \sigma) = \int \frac{\exp(\delta_{jt} + \mu_{jt}(\nu))}{1 + \sum_{l=1}^J \exp(\delta_{lt} + \mu_{lt}(\nu))} \, dP_\nu(\nu)
+\end{equation}
+\begin{itemize}
+  \item Integra\c{c}\~{a}o pseudo-Monte Carlo (pMC): $s_{jt} \approx \frac{1}{m}\sum_{i=1}^m [\cdots]$ --- r\'{a}pida mas imprecisa
+  \item Integra\c{c}\~{a}o Sparse Grid: $s_{jt} \approx \sum_{i=1}^n \phi_i [\cdots]$ --- mais precisa e, com instrumentos \'{o}timos, mais r\'{a}pida
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Lado da oferta (competi\c{c}\~{a}o perfeita):}
+\begin{equation}
+  p_t = X_t \gamma_1 + W_t \gamma_2 + \omega_t
+\end{equation}
+Os cost shifters $W_t$ afetam apenas o custo --- servem como instrumentos para o pre\c{c}o end\'{o}geno.
+\end{frame}
+
+%================================================
+% SECAO 4: GMM E IDENTIFICACAO
+%================================================
+
+\begin{frame}{O Estimador GMM e Estrat\'{e}gia de Identifica\c{c}\~{a}o}
+\textbf{Restri\c{c}\~{a}o de momento central:}
+\begin{equation}
+  E[\xi_{jt} \mid X_t, w_{jt}] = 0 \;\Rightarrow\; E[\xi_{jt}\, z_{jt}] = 0
+\end{equation}
+\begin{itemize}
+  \item $\xi_{jt}$ \'{e} independente em m\'{e}dia das caracter\'{i}sticas de todos os produtos e dos cost shifters
+  \item GMM minimiza: $\min_\theta\; \xi(\theta)' Z A Z' \xi(\theta)$
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Dois algoritmos de estima\c{c}\~{a}o:}
+\begin{itemize}
+  \item \textbf{NFP (BLP):} loop externo minimiza GMM; loop interno inverte $s_t(\delta_t,\sigma)=s_t$ por mapeamento de contra\c{c}\~{a}o --- erros do loop interno propagam para o externo
+  \item \textbf{MPEC (Dub\'{e} et al., 2012):} $\min_{\theta,\xi}\,\xi'ZAZ'\xi$ sujeito a $s(\delta,\sigma)=s$ --- elimina o loop interno; equivalente ao NFP em teoria, mais r\'{a}pido na pr\'{a}tica
+\end{itemize}
+\end{frame}
+
+%================================================
+% SECAO 5: INSTRUMENTOS OTIMOS
+%================================================
+
+\begin{frame}{Instrumentos \'{O}timos de Chamberlain (1987) --- Teoria}
+\textbf{Tr\^{e}s conjuntos de instrumentos padr\~{a}o:}
+\begin{itemize}
+  \item $z^1_{jt} = (x_{jt}, w_{jt})$: caracter\'{i}sticas e cost shifters
+  \item $z^2_{jt}$: $z^1$ + polin\^{o}mios (quadrados e intera\c{c}\~{o}es de $x_{jt}$ e $w_{jt}$)
+  \item $z^3_{jt}$: $z^1$ + somas de caracter\'{i}sticas dos concorrentes $\sum_{k \neq j} x_{kt}$ (instrumentos BLP)
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Instrumentos \'{o}timos de Chamberlain (1987) --- m\'{a}xima efici\^{e}ncia assint\'{o}tica:}
+\begin{equation}
+  z_{jt} = E\!\left[\frac{\partial \xi_{jt}(\theta)}{\partial \theta'} \;\bigg|\; X_t, w_{jt}\right]
+\end{equation}
+Exploram a estrutura funcional do modelo para minimizar a vari\^{a}ncia assint\'{o}tica do estimador GMM.
+\end{frame}
+
+\begin{frame}{Instrumentos \'{O}timos --- Par\^{a}metros Lineares e N\~{a}o Lineares}
+\textbf{Para par\^{a}metros lineares $\beta$ e $\alpha$ (interpreta\c{c}\~{a}o 2SLS):}
+\begin{equation}
+  E\!\left[\frac{\partial \xi_{jt}}{\partial \beta'}\right] = x_{jt}, \qquad
+  E\!\left[\frac{\partial \xi_{jt}}{\partial \alpha}\right] = x_{jt}\gamma_1 + w_{jt}\gamma_2
+\end{equation}
+\begin{itemize}
+  \item Instrumento para $\beta$: os pr\'{o}prios regressores $x_{jt}$
+  \item Instrumento para $\alpha$: pre\c{c}o predito da 1\textordfeminine{} etapa (OLS sobre cost shifters) --- id\^{e}ntico ao 2SLS linear; n\~{a}o depende dos par\^{a}metros de demanda
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Para par\^{a}metros n\~{a}o lineares $\sigma$ (infeas\'{i}veis --- requerem 1\textordfeminine{} etapa):}
+\begin{equation}
+  E\!\left[\frac{\partial \xi_{jt}(\theta)}{\partial \sigma'} \;\bigg|\; X_t, w_{jt}\right] = E\!\left[\frac{\partial \delta_{jt}(s_t, \sigma)}{\partial \sigma'} \;\bigg|\; X_t, w_{jt}\right]
+\end{equation}
+Fun\c{c}\~{a}o n\~{a}o linear das caracter\'{i}sticas de todos os concorrentes; captura como $\delta_{jt}$ varia com a heterogeneidade $\sigma$.
+\end{frame}
+
+\begin{frame}{Implementa\c{c}\~{a}o dos Instrumentos \'{O}timos para $\sigma$}
+\textbf{Implementa\c{c}\~{a}o aproximada ($z^4_{jt}$ --- BLP, 1999):}
+\begin{enumerate}
+  \item Obter estimativa inicial $\hat{\theta}=(\hat{\beta},\hat{\alpha},\hat{\sigma})$ usando $z^1$
+  \item Calcular pre\c{c}o predito $\hat{p}_t = X_t\hat{\gamma}_1 + W_t\hat{\gamma}_2$
+  \item Calcular $\hat{\delta}_t = X_t\hat{\beta} - \hat{\alpha}\hat{p}_t$ e quotas $\hat{s}_t = s_t(\hat{\delta}_t,\hat{\sigma})$
+  \item Usar o Jacobiano $\partial\delta_t(\hat{s}_t,\sigma)/\partial\sigma'|_{\sigma=\hat{\sigma}}$ como instrumento
+\end{enumerate}
+\vspace{0.25cm}
+\textbf{Implementa\c{c}\~{a}o exata ($z^5_{jt}$):} m\'{e}dia do Jacobiano sobre $K$ simula\c{c}\~{o}es de $\hat{\xi}_t$:
+\begin{equation}
+  \frac{1}{K}\sum_{k=1}^K \frac{\partial \delta_t(\hat{s}_t^k, \sigma)}{\partial \sigma'}\bigg|_{\sigma=\hat{\sigma}}
+\end{equation}
+\textbf{Resultado pr\'{a}tico crucial:} 1\textordfeminine{} etapa com logit simples ($\sigma=0$) e chute inicial para $\hat{\sigma}^1$ \'{e} suficiente --- evita estima\c{c}\~{a}o custosa do modelo completo de coeficientes aleat\'{o}rios.
+\end{frame}
+
+%================================================
+% SECAO 6: MONTE CARLO
+%================================================
+
+\begin{frame}{Processo Gerador de Dados e Detalhes Computacionais}
+\textbf{Design Monte Carlo:} 1.000 conjuntos de dados; $T = 25$ mercados, $J = 10$ produtos.
+\begin{itemize}
+  \item $x_{jt} = (1, x^1_{jt})$, com $x^1_{jt} \sim U(1,2)$; cost shifters $w_{jt} \sim U(0,1)^3$
+  \item $(\xi_{jt},\, \omega_{jt}) \sim N\!\left(\mathbf{0},\;\begin{bmatrix}1 & 0{,}7 \\ 0{,}7 & 1\end{bmatrix}\right)$
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Par\^{a}metros verdadeiros:} $\beta=(2,2)$, $\alpha=-2$, $\sigma=(0,1)$; $\gamma_2=(3,3,3)$ (instrumentos fortes para pre\c{c}o).
+\vspace{0.25cm}
+\textbf{Detalhes computacionais:}
+\begin{itemize}
+  \item Knitro 800 Interior$\backslash$Direct (Matlab); MPEC com Jacobiano e Hessiana anal\'{i}ticos
+  \item 10 valores iniciais por dataset; seleciona menor valor da fun\c{c}\~{a}o objetivo
+  \item Sparse Grid com 9 n\'{o}s (exata para polin\^{o}mios at\'{e} grau 17)
+\end{itemize}
+\end{frame}
+
+%================================================
+% SECAO 7: VIES E EFICIENCIA
+%================================================
+
+\begin{frame}{Resultados com Instrumentos Padr\~{a}o --- Tabela 1}
+{\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lc cccc cc}
+\toprule
+& & \multicolumn{2}{c}{$z^1_{jt}$} & \multicolumn{2}{c}{$z^2_{jt}$} & \multicolumn{2}{c}{$z^3_{jt}$} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}
+Par\^{a}metro & Verdadeiro & Vi\'{e}s & RMSE & Vi\'{e}s & RMSE & Vi\'{e}s & RMSE \\
+\midrule
+$\beta^0$ & 2  & \phantom{$-$}0,295  & 1,739 & $-$0,087 & 0,787 & \phantom{$-$}0,115  & 1,175 \\
+$\beta^1$ & 2  & $-$0,291 & 1,584 & \phantom{$-$}0,032 & 0,617 & $-$0,119 & 1,097 \\
+$\alpha$  & $-$2 & $-$0,028 & 0,137 & \phantom{$-$}0,007 & 0,053 & $-$0,009 & 0,075 \\
+$\sigma^1$ & 1 & \phantom{$-$}0,088  & 1,316 & $-$0,100 & 0,549 & \phantom{$-$}0,011 & 0,817 \\
+\bottomrule
+\end{tabular}}}
+\vspace{0.25cm}
+\begin{itemize}
+  \item RMSE muito elevado para $\beta$ e $\sigma^1$; apenas $\alpha$ \'{e} estimado com precis\~{a}o (cost shifters fortes para o pre\c{c}o)
+  \item $\sim$30\% das estimativas de $\sigma^1$ colapsa para zero com $z^1$; $\sim$15\% com $z^2$ e $z^3$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Resultados com Instrumentos \'{O}timos --- Tabela 2}
+{\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lc cccc}
+\toprule
+& & \multicolumn{2}{c}{$z^4_{jt}$ (aproximado)} & \multicolumn{2}{c}{$z^5_{jt}$ (exato)} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Par\^{a}metro & Verdadeiro & Vi\'{e}s & RMSE & Vi\'{e}s & RMSE \\
+\midrule
+$\beta^0$ & 2  & \phantom{$-$}0,000   & 0,466 & $-$0,003 & 0,446 \\
+$\beta^1$ & 2  & $-$0,003 & 0,328 & \phantom{$-$}0,001   & 0,278 \\
+$\alpha$  & $-$2 & $-$0,001 & 0,042 & $-$0,0004 & 0,042 \\
+$\sigma^1$ & 1 & $-$0,001 & 0,192 & $-$0,003 & 0,142 \\
+\bottomrule
+\end{tabular}}}
+\vspace{0.25cm}
+\begin{itemize}
+  \item Vi\'{e}s reduzido por fator $>10$ vs.\ melhor instrumento padr\~{a}o ($z^2$)
+  \item RMSE de $\sigma^1$: cai de 1,316 ($z^1$) / 0,549 ($z^2$) para 0,192 ($z^4$) e 0,142 ($z^5$)
+  \item Pico em zero desaparece; distribui\c{c}\~{a}o fortemente concentrada ao redor do valor verdadeiro
+\end{itemize}
+\end{frame}
+
+\begin{frame}{1\textordfeminine{} Etapa com Logit Simples --- Tabela 3}
+\begin{itemize}
+  \item Substituindo a 1\textordfeminine{} etapa (coeficientes aleat\'{o}rios) por um logit simples com chute inicial para $\hat{\sigma}^1$, os resultados s\~{a}o quase id\^{e}nticos:
+\end{itemize}
+{\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lc cccc}
+\toprule
+& & \multicolumn{2}{c}{$z^4_{jt}$ (1\textordfeminine{} etapa: logit)} & \multicolumn{2}{c}{$z^5_{jt}$ (1\textordfeminine{} etapa: logit)} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Par\^{a}metro & Verdadeiro & Vi\'{e}s & RMSE & Vi\'{e}s & RMSE \\
+\midrule
+$\beta^0$ & 2  & $-$0,003 & 0,447 & $-$0,003 & 0,445 \\
+$\beta^1$ & 2  & \phantom{$-$}0,000   & 0,280 & \phantom{$-$}0,001   & 0,278 \\
+$\alpha$  & $-$2 & \phantom{$-$}0,000 & 0,042 & \phantom{$-$}0,000   & 0,042 \\
+$\sigma^1$ & 1 & $-$0,002 & 0,143 & $-$0,002 & 0,139 \\
+\bottomrule
+\end{tabular}}}
+\vspace{0.25cm}
+\begin{itemize}
+  \item Implicac\~{a}o pr\'{a}tica: n\~{a}o \'{e} necess\'{a}rio estimar o modelo completo de coeficientes aleat\'{o}rios na 1\textordfeminine{} etapa
+\end{itemize}
+\end{frame}
+
+%================================================
+% SECAO 8: INSTRUMENTOS FRACOS E AMOSTRA
+%================================================
+
+\begin{frame}{Instrumentos Fracos para Pre\c{c}o --- Tabela 4}
+\textbf{Cen\'{a}rio:} $\gamma_2 = (0{,}3;\;0{,}3;\;0{,}3)$ --- cost shifters t\^{e}m impacto fraco nos pre\c{c}os.
+\vspace{0.25cm}
+{\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lc cccc}
+\toprule
+& & \multicolumn{2}{c}{$z^1_{jt}$ (padr\~{a}o)} & \multicolumn{2}{c}{$z^4_{jt}$ (\'{o}timo)} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Par\^{a}metro & Verdadeiro & Vi\'{e}s & RMSE & Vi\'{e}s & RMSE \\
+\midrule
+$\beta^0$ & 2  & \phantom{$-$}1,052 & 3,834 & $-$0,032 & 1,500 \\
+$\beta^1$ & 2  & \phantom{$-$}0,041 & 0,664 & $-$0,111 & 0,404 \\
+$\alpha$  & $-$2 & \phantom{$-$}0,098 & 0,533 & \phantom{$-$}0,165   & 0,441 \\
+$\sigma^1$ & 1 & \phantom{$-$}0,457 & 2,185 & \phantom{$-$}0,033   & 0,760 \\
+\bottomrule
+\end{tabular}}}
+\vspace{0.25cm}
+\begin{itemize}
+  \item RMSE($\sigma^1$) cai de 2,185 ($z^1$) para 0,760 ($z^4$) --- redu\c{c}\~{a}o de $\approx$65\%
+  \item Ganhos para $\sigma$ s\~{a}o independentes da qualidade dos instrumentos de pre\c{c}o
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Desempenho com Tamanho de Amostra --- Tabela 5}
+\textbf{Com instrumentos \'{o}timos ($z^4$), RMSE melhora na ordem de $\sqrt{J}$ e $\sqrt{T}$:}
+\vspace{0.25cm}
+{\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lc ccc ccc}
+\toprule
+& & \multicolumn{3}{c}{Variando $J$ ($T=25$)} & \multicolumn{3}{c}{Variando $T$ ($J=10$)} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Par\^{a}m. & Verd. & $J=5$ & $J=10$ & $J=20$ & $T=12$ & $T=25$ & $T=50$ \\
+\midrule
+$\beta^0$ & 2 & 0,647 & 0,447 & 0,315 & 0,700 & 0,447 & 0,308 \\
+$\beta^1$ & 2 & 0,446 & 0,280 & 0,191 & 0,476 & 0,280 & 0,194 \\
+$\alpha$  & $-$2 & 0,065 & 0,042 & 0,031 & 0,065 & 0,042 & 0,031 \\
+$\sigma^1$ & 1 & 0,223 & 0,143 & 0,124 & 0,276 & 0,143 & 0,095 \\
+\bottomrule
+\end{tabular}}}
+\vspace{0.25cm}
+\begin{itemize}
+  \item Contraste: com instrumentos padr\~{a}o, Skrainka (2012) documenta que o RMSE \textit{n\~{a}o} melhora com o tamanho da amostra --- o problema \'{e} a qualidade dos instrumentos, n\~{a}o o tamanho amostral
+\end{itemize}
+\end{frame}
+
+%================================================
+% SECAO 9: DESEMPENHO COMPUTACIONAL
+%================================================
+
+\begin{frame}{MPEC versus NFP --- Tabela 6}
+\begin{itemize}
+  \item Com instrumentos \'{o}timos: MPEC \'{e} $\approx10\times$ mais r\'{a}pido que NFP
+  \item Com instrumentos padr\~{a}o: MPEC \'{e} apenas $\approx1{,}75\times$ mais r\'{a}pido
+\end{itemize}
+\vspace{0.25cm}
+{\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcc cc}
+\toprule
+& \multicolumn{2}{c}{NFP} & \multicolumn{2}{c}{MPEC} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+& $z^1_{jt}$ & $z^4_{jt}$ & $z^1_{jt}$ & $z^4_{jt}$ \\
+\midrule
+CPU m\'{e}dio (seg) & 37,64 & 90,63 & 21,53 & 9,31 \\
+RMSE($\sigma^1$) & 1,208 & 0,143 & 1,316 & 0,143 \\
+\bottomrule
+\end{tabular}}}
+\vspace{0.25cm}
+\begin{itemize}
+  \item Com $z^4$: NFP e MPEC d\~{a}o resultados id\^{e}nticos --- confirma equivalencia te\'{o}rica (Su e Judd, 2012)
+  \item Com $z^1$: divergem mesmo com crit\'{e}rio de converg\^{e}ncia $10^{-12}$ no loop interno
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Integra\c{c}\~{a}o Num\'{e}rica: pMC versus Sparse Grid --- Tabela 7}
+{\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llccc}
+\toprule
+M\'{e}todo & Precis\~{a}o & CPU (seg) & Vi\'{e}s($\sigma^1$) & RMSE($\sigma^1$) \\
+\midrule
+pMC & 200 draws & 41,44 & $-$0,089 & 0,249 \\
+pMC & 100 draws & 29,18 & $-$0,147 & 0,299 \\
+pMC & \phantom{1}50 draws  & 17,89 & $-$0,236 & 0,361 \\
+\midrule
+Sparse Grid & 19 n\'{o}s & 12,47 & $-$0,004 & 0,143 \\
+Sparse Grid & \phantom{1}9 n\'{o}s  & \phantom{1}8,00  & $-$0,004 & 0,143 \\
+Sparse Grid & \phantom{1}7 n\'{o}s  & \phantom{1}6,43  & $-$0,004 & 0,139 \\
+\bottomrule
+\end{tabular}}}
+\vspace{0.25cm}
+\begin{itemize}
+  \item Sparse Grid \'{e} simultaneamente mais r\'{a}pida e mais precisa que pMC com instrumentos \'{o}timos
+  \item RMSE insens\'{i}vel ao n\'{u}mero de n\'{o}s acima de 7 --- patamar de precis\~{a}o atingido rapidamente
+  \item Com instrumentos padr\~{a}o: Skrainka e Judd (2011) n\~{a}o encontram vantagens claras de Sparse Grid em vi\'{e}s/RMSE
+\end{itemize}
+\end{frame}
+
+\begin{frame}{M\'{i}nimos Locais e Sensibilidade a Valores Iniciais --- Tabela 8}
+\textbf{Desvio-padr\~{a}o das estimativas sob 10 valores iniciais (m\'{e}dia sobre 50 datasets):}
+\vspace{0.25cm}
+\begin{center}
+{\footnotesize
+\begin{tabular}{lcc}
+\toprule
+Par\^{a}metro & $z^1_{jt}$ (Desv.-Pad.) & $z^4_{jt}$ (Desv.-Pad.) \\
+\midrule
+$\beta^0$ & 0,117 & 0,028 \\
+$\beta^1$ & 0,140 & 0,024 \\
+$\alpha$  & 0,007 & 0,001 \\
+$\sigma^1$ & 0,108 & 0,019 \\
+Valor da fun\c{c}\~{a}o objetivo & 0,029 & $1{,}07\times10^{-13}$ \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+\vspace{0.25cm}
+\begin{itemize}
+  \item Com $z^4$: desvios-padr\~{a}o $\approx5\times$ menores; converg\^{e}ncia em 100\% dos casos (vs.\ 37 n\~{a}o-converg\^{e}ncias com $z^1$)
+  \item A n\~{a}o linearidade inerente do modelo ainda justifica m\'{u}ltiplos valores iniciais mesmo com $z^4$
+\end{itemize}
+\end{frame}
+
+%================================================
+% SECAO 10: CONCLUSAO
+%================================================
+
+\begin{frame}{Conclus\~{a}o}
+\textbf{Os instrumentos \'{o}timos de Chamberlain (1987) resolvem os principais problemas do estimador GMM do modelo BLP:}
+\begin{itemize}
+  \item \textbf{Vi\'{e}s:} reduzido por fator $>10$ para $\sigma^1$ vs.\ melhor instrumento padr\~{a}o
+  \item \textbf{Efici\^{e}ncia:} RMSE($\sigma^1$) cai de $\approx1{,}3$ para $\approx0{,}14$ --- redu\c{c}\~{a}o de $\approx90\%$
+  \item \textbf{Estabilidade:} $\approx5\times$ menos varia\c{c}\~{a}o entre valores iniciais; zero n\~{a}o-converg\^{e}ncias
+  \item \textbf{Melhoria com amostra:} RMSE decresce na ordem $\sqrt{J}$ e $\sqrt{T}$ (n\~{a}o ocorre com padr\~{a}o)
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Recomenda\c{c}\~{a}o pr\'{a}tica:} buscar cost shifters para identificar $\alpha$ (Armstrong, 2012) \textbf{e} aplicar instrumentos \'{o}timos de Chamberlain para identificar $\sigma$. 1\textordfeminine{} etapa simples (logit linear + chute para $\sigma$) \'{e} suficiente.
+\end{frame}
+
+\begin{frame}{Conclus\~{a}o (cont.) --- Avisos Cautelares}
+\textbf{Avan\c{c}os computacionais s\'{o} mostram todo o potencial com instrumentos \'{o}timos:}
+\begin{itemize}
+  \item Com $z^4$: MPEC \'{e} $\approx10\times$ mais r\'{a}pido que NFP (vs.\ $1{,}75\times$ com $z^1$)
+  \item Sparse Grid mais r\'{a}pida e precisa que pMC \textit{apenas} com instrumentos \'{o}timos
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Limita\c{c}\~{o}es e avisos:}
+\begin{itemize}
+  \item Resultados assumem $\xi_{jt}$ n\~{a}o correlacionado com caracter\'{i}sticas de \textit{todos} os produtos --- se violado, instrumentos \'{o}timos requerem modifica\c{c}\~{a}o (Crawford, 2011; Ackerberg e Crawford, 2009)
+  \item Caracter\'{i}sticas dos produtos tratadas como ex\'{o}genas e n\~{a}o correlacionadas entre produtos
+  \item Modelo bem especificado (distribui\c{c}\~{a}o normal para $\nu$) --- validade em dados reais \'{e} agenda de pesquisa aberta
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

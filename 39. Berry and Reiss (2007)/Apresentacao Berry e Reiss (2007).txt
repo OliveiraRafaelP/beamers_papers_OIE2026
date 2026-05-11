@@ -1,0 +1,196 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Berry e Reiss (2007)]{Empirical Models of Entry and Market Structure}
+\subtitle{{\Large}Berry e Reiss (2007)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2007}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Estrutura do Capítulo
+  \item Modelo Base com Firmas Homogêneas
+  \item Especificação de $V(N)$ e Limiares de Entrada
+  \item Heterogeneidade de Firmas e Múltiplos Equilíbrios
+  \item Soluções para Multiplicidade de Equilíbrios
+  \item Informação Incompleta e Modelos de Localização
+  \item Extensões: Leilões, Dinâmica e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação: Por que Modelos Estruturais de Estrutura de Mercado?}
+\begin{itemize}
+  \item Permitem estimar quantidades não observáveis: custos fixos, lucros variáveis, natureza da competição
+  \item Endogenizam $N$ (ao contrário da literatura de poder de mercado)
+  \item Baseiam-se em preferência revelada: decisões de entrada revelam lucratividade
+  \item Variáveis que afetam $N$ fornecem instrumentos para concentração nas equações de oferta
+\end{itemize}
+
+\textbf{Diferenças frente à literatura de poder de mercado:}
+\begin{enumerate}
+  \item Poder de mercado trata estrutura como exógena; modelos de entrada a endogenizam
+  \item Modelos de entrada estimam custos fixos e afundados
+  \item Aplicáveis sem dados de preço e quantidade
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{2. Modelo Base com Firmas Homogêneas}
+$M$ potenciais entrantes idênticos. Firma entra se $\pi(N) \geq 0$:
+\begin{equation}
+  \pi(N) = V(N, x, \theta) - F_i
+\end{equation}
+
+Equilíbrio com $N^*$ firmas (condições de limiar):
+\begin{align}
+  V(N^*, x, \theta) &\geq F > V(N^*+1, x, \theta)
+\end{align}
+
+\textbf{Verossimilhança ordenada:}
+\begin{equation}
+  \Pr(N^*) = \Phi\bigl(V(N^*,x,\theta)\bigr) - \Phi\bigl(V(N^*+1,x,\theta)\bigr)
+\end{equation}
+Se $F_i \sim \mathcal{N}(0,\sigma^2)$: probit ordenado. Se Gumbel: logit ordenado.
+
+\textbf{Implicações de identificação:}
+\begin{itemize}
+  \item Sem variação em $x$, pode-se no máximo colocar intervalos em $\theta$
+  \item Variação no tamanho de mercado $S$ é essencial para separar $\theta$ de $F$
+  \item A taxa de variação de $N$ com $S$ revela quão rapidamente $V$ cai em $N$
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{3. Especificação Estrutural de $V(N)$}
+\textbf{Exemplo: demanda linear + Cournot ($d=0$)}
+\begin{equation}
+  P^* = a - N^*\frac{a-c}{N^*+1}, \quad V(N,S,\theta) = \frac{\theta_1^2 S}{(N+1)^2}
+\end{equation}
+Condição de limiar: $\ln(N^*+2) > \tfrac{1}{2}[\ln(\theta_1^2 S) - \ln F] \geq \ln(N^*+1)$
+
+\vspace{0.2cm}
+\textbf{Especificação flexível de Bresnahan-Reiss:}
+\begin{equation}
+  V(N^*,S,\theta) = S\!\left(\theta_1 + \sum_{k=2}^{M}\theta_k D_k + x'\theta_{M+1}\right)
+\end{equation}
+$D_k = \mathbf{1}(N \geq k)$; $\theta_2,\ldots,\theta_M \leq 0$ descrevem queda de $V$ com entrada.
+
+\vspace{0.2cm}
+\textbf{Limiares de entrada} $S_N^* = \bar{F}/V(N)$ e razões $S_{N+1}/S_N$:
+\begin{itemize}
+  \item Sob competição perfeita \textit{ou} cartel: $S_{N+1}/S_N = 1$ (indistinguíveis sem preços)
+  \item Razões caem para 1 com $N$ crescente em mercados profissionais (Bresnahan-Reiss 1991b)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{4. Heterogeneidade de Firmas: Múltiplos Equilíbrios}
+\textbf{Jogo 2×2 com informação perfeita (Tabela 2):}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Resultado & Condições \\
+\midrule
+$N=0$       & $\pi_1^M < 0$, $\pi_2^M < 0$ \\
+Monop.\ 1   & $\pi_1^M > 0$, $\pi_2^D < 0$ \\
+Monop.\ 2   & $\pi_2^M > 0$, $\pi_1^D < 0$ \\
+Duopólio    & $\pi_1^D > 0$, $\pi_2^D > 0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+  \item Região central: $\pi_1^M > 0$, $\pi_2^M > 0$, $\pi_1^D < 0$, $\pi_2^D < 0$ $\Rightarrow$ \textbf{dois equilíbrios} (Monop.\ 1 ou Monop.\ 2)
+  \item Modelo é \textbf{incompleto}: não faz predição única sobre qual resultado ocorre
+  \item Probit padrão ignora preempção estratégica — inadequado para firmas heterogêneas
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{5. Soluções para Multiplicidade de Equilíbrios}
+\begin{itemize}
+  \item \textbf{(A) Agregar em $N$} (Bresnahan-Reiss 1991a): $N^*$ é único mesmo que identidades sejam indeterminadas — permite construir $\Pr(N^*)$ sem especificar quem entra
+  \item \textbf{(B) Entrada sequencial} (ordem predeterminada): firma 1 move primeiro $\Rightarrow$ elimina a região de múltiplos monopólios via preempção. Exige conhecer a ordem.
+  \item \textbf{(C) Entrada eficiente} (two-stage sequential, Tabela 4): empreendedor mais lucrável escolhe qual firma ser antes de entrar; resolve multiplicidade sem ordem conhecida, mas gera regiões não retangulares
+  \item \textbf{(D) Probabilidades de equilíbrio} (Tamer 2003): estima $H(x)$ = prob.\ de cada equilíbrio como função não-paramétrica dos dados
+  \item \textbf{(E) Identificação por limites} (Manski 1995; Ciliberto-Tamer 2003): condições de melhor resposta são necessárias; conjunto identificado é $\{\theta: \Pr(\varepsilon \in \Omega(D,x,\theta)) \geq \Pr_0(D|x)\}$
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Informação Incompleta e Modelos de Localização}
+\textbf{Modelo com informação privada (2 firmas):}
+\begin{align}
+  D_i = 1 &\iff \pi_i^M + p_j^i \Delta_i - \varepsilon_i > 0 \\
+  p_j^i &= F_i(\pi_i^M + p_i^j \Delta_i) \quad \text{(consistência)}
+\end{align}
+Para variância alta de $\varepsilon$, há equilíbrio simétrico único; para variância pequena, multiplicidade persiste.
+
+\vspace{0.2cm}
+\textbf{Seim (2004) — Videolocadoras ($N$ entrantes, $L$ localizações):}
+\begin{equation}
+  \pi_{il} = x_l\beta + \theta_{ll}(N-1)p_l + \sum_{h\neq l}\theta_{lh}(N-1)p_h + \nu_{il}
+\end{equation}
+Firma observa $\nu_{il}$ privado; com $\nu_{il} \sim$ Gumbel, obtém-se logit:
+\begin{equation}
+  p_l = \frac{\exp(\bar{\pi}_l)}{1 + \sum_h \exp(\bar{\pi}_h)}
+\end{equation}
+Sistema de ponto fixo — solução tipicamente única. Estimado por MLE com ponto fixo aninhado.
+\end{frame}
+
+%================================================
+\begin{frame}{7. Extensões: Leilões, Dinâmica e Legado}
+\textbf{Entrada em leilões (Levin-Smith):}
+\begin{itemize}
+  \item $N$ potenciais licitantes pagam custo $K$ para entrar
+  \item Em equilíbrio simétrico: $\sum_{n=1}^N \Pr(n-1,N-1)\,\mathbb{E}_v\pi(v,n) = K$
+  \item Paralelo com entrada oligopolística: $K \leftrightarrow F$; informação privada sobre valoração $\leftrightarrow$ heterogeneidade de firma
+\end{itemize}
+
+\textbf{Dinâmica:}
+\begin{itemize}
+  \item Ericson-Pakes (1995): heterogeneidade endógena + investimento + entrada/saída
+  \item Aguirregabiria-Mira (2007), Pesendorfer-Schmidt-Dengler (2004): estimação sem resolver o modelo dinâmico (two-step methods)
+  \item Desafio: maldição da dimensionalidade
+\end{itemize}
+
+\textbf{Legado do capítulo:}
+\begin{itemize}
+  \item Organiza a literatura de 1988--2006 em um arcabouço unificado de preferência revelada
+  \item Identifica desafios centrais: múltiplos equilíbrios, dinâmica, endogeneidade de heterogeneidade
+  \item Referência para toda a literatura subsequente de modelos de entrada
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

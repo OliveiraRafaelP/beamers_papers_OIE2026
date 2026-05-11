@@ -1,0 +1,161 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Lau (1982)]{On Identifying the Degree of Competitiveness from Industry Price and Output Data}
+\subtitle{{\Large}Lau (1982)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1982}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item O Modelo: Demanda Inversa, Custo Marginal e Índice $\lambda$
+  \item O Teorema de Impossibilidade
+  \item Demonstração: Necessidade
+  \item Aplicações do Teorema e Extensões
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item Artigo companheiro de Bresnahan (1982): fornece a \textbf{fundamentação matemática rigorosa} para as condições de identificação do parâmetro $\lambda$
+  \item Contexto: sem dados de custo ou lucro, o economista observa apenas $(P, Q, z_1, z_2)$ — pode-se inferir o grau de poder de mercado?
+  \item Bresnahan (1982) mostrou heuristicamente que é preciso \textit{rotação} da demanda; Lau (1982) deriva as \textbf{condições exatas necessárias e suficientes}
+  \item Resultado: caracterização completa das formas funcionais de demanda que permitem (ou impedem) a identificação de $\lambda$
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{2. O Modelo: Demanda Inversa, Custo Marginal e Índice $\lambda$}
+\begin{itemize}
+  \item Demanda inversa: $P = f(Q,\,z_1)$, com $z_1$ afetando a demanda mas não o CMg
+  \item Custo marginal: $MC = g(Q,\,z_2)$, com $z_2$ afetando o CMg mas não a demanda
+\end{itemize}
+
+Condição de equilíbrio geral (equação 5):
+\begin{equation}
+  f(Q, z_1) + \lambda\,\frac{\partial f}{\partial Q}(Q, z_1)\cdot Q = g(Q, z_2)
+\end{equation}
+
+\begin{itemize}
+  \item $\lambda=0$: competição perfeita ($P = CMg$)
+  \item $\lambda=1$: monopolio ($RMg = CMg$)
+  \item $0 < \lambda < 1$: oligopólio / conluio parcial
+\end{itemize}
+\vspace{0.15cm}
+As formas reduzidas $Q = h_2(z_1,z_2)$ e $P = h_1(z_1,z_2) = f(h_2(z_1,z_2),\,z_1)$ são sempre identificadas. A questão é se $(g,\lambda)$ é único dado $f(\cdot)$.
+\end{frame}
+
+%================================================
+\begin{frame}{3. O Teorema de Impossibilidade}
+\textbf{Teorema (resultado central):}
+
+\vspace{0.15cm}
+Assumindo funções duas vezes continuamente diferenciáveis, $\lambda$ \textbf{não pode} ser identificado de $(P,\, Q,\, z_1,\, z_2)$ \textbf{se e somente se} a função de demanda inversa $P = f(Q, z_1)$ é \textbf{separável em $z_1$}:
+\begin{equation}
+  P = f\bigl(Q,\; r(z_1)\bigr)
+\end{equation}
+\textit{exceto} quando $f$ tem a forma singular $P = Q^{-1/\lambda}\,r(z_1) + s(Q)$.
+
+\vspace{0.2cm}
+\textbf{Corolário:} $\lambda$ \textbf{é identificado} se e somente se $f(Q, z_1)$ \textbf{não é separável} em $z_1$.
+
+\vspace{0.2cm}
+\textbf{Intuição:} separabilidade em $z_1$ implica que todo componente de $z_1$ apenas desloca a demanda paralelamente (sem alterar sua inclinação em $Q$) — impossível distinguir diferentes $\lambda$.
+\end{frame}
+
+%================================================
+\begin{frame}{4. Demonstração: Necessidade (Separabilidade $\Rightarrow$ Não-Identificação)}
+Hipótese: existem $(\lambda, g)$ e $(\lambda^*, g^*)$ com $\lambda \neq \lambda^*$ gerando as mesmas formas reduzidas.
+
+\vspace{0.15cm}
+Igualdade de $\partial h_2/\partial z_1$ para os dois pares gera (via equações 11--12):
+\begin{equation}
+  \frac{\partial}{\partial Q}\!\left(\frac{(\partial f/\partial z_{1i})(Q,z_1)}{(\partial f/\partial z_{1j})(Q,z_1)}\right) = 0, \quad i\neq j,\;\forall i,j
+\end{equation}
+
+Esta é exatamente a condição de \textbf{separabilidade} de $f(Q,z_1)$ em $z_1$.
+
+\vspace{0.15cm}
+Para $z_1$ escalar: a transformação entre conjuntos de variáveis torna-se singular quando
+\begin{equation}
+  \frac{\partial f}{\partial z_1} + \lambda\,\frac{\partial^2 f}{\partial z_1 \partial Q}\,Q = 0
+\end{equation}
+que se integra em $P = Q^{-1/\lambda}\,r(z_1) + s(Q)$ — o \textbf{caso singular} em que $\lambda$ é identificado mesmo com demanda separável.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Aplicações do Teorema}
+{\small
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Forma funcional de $f(Q, z_1)$ & Separável? & $\lambda$ identificado? \\
+\midrule
+Linear: $P = P_0 + \alpha_Q Q + \alpha' z_1$ & Sim & Não \\
+Elast. constante: $P = Q^k r(z_1)$ & Sim & Não (salvo $k=-1/\lambda$) \\
+Bresnahan (1982) c/ interação $PZ$ & Não & Sim \\
+Polinômio TR de grau $<3$ em $Q$ & Sim & Não \\
+Polinômio TR de grau $\geq 3$ em $Q$ & Não & Sim \\
+\bottomrule
+\end{tabular}
+\end{center}
+}
+
+\vspace{0.2cm}
+\textbf{Conclusão prática:} formas funcionais comuns (demanda linear, log-linear) são separáveis $\Rightarrow$ não identificam $\lambda$. É necessária ao menos uma variável que interaja com $Q$ na demanda inversa.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Aplicações do Teorema (cont.)}
+\textbf{Extensões:}
+\begin{itemize}
+  \item \textbf{$\lambda$ variável:} se $\lambda = \lambda(Q, z_1)$, o teorema ainda se aplica — não-identificação sse $P = f(Q, r(z_1))$ e $\lambda = \lambda(Q, r(z_1))$
+  \item \textbf{Com CMg constante a priori:} se $g^*(Q, z_2) = k^*$, então $\lambda$ não é identificado sse a demanda inversa tem elasticidade constante em $Q$
+  \item \textbf{Dimensão de $z_1$:} condição necessária é que $\dim(z_1) \geq 2$ (exceto pelo caso singular) — um único instrumento de demanda é insuficiente para identificar $\lambda$ na ausência de separabilidade
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Conclusão e Legado}
+\begin{itemize}
+  \item \textbf{Resultado central:} $\lambda$ é identificado $\iff$ $f(Q, z_1)$ não é separável em $z_1$ — formalização rigorosa do "efeito de rotação" de Bresnahan (1982)
+  \item \textbf{Suficiência provada:} Lau vai além de Bresnahan ao demonstrar que a não-separabilidade é também \textit{suficiente} (não apenas necessária)
+  \item \textbf{Implicação prática:} demandas linear e log-linear não identificam poder de mercado sem enriquecimento da especificação (interação com substitutos, renda quadrática, etc.)
+  \item \textbf{Legado:} referência obrigatória para toda aplicação de NEIO com parâmetro $\lambda$ — Baker--Bresnahan (1985, 1988), Hausman et al.\ (1994), Bresnahan--Reiss (1990, 1991)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

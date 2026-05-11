@@ -1,0 +1,176 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Baker e Bresnahan (1988)]{Estimating the Residual Demand Curve Facing a Single Firm}
+\subtitle{{\Large}Baker e Bresnahan (1988)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1988}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item Derivação da Demanda Residual
+  \item Relação entre Elasticidade Residual e Markup
+  \item Estratégia Econométrica e Identificação
+  \item Dados: Indústria Cervejeira EUA (1962--1982)
+  \item Resultados: Elasticidades da Demanda Residual
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item Em indústrias com produtos diferenciados, medir poder de mercado parece exigir todas as elasticidades cruzadas de demanda — frequentemente inviável por dados escassos
+  \item \textbf{Proposta:} especificar e estimar a \textbf{demanda residual} de uma única firma — a relação entre seu preço e quantidade, tomando em conta a resposta de \textit{todos} os rivais
+\end{itemize}
+
+\textbf{Vantagens:}
+\begin{itemize}
+  \item Sem estimação de sistema de demanda completo ($n^2$ parâmetros)
+  \item Identificação via custos firma-específicos ($W^1$)
+  \item \textbf{Propriedade conservadora:} sem instrumentos, OLS vicia estimativas \textit{contra} encontrar poder de mercado
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{2. Derivação da Demanda Residual}
+Sistema geral: CPOs das firmas $i \neq 1$ + demandas das outras firmas resolvem para $Q_{-1}$:
+\begin{equation}
+  Q_{-1} = E^1(Q_1,\, Y,\, W,\, W^1;\; \alpha^1,\, \beta^1,\, \theta^1)
+\end{equation}
+
+Substituindo na demanda da firma 1 — \textbf{curva de demanda residual} (equação 6):
+\begin{equation}
+  P_1 = R(Q_1,\; Y,\; W,\; W^1;\; \alpha,\, \beta^1,\, \theta^1)
+\end{equation}
+
+\textbf{Elasticidade da demanda residual} (equação 7):
+\begin{equation}
+  \eta_1^R = \eta_{11} + \sum_{j \neq 1} \eta_{j1}\,\xi_{j1}
+\end{equation}
+
+$\xi_{j1}$ = elasticidade da reação da firma $j$ a $Q_1$. $\eta_1^R$ resume \textit{toda} a disciplina competitiva dos rivais em um único parâmetro.
+\end{frame}
+
+%================================================
+\begin{frame}{3. Relação entre Elasticidade Residual e Markup}
+\textbf{Casos em que} $-\eta_1^R = $ \textbf{markup} (relação exata):
+
+\begin{enumerate}
+  \item \textbf{Líder Stackelberg:} firma 1 internaliza reações dos rivais $\Rightarrow$ $-\eta_1^R = (P_1 - MC_1)/P_1$
+  \item \textbf{Equilíbrio de Conjecturas Consistentes} (Bresnahan, 1981): conjecturas $= $ reações verdadeiras $\Rightarrow$ relação exata com markup
+  \item \textbf{Diferenciação extensiva:} questões estratégicas oligopolísticas desaparecem $\Rightarrow$ $-\eta_1^R \approx$ markup
+  \item \textbf{Competição perfeita:} $\eta_1^R = 0$, corretamente estimado
+\end{enumerate}
+
+\textbf{Implicação para aplicação cervejeira:} com diferenciação substancial de produto, $-\hat\eta_1^R$ é interpretado como markup aproximado de preço sobre custo marginal.
+\end{frame}
+
+%================================================
+\begin{frame}{4. Identificação e Estratégia Econométrica}
+\textbf{Especificação log-linear} (equação 6''):
+\begin{equation}
+  p_j = \eta_j^R\,q_j + \langle\delta_j,\,(w,\, w^1)\rangle + \langle\gamma_j,\, y\rangle + \varepsilon_j
+\end{equation}
+
+\textbf{Endogeneidade de} $Q_j$: resolvida por IV com custos firma-específicos $W^1_j$.
+
+\textbf{Instrumentos:}
+\begin{itemize}
+  \item Capacidade instalada $K_j$: exógena no curto prazo (lumpy investment)
+  \item A-B e Pabst: tamanho médio das plantas da firma ($\text{APS}_j$)
+  \item Coors: salário manufatureiro do Colorado (planta única em Golden, CO)
+\end{itemize}
+
+\textbf{Restrição cross-equacional} (equação 12): as outras firmas usam insumos em mesmas proporções; conserva graus de liberdade. \textbf{Estimação:} 3SLS para as três equações conjuntamente.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Dados: Indústria Cervejeira EUA 1962--1982}
+\begin{itemize}
+  \item Três firmas: Anheuser-Busch (A-B), Coors, Pabst; período 1962--82
+  \item Preço: receita média (receita / galões) OU preço da marca principal no norte da California
+  \item Correlação receita média $\leftrightarrow$ marca principal: 0,96 (A-B), 0,94 (Coors), 0,99 (Pabst) — resultados idênticos
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Mudança estrutural:} Miller lança LITE em 1975 — dummy LITE e interação com $q_{ab}$ na equação de A-B.
+
+\vspace{0.2cm}
+\textbf{Variáveis de custo da indústria:} SRAVC, APS, PK, EKTI (capacidade ociosa dos rivais).
+\end{frame}
+
+%================================================
+\begin{frame}{6. Resultados: Elasticidades da Demanda Residual}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Firma / Período & $\hat\eta^R$ & E.P. \\
+\midrule
+A-B, 1962--74          & $-0{,}312$ & $0{,}064$ \\
+A-B, 1975--82 (LITE)   & $-0{,}030$ & --- \\
+Pabst                  & $-0{,}058$ & $0{,}031$ \\
+Coors                  & $-0{,}745$ & $0{,}054$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Interpretações:}
+\begin{itemize}
+  \item \textbf{Coors:} markup $\approx 74\%$ — produto/imagem altamente distinto; monopólio regional nos estados ocidentais
+  \item \textbf{Pabst:} markup $\approx 6\%$ (não significativo) — praticamente tomadora de preço, apesar de market share similar ao de Coors
+  \item \textbf{A-B:} markup $31\%$ antes de 1975; cai para $3\%$ após inovação LITE da Miller
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{7. Conclusão e Legado}
+\textbf{Síntese:}
+\begin{itemize}
+  \item Market share é indicador ruim de poder de mercado (Pabst $\approx$ Coors em share, mas poderes de mercado radicalmente diferentes)
+  \item Inovação de produto pode disciplinar poder de mercado sem reduzir concentração
+  \item Ausência de conluio tácito: Pabst sem poder de mercado é inconsistente com conluio da indústria
+\end{itemize}
+
+\textbf{Contribuições metodológicas:}
+\begin{enumerate}
+  \item Demanda residual individual: poder de mercado sem $n^2$ elasticidades
+  \item Identificação via $W^1$ — extensão de Bresnahan (1982)
+  \item Propriedade conservadora natural sem instrumentos
+\end{enumerate}
+
+\textbf{Legado:} metodologia aplicada à definição de mercado relevante (Scheffman e Spiller, 1987; DOJ Merger Guidelines); generalizada para pares de firmas em Baker e Bresnahan (1985).
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

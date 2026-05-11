@@ -1,0 +1,150 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Bresnahan (1982)]{The Oligopoly Solution Concept Is Identified}
+\subtitle{{\Large}Bresnahan (1982)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1982}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item O Modelo: Demanda e Relação de Oferta com Poder de Mercado
+  \item O Problema de Identificação com Demanda Linear
+  \item A Solução: Rotação da Curva de Demanda
+  \item Interpretação, Extensões e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item Estudos de indústrias concentradas usam modelos econométricos estruturais para discriminar Cournot vs.\ Bertrand vs.\ Conluio
+  \item Questão fundamental: o conceito de solução oligopolista é econometricamente \textbf{identificado}?
+  \item \textbf{Resultado central:} SIM — um parâmetro $\lambda$ que indexa o grau de poder de mercado é identificado por métodos padrão, \textit{mesmo sem dados de custo/lucro}, mesmo estimando demanda e custo simultaneamente
+  \item \textbf{Intuição:} a estatística comparativa do equilíbrio — como $P$ e $Q$ respondem a variáveis exógenas — revela o grau de poder de mercado
+\end{itemize}
+\vspace{0.2cm}
+Este artigo de 6 páginas é o documento fundador da \textbf{New Empirical Industrial Organization (NEIO)}.
+\end{frame}
+
+%================================================
+\begin{frame}{2. O Modelo: Demanda e Relação de Oferta com Poder de Mercado}
+\textbf{Demanda} (compradores tomadores de preço):
+\begin{equation}
+  Q = D(P,\, Y,\, \alpha) + \varepsilon
+\end{equation}
+
+\textbf{Oferta com poder de mercado} (RMg percebida $=$ CMg):
+\begin{equation}
+  P = c(Q,\, W,\, \beta) - \lambda \cdot h(Q,\, Y,\, \alpha) + \eta
+\end{equation}
+
+onde $P + h(\cdot)$ é a RMg real e $P + \lambda h(\cdot)$ é a RMg percebida pela firma.
+
+\vspace{0.25cm}
+\textbf{Interpretação de $\lambda$:}
+\begin{itemize}
+  \item $\lambda = 0$: competição perfeita ($P = CMg$)
+  \item $\lambda = 1$: cartel perfeito ($RMg = CMg$)
+  \item $\lambda = 1/n$: equilíbrio de Cournot com $n$ firmas
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{3. O Problema de Identificação com Demanda Linear}
+Versão linear com $Q = \alpha_0 + \alpha_1 P + \alpha_2 Y + \varepsilon$ e $MC = \beta_0 + \beta_1 Q + \beta_2 W$:
+\begin{equation}
+  P = \lambda\!\left(\frac{-Q}{\alpha_1}\right) + \beta_0 + \beta_1 Q + \beta_2 W + \eta
+\end{equation}
+pois $MR = P - Q/\alpha_1$.  Reescrevendo:
+\begin{equation}
+  P = \beta_0 + \underbrace{\left(\beta_1 - \frac{\lambda}{\alpha_1}\right)}_{\gamma}\,Q + \beta_2 W + \eta
+\end{equation}
+
+\textbf{Problema:} $\gamma$ confunde $\beta_1$ e $\lambda$. Mesmo conhecendo $\alpha_1$ (da demanda), não se separa $\beta_1$ de $\lambda$ a partir de $\gamma$ sozinho.
+
+\vspace{0.2cm}
+\textbf{Intuição (Fig.~1):} com deslocamentos \textit{verticais} da demanda (via $Y$), monopolio ($MR=MC^m$) e competição ($P=MC^c$) geram a mesma trajetória de equilíbrio — os dois regimes são \textbf{observacionalmente equivalentes}.
+\end{frame}
+
+%================================================
+\begin{frame}{4. A Solução: Rotação da Curva de Demanda}
+Incluir variável $Z$ interagindo com $P$ na demanda:
+\begin{equation}
+  Q = \alpha_0 + \alpha_1 P + \alpha_2 Y + \alpha_3 P Z + \alpha_4 Z + \varepsilon
+\end{equation}
+
+$Z$ (ex: preço de bem substituto) \textbf{rotaciona} a curva de demanda ao redor do equilíbrio (não apenas desloca verticalmente). Nova relação de oferta:
+\begin{equation}
+  P = \frac{-\lambda}{\alpha_1 + \alpha_3 Z}\cdot Q + \beta_0 + \beta_1 Q + \beta_2 W + \eta
+\end{equation}
+
+Definindo $Q^* = -Q/(\alpha_1 + \alpha_3 Z)$: dois instrumentos excluídos ($Z$ e $W$) para duas variáveis endógenas incluídas ($Q$ e $Q^*$) $\Rightarrow$ $\lambda$ é identificado como o \textbf{coeficiente de $Q^*$}.
+\end{frame}
+
+%================================================
+\begin{frame}{4. A Solução: Rotação da Curva de Demanda (cont.)}
+\textbf{Intuição geométrica (Fig.~2):}
+\begin{itemize}
+  \item \textit{Rotação} da curva $D_1 \to D_3$ ao redor de $E_1$:
+  \item Sob competição: equilíbrio permanece em $E_1$ (rotação percorre a curva de oferta)
+  \item Sob poder de mercado: equilíbrio muda para $E_3$ (onde $MR_3 = MC^m$)
+  \item Competição e monopolio são observacionalmente \textbf{distintos}
+\end{itemize}
+\vspace{0.25cm}
+\textbf{Generalização:} resultado vale para curvas não lineares. Lau (1981) deriva as condições exatas sobre o sistema de demanda. O resultado é robusto a diferenciação de produto e fixidade de capital.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Interpretação, Extensões e Legado}
+\begin{itemize}
+  \item \textbf{Condição necessária:} variáveis exógenas devem poder \textit{rotar} (não apenas deslocar) a curva de demanda — ao menos uma variável deve interagir com $P$
+  \item \textbf{Extensão:} cada firma pode ter seu próprio $\lambda$ (lida com Stackelberg, firma dominante, etc.)
+  \item \textbf{$\lambda$ como medida de poder de mercado:} $\lambda=0$ implica $P=CMg$; $\lambda=1$ implica comportamento de monopolista unificado; valores intermediários refletem graus de conluio implícito
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{5. Interpretação, Extensões e Legado (cont.)}
+\begin{itemize}
+  \item \textbf{Baker e Bresnahan (1985, 1988):} aplicam a cervejas e cigarros nos EUA
+  \item \textbf{Hausman, Leonard e Zona (1994):} mercado de cervejas com produtos diferenciados (demanda AIDS)
+  \item \textbf{Bresnahan e Reiss (1990, 1991):} potência competitiva de entradas em mercados locais
+  \item \textbf{BLP (1995):} demanda de produtos diferenciados com preços endógenos
+\end{itemize}
+\vspace{0.2cm}
+\textbf{Resultado metodológico fundamental:} observar apenas $P$ e $Q$ é insuficiente para inferir poder de mercado — é necessária variação adequada de instrumentos que rotem a demanda. Equivalência observacional sem rotação continua sendo uma limitação crítica em estudos empíricos de poder de mercado.
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

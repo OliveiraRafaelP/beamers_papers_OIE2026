@@ -1,0 +1,204 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Panzar e Rosse (1987)]{Testing for ``Monopoly'' Equilibrium}
+\subtitle{{\Large}Panzar e Rosse (1987)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1987}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item O Modelo Geral e a Estatística $H$
+  \item Teorema 1: Restrição do Monopólio ($H^* \leq 0$)
+  \item Modelos Alternativos: Competição Monopolística
+  \item Modelos Alternativos: Competição Perfeita e Oligopólio
+  \item Resumo das Restrições Testáveis
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item Resultado empírico intrigante na indústria americana de jornais diários: coeficientes dos preços de insumos eram \textbf{persistentemente positivos} nas equações de receita de forma reduzida
+  \item Paradoxo: jornais são monopolistas locais — teoria padrão prediz que aumento de custos \textit{reduz} receita de equilíbrio
+  \item Motivou a derivação de restrições testáveis exatas sobre comportamento do monopolista e modelos alternativos
+\end{itemize}
+
+\textbf{Vantagem metodológica:}
+\begin{itemize}
+  \item Requisitos de dados modestos: apenas \textbf{receitas e preços de fatores}
+  \item Sem necessidade de dados de custo, quantidade ou estrutura de mercado
+  \item Baseado apenas em estática comparativa do equilíbrio
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{2. O Modelo Geral e a Estatística $H$}
+\textbf{Estrutura:} firma maximiza lucros $\pi = R(y, z) - C(y, w, t)$
+
+Receita de forma reduzida: $R^*(z, w, t) = R(y^*, z)$, com $y^* = \arg\max \pi$.
+
+\textbf{Estatística $H$} (equação 6):
+\begin{equation}
+  H^* = \sum_j \frac{w_j}{R^*} \frac{\partial R^*}{\partial w_j} = \sum_j \varepsilon_{R^*, w_j}
+\end{equation}
+
+$H^*$ é a \textbf{soma das elasticidades-preço de fatores} da equação de receita de forma reduzida.
+
+\textbf{Intuição:} $H^*$ mede o impacto de um aumento proporcional de 1\% em todos os preços de fatores sobre a receita de equilíbrio — equivalente a deslocar todas as curvas de custo em 1\%, \textit{sem observar dados de custo}.
+\end{frame}
+
+%================================================
+\begin{frame}{3. Teorema 1: Restrição do Monopólio}
+\textbf{Prova não-paramétrica:} sejam $y^0$ e $y^1$ as escolhas ótimas com preços $w$ e $(1+h)w$.
+
+Das condições de otimalidade (inequações de lucro máximo):
+\begin{align}
+  R^1 - (1+h)\,C(y^1, w, t) &\geq R^0 - (1+h)\,C(y^0, w, t) \\
+  R^0 - C(y^0, w, t) &\geq R^1 - C(y^1, w, t)
+\end{align}
+
+Combinando e dividindo por $-h^2$:
+\begin{equation}
+  \frac{R^1 - R^0}{h} < 0
+\end{equation}
+
+Tomando $h \to 0$ e dividindo por $R^*$: $\;\;H^* \leq 0$.
+
+\textbf{Teorema 1:} a soma das elasticidades-preço de fatores de um monopolista é \textbf{não-positiva}: $H^* \leq 0$.
+\end{frame}
+
+%================================================
+\begin{frame}{3. Teorema 1: Restrição do Monopólio (cont.)}
+\textbf{Interpretação do ``Monopólio'' entre aspas:}
+\begin{itemize}
+  \item O resultado vale para \textit{qualquer} firma cuja função de receita não depende de decisões de rivais — incluindo tomadores de preço com preço exógeno
+  \item Rejeitar $H^* \leq 0$ implica que a receita da firma \textbf{depende das ações de outros}: rivais atuais ou entrada potencial
+\end{itemize}
+
+\textbf{Exemplo (monopolio CES + Cobb-Douglas CRS):}
+\begin{equation}
+  \ln R^*(z, t, w) = \gamma_0 + \varepsilon\ln z - (\varepsilon-1)\ln t - (\varepsilon-1)\sum_i a_i \ln w_i
+\end{equation}
+
+$H^* = 1 - \varepsilon < 0$, e o índice de Lerner: $L = (\varepsilon-1)/\varepsilon = H^*/(H^*-1)$.
+\end{frame}
+
+%================================================
+\begin{frame}{4. Competição Monopolística (Chamberlin)}
+Equilíbrio de Chamberlin: firma representativa simétrica com $n$ rivais e livre entrada.
+\begin{align}
+  R_y(y, n, z) - C_y(y, w, t) &= 0 \quad \text{(CPO)} \\
+  R(y, n, z) - C(y, w, t) &= 0 \quad \text{(zero-lucro)}
+\end{align}
+
+\textbf{Hipótese 1:} $\partial\varepsilon/\partial n \geq 0$ — a elasticidade da demanda percebida não decresce com o número de rivais.
+
+\vspace{0.2cm}
+\textbf{Proposição 1:} no equilíbrio de Chamberlin simétrico:
+\begin{equation}
+  H_{\text{MC}}^* \leq 1
+\end{equation}
+
+\textbf{Intuição:} custo maior $\Rightarrow$ perdas $\Rightarrow$ saída de firmas $\Rightarrow$ demanda percebida sobe $\Rightarrow$ receita cresce mais do que no monopólio. Mas a condição de zero-lucro limita o efeito a no máximo 1.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Competição Perfeita e Oligopólio CV}
+\textbf{Competição perfeita de longo prazo:} equilíbrio com $p = C_y$ e zero-lucro.
+
+\textbf{Proposição 2:} para firmas em equilíbrio competitivo de longo prazo:
+\begin{equation}
+  H_{\text{CP}}^* = 1
+\end{equation}
+
+\textit{Intuição:} $+1\%$ em todos os $w_j$ $\Rightarrow$ custo médio mínimo $+1\%$ $\Rightarrow$ preço $p^* + 1\%$ $\Rightarrow$ quantidade por firma inalterada $\Rightarrow$ receita $+1\%$.
+
+\vspace{0.3cm}
+\textbf{Oligopólio CV simétrico} ($n$ firmas, $\Lambda = dY/dy_k$):
+\begin{equation}
+  H_{\text{OL}}^* = \frac{R_Y\,C_y}{D^0\,R^0} \quad \text{(indeterminado em geral)}
+\end{equation}
+
+Para collusão próxima ($\Lambda \approx n$): $R_Y > 0 \Rightarrow H_{\text{OL}}^* < 0$. Em geral, o sinal depende da estrutura de demanda e das conjecturas.
+\end{frame}
+
+%================================================
+\begin{frame}{6. Resumo das Restrições Testáveis}
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Modelo de Mercado & Restrição sobre $H^*$ \\
+\midrule
+``Monopólio'' (tomador de preço também) & $H^* \leq 0$ \\
+Competição Monopolística (Chamberlin LP) & $0 < H^* \leq 1$ \\
+Competição Perfeita (LP equilíbrio) & $H^* = 1$ \\
+Oligopólio CV (geral) & Indeterminado \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Lógica de rejeição:}
+\begin{itemize}
+  \item Rejeitar $H^* \leq 0$: exclui monopólio — há interação com rivais
+  \item $0 < H^* < 1$: apenas Chamberlin é consistente (dos três modelos)
+  \item Rejeitar $H^* = 1$: exclui competição perfeita de LP
+  \item $H^* > 1$: inconsistente com todos os modelos considerados
+\end{itemize}
+
+\textbf{Nota:} os resultados para competição perfeita e Chamberlin exigem observação em \textbf{equilíbrio de longo prazo}.
+\end{frame}
+
+%================================================
+\begin{frame}{7. Conclusão e Legado}
+\textbf{Síntese metodológica:}
+\begin{itemize}
+  \item $H^*$ é testável com apenas receitas e preços de fatores, sem dados de custo
+  \item Prova não-paramétrica: requer apenas maximização de lucro + homogeneidade linear dos custos em $w$
+  \item Aplicável a qualquer sistema de equações de equilíbrio bem definido
+\end{itemize}
+
+\textbf{Limitações:}
+\begin{itemize}
+  \item Exige equilíbrio de longo prazo (crítico para competição perfeita e Chamberlin)
+  \item Para oligopólio CV, $H^*$ é indeterminado — não discrimina bem esse caso
+  \item Rejeitar $H^* \leq 0$ mostra interação com rivais, mas não identifica qual modelo de oligopólio
+\end{itemize}
+
+\textbf{Legado:} teste mais amplamente usado na literatura bancária (Bikker e Haaf, 2002; Claessens e Laeven, 2004) e de OI para avaliar competição em setores com dados de mercado escassos.
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

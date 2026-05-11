@@ -1,0 +1,692 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[EASI Demand System]{Tricks with Hicks: The EASI Demand System}
+\subtitle{{\Large}Lewbel e Pendakur (2009)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2009}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+% SUMÁRIO
+%================================================
+
+\begin{frame}{Sumário}
+\begin{enumerate}
+    \item Motivação e Problema de Pesquisa
+    \item Revisão da Literatura e Contribuição do Artigo
+    \item Arcabouço Teórico: Demandas Marshallianas Implícitas
+    \item O Sistema EASI: Função de Custo e Forma Funcional
+    \item Modelo Aproximado e Estimação Linear
+    \item Metodologia Econométrica e Estratégia de Identificação
+    \item Dados e Estatísticas Descritivas
+    \item Resultados: Curvas de Engel Estimadas
+    \item Resultados: Efeitos de Preços e Elasticidades
+    \item Excedente do Consumidor e Bem-Estar
+    \item Conclusões, Limitações e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+% SEÇÃO 1: MOTIVAÇÃO
+%================================================
+
+\begin{frame}{Motivação e Problema de Pesquisa}
+\textbf{Dois problemas centrais dos sistemas de demanda paramétricos:}
+
+\vspace{0.25cm}
+\textbf{(a) Rigidez nas Curvas de Engel}
+\begin{itemize}
+    \item Dados empíricos revelam curvas de Engel com curvatura significativa e heterogênea: formas lineares, quadráticas, em S
+    \item O \textbf{AID} (Deaton e Muellbauer, 1980): curvas lineares, rank 2
+    \item O \textbf{QUAID} (Banks, Blundell e Lewbel, 1997): curvas quadráticas, rank 3
+    \item \textbf{Restrição de Gorman (1981):} rank de sistemas polinomiais $\leq 3$ --- limita fundamentalmente a flexibilidade
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Motivação e Problema de Pesquisa}
+
+\textbf{(b) Heterogeneidade de Preferências Não Observada}
+\begin{itemize}
+    \item Na maioria dos modelos, termos de erro \textbf{não podem} ser interpretados como parâmetros de utilidade aleatórios
+    \item Incorporar heterogeneidade coerente exige erros heteroscedásticos de formas específicas (Brown e Walker, 1989)
+    \item Cálculos de bem-estar contaminados por confundir preferências não observadas com erros de medição
+\end{itemize}
+
+\vspace{0.25cm}
+\textbf{Desafio:} Construir um sistema que permita Engel curves de qualquer forma, incorpore heterogeneidade coerente e mantenha a facilidade de estimação do AID.
+\end{frame}
+
+%================================================
+% SEÇÃO 2: LITERATURA E CONTRIBUIÇÃO
+%================================================
+
+\begin{frame}{Revisão da Literatura e Contribuição}
+\textbf{Modelos existentes:}
+
+\vspace{0.2cm}
+\begin{center}
+{\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Modelo} & \textbf{Engel curves} & \textbf{Rank} \\
+\midrule
+AID (Deaton e Muellbauer, 1980) & Lineares em $y$ & 2 \\
+QUAID (Banks, Blundell, Lewbel, 1997) & Quadráticas em $y$ & 3 \\
+Blundell, Pashardes, Weber (1993) & Quadráticas & 3 (caso EASI) \\
+Pendakur e Sperlich (2008) & Semiparamétrico & qualquer \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\vspace{0.2cm}
+\textbf{Contribuição tripla do artigo:}
+
+\begin{enumerate}
+    \item \textbf{Conceitual:} Inventa as \emph{demandas marshallianas implícitas} --- combina virtudes das demandas Hicksianas e Marshallianas sem necessidade de forma fechada para a utilidade indireta
+    \item \textbf{Teórica:} Propõe e caracteriza formalmente o sistema \textbf{EASI} (Exact Affine Stone Index), provando os teoremas sobre classes ESI e EASI
+    \item \textbf{Empírica:} Estima o modelo com microdados canadenses --- detecta Engel curves não-quadráticas (rank $>$ 3) e demonstra papel central da heterogeneidade não observada nos cálculos de bem-estar
+\end{enumerate}
+\end{frame}
+
+%================================================
+% SEÇÃO 3: DEMANDAS MARSHALLIANAS IMPLÍCITAS
+%================================================
+
+\begin{frame}{Arcabouço Teórico: A Ideia Central}
+\textbf{Configuração padrão:} Consumidor com $\mathbf{z}$ (demográficas), $\boldsymbol{\varepsilon}$ (preferências não observadas, $\mathbf{1}'\boldsymbol{\varepsilon}=0$), $x$ (log-gasto nominal), $\mathbf{p}$ (log-preços).
+
+\vspace{0.3cm}
+Demandas Hicksianas via Lema de Shephard:
+\begin{equation}
+    \mathbf{w} = \boldsymbol{\omega}(\mathbf{p}, u, \mathbf{z}, \boldsymbol{\varepsilon}) = \nabla_\mathbf{p} C(\mathbf{p}, u, \mathbf{z}, \boldsymbol{\varepsilon})
+\end{equation}
+
+\textbf{Dificuldade usual:} Obter a utilidade indireta $V(\mathbf{p},x,\mathbf{z},\boldsymbol{\varepsilon})$ em forma fechada é frequentemente intratável.
+
+\vspace{0.4cm}
+\textbf{Inovação central --- Utilidade Implícita:}
+
+Construir $y = g(\mathbf{w}, \mathbf{p}, x, \mathbf{z})$ a partir dos observáveis tal que $y = u$.
+
+A \textbf{demanda marshalliana implícita} é então:
+\begin{equation}
+    \mathbf{w} = \boldsymbol{\omega}(\mathbf{p}, y, \mathbf{z}, \boldsymbol{\varepsilon})
+\end{equation}
+
+\textit{Intuição:} $y$ é uma cardinalização de $u$ computável diretamente dos dados, sem inverter $C$ analiticamente.
+\end{frame}
+
+\begin{frame}{Exemplo Ilustrativo: Exact Stone Index (ESI)}
+
+Considere a função de log-custo mais simples:
+
+\begin{equation}
+    C(\mathbf{p}, u, \mathbf{z}, \boldsymbol{\varepsilon}) = u + \mathbf{p}'\mathbf{m}(u, \mathbf{z}) + \mathbf{p}'\boldsymbol{\varepsilon}
+\end{equation}
+
+Pelo Lema de Shephard: $\mathbf{w} = \mathbf{m}(u,\mathbf{z}) + \boldsymbol{\varepsilon}$
+
+Como $x = u + \mathbf{p}'\mathbf{w}$, obtemos diretamente:
+\begin{equation}
+    \mathbf{y} = x - \mathbf{p}'\mathbf{w}
+\end{equation}
+
+\begin{itemize}
+    \item $y$ = log do gasto deflacionado pelo \textbf{índice de Stone} exato (não uma aproximação!)
+    \item Demanda implícita: $\mathbf{w} = \mathbf{m}(y, \mathbf{z}) + \boldsymbol{\varepsilon}$
+    \item Os erros $\boldsymbol{\varepsilon}$ são \emph{exatamente} os parâmetros de utilidade não observados
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Exemplo Ilustrativo: Exact Stone Index (ESI)}
+
+\textbf{Limitação ESI (Teoremas 1 e 2):}
+\begin{itemize}
+    \item As demandas Hicksianas não se alteram quando todos os preços são elevados ao quadrado --- condição economicamente implausível
+    \item Com $J=2$ bens: parcelas de orçamento independentes dos preços
+\end{itemize}
+
+\vspace{0.2cm}
+$\Rightarrow$ Motiva a generalização para o \textbf{EASI}
+\end{frame}
+
+%================================================
+% SEÇÃO 4: SISTEMA EASI
+%================================================
+
+\begin{frame}{O Sistema EASI: Definição e Função de Custo}
+\textbf{Definição EASI:} Custo onde a utilidade é ordinalmente equivalente a uma transformação afim de $x - \mathbf{p}'\mathbf{w}$:
+\begin{equation}
+    u = y = \frac{x - \mathbf{p}'\mathbf{w} - t(\mathbf{p})}{1 + s(\mathbf{p})}
+\end{equation}
+
+\textbf{Função de custo parametrizada para estimação (equação 5):}
+\begin{equation}
+    C(\mathbf{p},u,\mathbf{z},\boldsymbol{\varepsilon}) = u + \mathbf{p}'\!\left[\sum_{r=0}^{5} \mathbf{b}_r u^r + \mathbf{C}\mathbf{z} + \mathbf{D}\mathbf{z}u\right] + \frac{1}{2}\sum_{l=0}^{L} z_l \mathbf{p}'\mathbf{A}_l\mathbf{p} + \frac{1}{2}\mathbf{p}'\mathbf{B}\mathbf{p}u + \mathbf{p}'\boldsymbol{\varepsilon}
+\end{equation}
+
+\begin{center}
+\vspace{0.2cm}
+{\footnotesize
+\begin{tabular}{lp{7.5cm}}
+\toprule
+\textbf{Parâmetro} & \textbf{Papel} \\
+\midrule
+$\mathbf{b}_r$ ($r=0,\ldots,5$) & Polinômio de 5ª ordem em $u$ --- gera curvas de Engel flexíveis \\
+$\mathbf{C}$, $\mathbf{D}$ & Demográficas no intercepto ($\mathbf{C}$) e inclinação das Engel ($\mathbf{D}$) \\
+$\mathbf{A}_l$ ($l=0,\ldots,L$) & Efeitos de preços interagidos com demográficas \\
+$\mathbf{B}$ & Interação preço $\times$ renda real \\
+$\boldsymbol{\varepsilon}$ & Heterogeneidade de preferências não observada \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}{Demandas EASI: Hicksianas e Implícitas}
+\textbf{Demandas Hicksianas --- Lema de Shephard (equação 7):}
+\begin{equation}
+    \mathbf{w} = \sum_{r=0}^{5} \mathbf{b}_r u^r + \mathbf{C}\mathbf{z} + \mathbf{D}\mathbf{z}u + \sum_{l=0}^{L} z_l \mathbf{A}_l \mathbf{p} + \mathbf{B}\mathbf{p}u + \boldsymbol{\varepsilon}
+\end{equation}
+
+\textbf{Utilidade implícita $y$ (equação 8):}
+\begin{equation}
+    y = \frac{x - \mathbf{p}'\mathbf{w} + \sum_{l=0}^{L} z_l \mathbf{p}'\mathbf{A}_l\mathbf{p}/2}{1 - \mathbf{p}'\mathbf{B}\mathbf{p}/2}
+\end{equation}
+
+\textbf{Demandas marshallianas implícitas EASI (equação 9) --- substituindo $y$:}
+\begin{equation}
+    \mathbf{w} = \sum_{r=0}^{5} \mathbf{b}_r y^r + \mathbf{C}\mathbf{z} + \mathbf{D}\mathbf{z}y + \sum_{l=0}^{L} z_l \mathbf{A}_l \mathbf{p} + \mathbf{B}\mathbf{p}y + \boldsymbol{\varepsilon}
+\end{equation}
+
+\textit{Dado $y$: as parcelas de orçamento são \textbf{completamente lineares nos parâmetros}.}
+\end{frame}
+
+\begin{frame}{Propriedades Notáveis do Sistema EASI}
+
+\begin{itemize}
+    \item \textbf{Curvas de Engel de qualquer ordem:} Polinômio de 5ª ordem em $y$ --- formas em S, não-monotônicas, assimétricas
+    \vspace{0.3cm}
+    \item \textbf{Sem restrição de rank:} Rank pode ser até $J-1$, sem o limite de 3 de Gorman (1981)
+    \vspace{0.3cm}
+    \item \textbf{Heterogeneidade não observada coerente:} $\boldsymbol{\varepsilon}$ é exatamente os parâmetros de preferência aleatórios --- o modelo é coerente e invertível
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Propriedades Notáveis do Sistema EASI}
+
+\begin{itemize}
+    \item \textbf{Efeitos de preços flexíveis:} Semi-elasticidade compensada de preços:
+    \begin{equation}
+        \nabla_\mathbf{p}\boldsymbol{\omega}(\mathbf{p},y,\mathbf{z},\boldsymbol{\varepsilon}) = \sum_{l=0}^{L} z_l \mathbf{A}_l + \mathbf{B}y
+    \end{equation}
+    Afim em $\mathbf{z}$ e $y$ --- elasticidades variam com renda real e demográficas
+    \vspace{0.3cm}
+    \item \textbf{Índice de custo de vida em forma fechada:}
+    \begin{equation}
+        C(\mathbf{p}_1,u,\mathbf{z},\boldsymbol{\varepsilon}) - C(\mathbf{p}_0,u,\mathbf{z},\boldsymbol{\varepsilon}) = (\mathbf{p}_1-\mathbf{p}_0)'\mathbf{w}_0 + \tfrac{1}{2}(\mathbf{p}_1-\mathbf{p}_0)' \\
+        \!\left(\sum_l z_l \mathbf{A}_l + \mathbf{B}y\right)\!(\mathbf{p}_1-\mathbf{p}_0)
+    \end{equation}
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 5: MODELO APROXIMADO
+%================================================
+
+\begin{frame}{Modelo Aproximado e Estimação Linear}
+\textbf{Problema:} $y$ (equação 8) é endógeno --- $\mathbf{w}$ aparece no lado direito via $\mathbf{p}'\mathbf{w}$.
+
+\vspace{0.3cm}
+\textbf{Solução --- aproximação análoga ao AID aproximado:}
+\begin{equation}
+    \tilde{y} = x - \mathbf{p}'\bar{\mathbf{w}}
+\end{equation}
+onde $\bar{\mathbf{w}}$ é o vetor de médias amostrais.
+
+\vspace{0.25cm}
+
+\textbf{Modelo Aproximado EASI (equação 11):}
+\begin{equation}
+    \mathbf{w} = \sum_{r=0}^{5} \mathbf{b}_r \tilde{y}^r + \mathbf{C}\mathbf{z} + \mathbf{D}\mathbf{z}\tilde{y} + \sum_{l=0}^{L} z_l \mathbf{A}_l \mathbf{p} + \mathbf{B}\mathbf{p}\tilde{y} + \tilde{\boldsymbol{\varepsilon}}
+\end{equation}
+
+\vspace{0.25cm}
+
+Completamente linear nos parâmetros --- estimável por MQO ou SUR.
+
+\end{frame}
+
+\begin{frame}{Modelo Aproximado e Estimação Linear}
+
+\textbf{Casos especiais aninhados:}
+\begin{itemize}
+    \item \textbf{AID}: termo linear em $\tilde{y}$, com $\tilde{y} = x - \mathbf{p}'\mathbf{w}$
+    \item \textbf{QUAID}: termos linear e quadrático em $\tilde{y}$
+    \item \textbf{Blundell, Pashardes e Weber (1993)}: também é caso especial do EASI aproximado
+\end{itemize}
+
+\vspace{0.25cm}
+\textbf{Validação da aproximação (Tabela 3):} Correlação entre $y$ e $\tilde{y}$ $> 0.998$. Desvio padrão de $\mathbf{p}'\boldsymbol{\varepsilon}$ (componente endógeno de $y$) é $1/20$ do desvio de $y$.
+\end{frame}
+
+%================================================
+% SEÇÃO 6: ESTIMAÇÃO
+%================================================
+
+\begin{frame}{Metodologia Econométrica}
+\textbf{Estimação do modelo exato:}
+
+O modelo exato (equação 15) é não-linear nos parâmetros: $\mathbf{A}_l$ e $\mathbf{B}$ aparecem tanto nos regressores quanto na construção de $y$. Além disso, $\mathbf{p}'\mathbf{w}$ (índice de Stone) é endógeno.
+
+\vspace{0.3cm}
+\textbf{Estimador principal --- 3SLS não-linear com IV:}
+
+Conjunto de instrumentos (assumindo $E(\boldsymbol{\varepsilon}|\mathbf{p},x,\mathbf{z}) = \mathbf{0}_J$):
+\[
+\mathbf{q} = \bigl\{\mathbf{p},\, \mathbf{z},\, \mathbf{z}\tilde{y},\, \mathbf{p}\tilde{y},\, \mathbf{p}z_1,\ldots,\mathbf{p}z_L,\, \tilde{y}^r \text{ para } r=0,\ldots,5\bigr\}
+\]
+
+\textbf{Condições de momento:}
+\begin{equation}
+    E[\boldsymbol{\varepsilon}'\mathbf{q}_m] = \mathbf{0}_J \quad \text{para } m = 1,\ldots,M
+\end{equation}
+
+Com simetria imposta em $\mathbf{A}_l$ e $\mathbf{B}$: modelo sobreidentificado com 196 restrições.
+
+\end{frame}
+
+\begin{frame}{Metodologia Econométrica}
+
+\textbf{Restrições de racionalidade (impostas como restrições lineares no 3SLS/GMM):}
+\begin{itemize}
+    \item \textit{Adding-up:} $\mathbf{1}'\mathbf{b}_0 = 1$, $\mathbf{1}'\mathbf{b}_r = 0$ para $r \neq 0$, $\mathbf{1}'\mathbf{C} = \mathbf{1}'\mathbf{D} = \mathbf{0}$
+    \item \textit{Homogeneidade:} $\mathbf{1}'\mathbf{A}_l = \mathbf{1}'\mathbf{B} = \mathbf{0}'$
+    \item \textit{Simetria de Slutsky:} $\mathbf{A}_l$ e $\mathbf{B}$ simétricas para todo $l$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Estimador Iterativo Linear e Identificação}
+\textbf{Estimador iterativo linear (proposta de referee):}
+
+\begin{enumerate}
+    \item Estimar modelo aproximado $\Rightarrow$ valores iniciais $\hat{\boldsymbol{\theta}}_0$
+    \item Calcular $\hat{y}_i = g(\mathbf{w}_i, \mathbf{p}_i, x_i, \mathbf{z}_i, \hat{\boldsymbol{\theta}})$ para cada $i$
+    \item Estimar modelo linear (eq. 9) com 3SLS linear usando $\hat{y}_i$ como dado
+    \item Atualizar $\hat{\boldsymbol{\theta}}$ e repetir até convergência
+\end{enumerate}
+
+Caso especial da classe de Dominitz e Sherman (2005). Na prática: \textbf{convergência em 3 iterações}, devido à quasi-linearidade do EASI.
+
+\vspace{0.4cm}
+\textbf{Testagem do modelo (Tabela 2):}
+\begin{itemize}
+    \item Simetria de Slutsky: não rejeitada ($p = 1.4\%$ marginalmente)
+    \item Efeitos diretos de preços ($\mathbf{A}_0$): fortemente significativos ($p \approx 0$)
+    \item Polinômio de 5ª ordem em $y$: necessário (não se pode excluir $y^5$, $p < 0.001$)
+    \item Teste $J$ de sobreidentificação: $p$-valor $= 2.1\%$ (aprovado marginalmente)
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 7: DADOS
+%================================================
+
+\begin{frame}{Dados e Estatísticas Descritivas}
+\textbf{Fonte:} Family Expenditure Surveys (1969--1996) + Survey of Household Spending (1997--1999) + preços de aluguel (Pendakur, 2002)
+
+\vspace{0.2cm}
+\textbf{Cobertura:} 12 anos $\times$ 4 regiões canadenses (Atlantic, Ontario, Prairies, British Columbia) $=$ 48 vetores de preços distintos. Base: Ontario em 1986.
+
+\vspace{0.2cm}
+\textbf{Amostra:} 4.847 domicílios unipessoais, 25--64 anos, cidades $\geq$ 30.000 hab., Canadá anglófono.
+
+\end{frame}
+
+\begin{frame}{Dados e Estatísticas Descritivas}
+
+\textbf{$J = 9$ categorias de despesa:} Alimentação em casa, alimentação fora, aluguel, operação doméstica, mobília/equipamentos, vestuário, transporte, recreação, cuidados pessoais (equação excluída).
+
+\vspace{0.3cm}
+\begin{center}
+{\footnotesize
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Variável} & \textbf{Média} & \textbf{Desvio} & \textbf{Máximo} \\
+\midrule
+Parcela aluguel & 0.37 & 0.12 & 0.89 \\
+Parcela aliment. em casa & 0.14 & 0.08 & 0.61 \\
+Parcela transporte & 0.11 & 0.08 & 0.60 \\
+Parcela recreação & 0.08 & 0.07 & 0.59 \\
+Log-gasto (normaliz.) $x$ & $-0.11$ & 0.59 & 1.66 \\
+$x - \mathbf{p}'\mathbf{w}$ (Stone deflat.) & $-0.07$ & 0.44 & 1.44 \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Demográficas ($L=5$):} Idade $-40$; dummy masculino; dummy não-proprietário de carro; dummy assistência social; tendência temporal ($\text{ano} - 1986$).
+\end{frame}
+
+%================================================
+% SEÇÃO 8: CURVAS DE ENGEL
+%================================================
+
+\begin{frame}{Resultados: Testes de Não-Quadraticidade}
+\textbf{Questão central:} As curvas de Engel são adequadamente capturadas por um polinômio quadrático em $y$?
+
+\vspace{0.2cm}
+\textbf{Testes de não-quadraticidade por bem (Tabela 2):}
+
+\begin{center}
+{\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Bem} & \textbf{Teste} & \textbf{$p$-valor} \\
+\midrule
+Aluguel & Rejeita quadraticidade & $< 0.001$ \\
+Operação doméstica & Rejeita quadraticidade & $< 0.001$ \\
+Recreação & Rejeita quadraticidade & $< 0.001$ \\
+Alimentação em casa & Rejeita quadraticidade & $0.001$ \\
+Alimentação fora & Rejeita quadraticidade & $0.016$ \\
+Vestuário & Rejeita marginalmente & $0.025$ \\
+Transporte & Não rejeita & $0.079$ \\
+Mobília/equipamentos & Não rejeita & $0.340$ \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Implicação:} Pelo menos 4 de 8 equações têm Engel curves significativamente não-quadráticas $\Rightarrow$ rank de demanda $>3$ $\Rightarrow$ \textbf{refuta a restrição de Gorman (1981) para sistemas polinomiais.}
+\end{frame}
+
+\begin{frame}{Resultados: Curvas de Engel por Bem}
+\textbf{Aluguel (Figura 3 --- resultado mais marcante):}
+\begin{itemize}
+    \item Curvatura próxima de zero no decil inferior
+    \item Fortemente negativa nos 2 decis seguintes
+    \item Próxima de zero, depois positiva no decil superior
+    \item \textbf{Modelo quadrático}: superestima parcela em $\sim5$ p.p. na 5ª percentil; subestima $\sim2$ p.p. na 20ª percentil
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Operação doméstica (Figura 4):}
+\begin{itemize}
+    \item Dois segmentos quase-lineares conectados por um segmento curvado --- impossível de capturar quadraticamente
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Resultados: Curvas de Engel por Bem}
+
+\textbf{Recreação (Figura 8):}
+\begin{itemize}
+    \item Curva exata se achata no decil inferior; quadrático mostra inclinação fortemente negativa --- diferença relevante para análises de programas para baixa renda
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Alimentação (Figuras 1-2):} Curvas próximas de lineares; exato, aproximado e quadrático coincidem bem.
+
+\vspace{0.3cm}
+\textbf{Nota:} O modelo \textbf{aproximado} replica bem o modelo exato mesmo quando as Engel curves são complexas.
+\end{frame}
+
+\begin{frame}{Resultados: Robustez das Curvas de Engel}
+\textbf{Três exercícios de robustez (Figuras 9-10):}
+
+\begin{enumerate}
+    \item \textbf{Amostra estendida} (18.600 domicílios, multi-membros, Quebec incluído):
+    \begin{itemize}
+        \item A não-quadraticidade no aluguel permanece evidente na amostra maior
+        \item Confirma que o resultado não é artefato da amostra restrita
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \item \textbf{Amostra ``nopoor''} (8.846 obs., sem assistência social, com carro):
+    \begin{itemize}
+        \item Revela departura quadrática no extremo superior da distribuição (+2 p.p. na 97ª percentil)
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \item \textbf{Amostra ``norent nopoor''} (32.399 obs., excluindo aluguel):
+    \begin{itemize}
+        \item Não-quadraticidade em recreação desaparece na base da distribuição
+        \item Sugere que parte do padrão em recreação era artefato da estimação conjunta com aluguel
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Conclusão geral:} Departures de quadraticidade concentradas nas caudas (menos dados) ou sutis explicam por que estudos anteriores não detectavam ranks $> 3$. Amostras grandes e modelos com muitos parâmetros são necessários para identificá-las.
+\end{frame}
+
+%================================================
+% SEÇÃO 9: EFEITOS DE PREÇOS
+%================================================
+
+\begin{frame}{Resultados: Efeitos de Preços e Elasticidades}
+\textbf{Semi-elasticidades compensadas (equações 12-13):}
+\begin{equation}
+    \nabla_\mathbf{p}\boldsymbol{\omega} = \underbrace{\sum_{l=0}^{L} z_l \mathbf{A}_l}_{\text{interação preço×demog.}} + \underbrace{\mathbf{B}y}_{\text{interação preço×renda}}
+\end{equation}
+
+\vspace{0.2cm}
+\textbf{Resultados selecionados, Tabela 4 (persona de referência, gasto mediano):}
+
+\vspace{0.2cm}
+{\footnotesize
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Bem} & \textbf{Semi-elast.} & \textbf{Slutsky} & \textbf{Elast. gasto} & \textbf{Coef. B (próprio)} \\
+ & \textbf{comp. (própria)} & \textbf{(próprio)} & \textbf{compensada} & \\
+\midrule
+Aluguel & $0.063$ & $-0.164$ & $0.528$ & $0.088^{*}$ \\
+Recreação & $-0.182$ & $-0.182$ & $-1.191^{*}$ & $-0.030$ \\
+Transporte & $-0.105$ & $-0.105$ & $0.393^{*}$ & $-0.006$ \\
+Aliment. em casa & $-0.137$ & $-0.137$ & $-0.064$ & $0.047$ \\
+\bottomrule
+\end{tabular}
+}
+
+\end{frame}
+
+\begin{frame}{Resultados: Efeitos de Preços e Elasticidades}
+
+\begin{itemize}
+    \item Todos os termos de Slutsky (diagonal) são \textbf{negativos} --- matriz de Slutsky negativa semi-definida $\Rightarrow$ racionalidade confirmada
+    
+    \vspace{0.3cm}
+    \item Efeito cruzado vestuário-aluguel: $-0.066$ --- aumento de preço do aluguel reduz parcela de vestuário
+    
+    \vspace{0.3cm}
+    \item $R^2$ das equações: 0.49 (aliment. em casa), 0.65 (aluguel), 0.57 (transporte) --- muito da variação é heterogeneidade não observada
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Interação Preço $\times$ Renda: Pobres vs. Ricos}
+\textbf{A matriz $\mathbf{B}$ captura diferenças na elasticidade de substituição por nível de renda.}
+
+\vspace{0.1cm}
+\textbf{Exemplo --- coeficiente $B^{\text{aluguel,aluguel}} = 0.088$:}
+
+Semi-elasticidade compensada própria do aluguel $= 0.063 + B^{al,al} \cdot y$
+
+\vspace{0.2cm}
+\begin{center}
+{\small
+\begin{tabular}{lrl}
+\toprule
+\textbf{Grupo} & \textbf{$y$ (aprox.)} & \textbf{Semi-elast. aluguel (própria)} \\
+\midrule
+5º percentil (pobre) & $-0.90$ & $0.063 - 0.90 \times 0.088 = -0.016 \approx 0$ \\
+Mediana & $0$ & $0.063$ \\
+95º percentil (rico) & $+0.60$ & $0.063 + 0.60 \times 0.088 = +0.115$ \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Termos de Slutsky correspondentes:}
+\begin{itemize}
+    \item 5º percentil: $-0.236$ (altamente negativo --- substituição intensa)
+    \item 95º percentil: $-0.080$ (negativamente menor --- substituição mais fraca)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Conclusão:} Pobres substituem \emph{muito mais} do que ricos diante de aumentos no preço do aluguel --- resultado com implicações distributivas importantes para políticas habitacionais.
+\end{frame}
+
+%================================================
+% SEÇÃO 10: EXCEDENTE DO CONSUMIDOR
+%================================================
+
+\begin{frame}{Excedente do Consumidor: Experimento de Política}
+\textbf{Cenário:} Introdução de imposto de 15\% sobre aluguel no Canadá.
+\[
+\mathbf{p}_0 = \mathbf{0}_J, \quad \mathbf{p}_1 = [0\ 0\ \ln(1.15)\ 0\ \cdots\ 0]
+\]
+
+\textbf{Índice de Custo de Vida (ICOV):}
+\begin{align}
+    \text{ICOV} &= \underbrace{\ln(1.15)\cdot w^{al}}_{\text{1ª ordem: inclui }\boldsymbol{\varepsilon}} + \underbrace{[\ln(1.15)]^2 \cdot \frac{\sum_l z_l a_l^{al,al} + b^{al,al}\cdot x}{2}}_{\text{2ª ordem: efeito de substituição}}
+\end{align}
+
+\end{frame}
+
+\begin{frame}{Excedente do Consumidor: Experimento de Política}
+
+\textbf{Dois componentes:}
+\begin{enumerate}
+    \item \textbf{Efeito de 1ª ordem:} Ponderado pela parcela do aluguel, que inclui $\boldsymbol{\varepsilon}$ --- captura heterogeneidade não observada
+    \item \textbf{Efeito de 2ª ordem:} Efeito de substituição; positivamente correlacionado com $x$ (pobres substituem mais $\Rightarrow$ segundo efeito menor para eles)
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Resultados quantitativos (Figura 11):}
+\begin{itemize}
+    \item ICOV médio: $\sim 5{-}6\%$ do gasto total
+    \item Com $\boldsymbol{\varepsilon} = \mathbf{0}$: variação no ICOV reflete apenas curva de Engel
+    \item Com $\boldsymbol{\varepsilon} \neq \mathbf{0}$: \textbf{maior parte da variação individual é atribuível a preferências não observadas}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Excedente do Consumidor: Implicações}
+\textbf{Importância da curva de Engel flexível:}
+\begin{itemize}
+    \item O efeito de 1ª ordem é conduzido pela curva de Engel do aluguel
+    \item Modelo quadrático diverge em até 5 p.p. nas caudas $\Rightarrow$ erros sistemáticos nas análises distributivas
+    \item Esses erros se magnificariam em experimentos que afetam mais diretamente a distribuição de gastos (ex.: mudanças na progressividade do IR)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Efeito de 2ª ordem --- substituição:}
+\begin{itemize}
+    \item $\approx -0.1$ p.p. no 5º percentil (total $\approx 6$ p.p.)
+    \item $\approx +0.1$ p.p. no 95º percentil (total $\approx 4$ p.p.)
+    \item Ignorar efeito de 2ª ordem: subestima impacto para ricos, superestima para pobres
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Excedente do Consumidor: Implicações}
+
+\textbf{Sensibilidade à interpretação dos erros:}
+\begin{itemize}
+    \item Tratando $\boldsymbol{\varepsilon}$ como erro de medição: parâmetros quase idênticos (distância $< 0.1$ dp)
+    \item Mas o ICOV individual varia \textbf{muito menos} --- a enorme variação individual observada é capturada pela heterogeneidade de preferências
+    \item Diferença máxima entre os dois tratamentos no ICOV: $0.01$ p.p. (negligível)
+\end{itemize}
+\end{frame}
+
+%================================================
+% SEÇÃO 11: CONCLUSÕES
+%================================================
+
+\begin{frame}{Conclusões e Contribuições}
+\textbf{Contribuições centrais:}
+
+\begin{enumerate}
+    \item \textbf{Demandas marshallianas implícitas:} Nova classe de modelos que evita computar a utilidade indireta. $y = g(\mathbf{w}, \mathbf{p}, x, \mathbf{z})$ é cardinalização de $u$ computável dos dados observados.
+
+    \vspace{0.2cm}
+    \item \textbf{Sistema EASI} resolve simultaneamente os dois problemas da literatura:
+    \begin{itemize}
+        \item Curvas de Engel de qualquer forma e rank irrestrito ($> 3$)
+        \item Heterogeneidade de preferências não observada coerente ($\boldsymbol{\varepsilon}$ = parâmetros de utilidade aleatórios)
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \item \textbf{Evidência empírica:}
+    \begin{itemize}
+        \item Curvas de Engel para aluguel, operação doméstica e recreação: \textbf{significativamente não-quadráticas} $\Rightarrow$ rank $> 3$
+        \item A heterogeneidade não observada domina a variação individual no ICOV
+        \item O modelo aproximado (linear) captura bem a complexidade do exato
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{O EASI mantém a facilidade de estimação do AID} (linearidade nos parâmetros, estimador linear aproximado) enquanto supera suas limitações estruturais mais importantes.
+\end{frame}
+
+\begin{frame}{Limitações, Extensões e Legado}
+\textbf{Limitações:}
+\begin{itemize}
+    \item Apenas domicílios unipessoais --- extensão para multi-membros requer escalas de equivalência ou demanda coletiva
+    \item Apenas 48 vetores de preços distintos --- variação relativamente limitada para identificação plena de $\mathbf{A}_l$ e $\mathbf{B}$
+    \item Regularidade global não imposta na estimação, apenas verificada ex-post
+    \item Teste $J$ com instrumentos adicionais ($y^{-1}$ e $y^6$) fica marginalmente significativo ($p = 0.003$)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Limitações, Extensões e Legado}
+
+\textbf{Extensões e legado:}
+\begin{itemize}
+    \item O arcabouço é geral: $g(\mathbf{w},\mathbf{p},x,\mathbf{z})$ pode tomar formas além do Stone afim
+    \item Splines e funções logísticas substituem polinômios, mantendo linearidade nos parâmetros
+    \item \textbf{M-demands} de Browning (2001) são caso especial da estrutura implícita
+    \item Influenciou sistemas de demanda para índices de custo de vida com substituição, análises de incidência tributária e estudos de bem-estar com microdados
+    \item A ideia de erros $=$ parâmetros de utilidade aleatórios tem implicações para modelos de escolha discreta e demanda com dados em painel
+    \item Estimador iterativo linear: facilmente implementável em Stata/R
+\end{itemize}
+\end{frame}
+
+%================================================
+% SLIDE FINAL
+%================================================
+
+\begin{frame}{Obrigado}
+\centering
+\Large Obrigado!
+\end{frame}
+
+\end{document}

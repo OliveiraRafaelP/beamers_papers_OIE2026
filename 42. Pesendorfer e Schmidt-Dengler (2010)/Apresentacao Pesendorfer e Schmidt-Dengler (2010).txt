@@ -1,0 +1,238 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Pesendorfer e Schmidt-Dengler (2010)]{Sequential Estimation of Dynamic Discrete Games: A Comment}
+\subtitle{{\Large}Pesendorfer e Schmidt-Dengler (2010)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2010}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação: O Que Este Comentário Critica
+  \item O Exemplo: Jogo de 2 Firmas com Anti-Coordenação
+  \item Mapeamento NPL e Equação de Diferença
+  \item Resultado Principal: Inconsistência do NPL
+  \item Análise Gráfica: Pontos Fixos Estáveis vs.\ Instáveis
+  \item Implicações e Alternativas Metodológicas
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação: O Que Este Comentário Critica}
+\textbf{AM (2007)} propuseram o NPL iterativo para jogos dinâmicos e afirmaram (Prop. 2) que é \textbf{consistente} independente de $P^0$.
+
+\vspace{0.3cm}
+\textbf{PSD (2010)} mostram que essa afirmação pode falhar:
+\begin{itemize}
+  \item O NPL sempre converge (para algum ponto fixo), mas pode convergir para um ponto fixo \textbf{estável porém INCORRETO}
+  \item O equilíbrio verdadeiro pode ser um ponto fixo \textbf{instável} do operador de melhor resposta
+  \item $\Rightarrow$ sequência NPL se afasta do verdadeiro e converge para ponto espúrio com probabilidade $\to 1$
+\end{itemize}
+
+\textbf{O que vai errado na condição (vii) de AM:}
+\begin{itemize}
+  \item AM requer que o Jacobiano do operador NPL não tenha autovalores no círculo unitário
+  \item Esta condição \textbf{falha} quando o equilíbrio verdadeiro é assintoticamente instável no mapeamento de melhor resposta
+  \item Casos economicamente relevantes: jogos com anti-coordenação ($\theta_0 < -1$)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{2. O Exemplo: Jogo de 2 Firmas}
+\textbf{Estrutura:} firmas $i=1,2$ decidem entrar simultaneamente a cada período $t$
+
+\vspace{0.3cm}
+\textbf{Payoffs:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Resultado & Firma $i$ & Firma $3-i$ \\
+\midrule
+Monopólio ($i$ ativa, $j$ inativa) & $\theta^0 + \varepsilon_i^1$ & $\varepsilon_j^3$ \\
+Duopólio (ambas ativas)            & $0 + \varepsilon_i^2$ & $0 + \varepsilon_j^2$ \\
+Inativa ($i$ inativa, $j$ ativa)   & $\varepsilon_i^3$ & $\theta^0 + \varepsilon_j^1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$s_i = \varepsilon_i^1 - \varepsilon_i^3$ i.i.d. com distribuição $F_a$ (uniforme em $[a,1-a]$ com caudas normais, $a$ pequeno)
+
+\vspace{0.3cm}
+\textbf{Equilíbrio simétrico} ($a \to 0$): $P_1 = P_2 = 1/2$
+
+\vspace{0.3cm}
+\textbf{Parâmetro de interesse:} $\theta_0 \in (-1,-10)$ — payoff de monopolista negativo e $< -1$
+
+\vspace{0.3cm}
+Para $\theta_0 \in (-1,0)$: NPL é consistente. Para $\theta_0 < -1$: NPL é inconsistente.
+\end{frame}
+
+%================================================
+\begin{frame}{3. Mapeamento NPL e Equação de Diferença}
+\textbf{Pseudo-verossimilhança:}
+\begin{equation}
+  Q_M(\theta,P) \propto P_{1M}\ln(1-F_a(-\theta P_2)) + (1-P_{1M})\ln F_a(-\theta P_2) + \{1 \leftrightarrow 2\}
+\end{equation}
+
+\vspace{0.3cm}
+\textbf{Sequência NPL:} $\hat{\theta}^K = \arg\max_\theta Q_M(\theta, P^{K-1})$; $\;P^K = \Psi(P^{K-1}, \hat{\theta}^K)$
+
+\vspace{0.3cm}
+\textbf{Equação de diferença em $p^K = P_1^K/P_2^K$:}
+\begin{equation}
+  p^K = g_M(p^{K-1})
+\end{equation}
+
+\vspace{0.3cm}
+Para $P_{1M}, P_{2M} < 1/2$ (ocorre quando $\theta_0 < -1$), $g_M$ tem \textbf{três pontos fixos}:
+\begin{itemize}
+  \item $p^* = 1$: equilíbrio verdadeiro — \textbf{INSTÁVEL}, slope $\approx -\theta_0 > 1$
+  \item $p^*_M > 1$ e $p^{**}_M < 1$: pontos espúrios — \textbf{ESTÁVEIS}, ambos implicam $\hat{\theta} \approx -1$
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{4. Resultado Principal: Inconsistência do NPL}
+\textbf{Resultado Limite:}
+
+\begin{enumerate}
+  \item $P_M \xrightarrow{p} P_0$ (estimativas de frequência são consistentes)
+  \item Se $P_M$ inicializa o NPL, então \textbf{para qualquer $\theta_0 \in (-1,-10)$}:
+\end{enumerate}
+
+\begin{equation}
+  \hat{\theta}^K \xrightarrow{K\to\infty} -1 \quad \text{com probabilidade} \to 1
+\end{equation}
+
+\textbf{Interpretação:}
+\begin{itemize}
+  \item O NPL converge com prob.\ $\to 1$ para $\hat{\theta} = -1$, independente do valor verdadeiro $\theta_0$
+  \item A probabilidade de convergir ao verdadeiro $\theta_0$ vai a \textbf{zero} quando $M\to\infty$
+  \item Paradoxo: mais dados $\Rightarrow$ mais certeza de convergir para o valor ERRADO
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Causa raiz:} a ordem dos limites importa
+\begin{itemize}
+  \item $M\to\infty$ primeiro, depois $K\to\infty$: NPL é consistente (Prop.\ 2 de AM, quando válida)
+  \item $K\to\infty$ primeiro, depois $M\to\infty$: NPL diverge do verdadeiro $\theta_0$
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{5. Por Que o Ponto Verdadeiro é Instável}
+\textbf{Propriedades de $g_M$:}
+\begin{itemize}
+  \item $g_M(p) > 1$ sse $p > 1$; \quad $g_M(1) = 1$
+  \item $g_M$ monótona não-decrescente para $p > 1$
+  \item $\partial g_M/\partial p|_{p=1} \to -\theta_0 > 1$ quando $M\to\infty$ e $\theta_0 < -1$
+\end{itemize}
+
+$\Rightarrow$ $g_M$ cruza a linha de $45°$ de \textbf{baixo para cima} em $p=1$: \textbf{ponto fixo instável}
+
+$\Rightarrow$ Pontos fixos estáveis $p^*_M, p^{**}_M$: slope entre 0 e 1
+
+\vspace{0.3cm}
+\textbf{Por que a condição de inicialização $p^0 = 1$ nunca é satisfeita?}
+\begin{equation}
+  \Pr(P_{1M} = P_{2M}) \xrightarrow{M\to\infty} 0
+\end{equation}
+Segue de que a probabilidade da moda de uma binomial tender a zero quando $M\to\infty$
+
+\vspace{0.3cm}
+\textbf{Implicação prática:} o pesquisador vê o NPL convergir para $\hat{\theta} \approx -1$ e ambos os pontos fixos estáveis têm \textbf{mesmos valores de pseudo-verossimilhança} — podendo concluir erroneamente que a estimativa é única e correta
+\end{frame}
+
+%================================================
+\begin{frame}{6. Implicações e Alternativas}
+
+\textbf{Limites da sugestão de AM (2007):}
+\begin{itemize}
+  \item AM sugerem tentar múltiplos $P^0$ e usar o NPL com maior verossimilhança
+  \item No exemplo: funciona somente se o pesquisador usa $P^0$ com $P_1 = P_2$ exatamente
+  \item Isso equivale a \textit{conhecer} a simetria do equilíbrio antecipadamente — irrealista em geral
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Extensão para modelos ricos:} Monte Carlo de PSD (2008) em jogo dinâmico com 5 equilíbrios mostra que NPL divergiu do verdadeiro em 3 dos 5 equilíbrios
+
+\end{frame}
+
+%================================================
+\begin{frame}{6. Implicações e Alternativas}
+
+\textbf{Alternativas robustas:}
+\begin{itemize}
+  \item \textbf{2S-PML (não-iterativo)}: consistente com $\hat{P}_0$ consistente, mas ineficiente
+  \item \textbf{ALS} (Pesendorfer-Schmidt-Dengler 2008): mínimos quadrados assintóticos — eficiente e não itera no mapeamento de melhor resposta; evita instabilidade
+  \item Buscar \textbf{todos} os pontos fixos NPL e comparar — computacionalmente exigente
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Quando NPL é consistente:} $\theta_0 \in (-1,0)$ — apenas um ponto fixo estável, que é o verdadeiro
+\end{frame}
+
+
+%================================================
+\begin{frame}{7. Conclusão e Legado}
+\textbf{Resultados:}
+\begin{enumerate}
+  \item NPL iterativo pode ser inconsistente: converge para ponto fixo estável porém incorreto
+  \item Causa: equilíbrio verdadeiro é ponto fixo INSTÁVEL do mapeamento de melhor resposta ($\theta_0 < -1$)
+  \item A condição (vii) de AM (2007) é necessária mas não está garantida em aplicações gerais
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Implicação:}
+\begin{itemize}
+  \item Pesquisadores que usam NPL sem verificar estabilidade do equilíbrio podem obter estimativas incorretas
+  \item O NPL é válido em modelos onde o equilíbrio verdadeiro é assintoticamente estável
+\end{itemize}
+
+\end{frame}
+
+%================================================
+\begin{frame}{7. Conclusão e Legado}
+
+\textbf{Legado:}
+\begin{itemize}
+  \item Motiva estimadores que não dependem de iteração no mapeamento de melhor resposta (ALS)
+  \item Identifica estabilidade do equilíbrio como requisito implícito para validade do NPL
+  \item Diálogo seminal na metodologia de estimação de jogos dinâmicos discretos
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}
+
+

@@ -1,0 +1,270 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Kumbhakar (1991)]{The Measurement and Decomposition of Cost-Inefficiency: The Translog Cost System}
+\subtitle{{\Large}Kumbhakar (1991)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1991}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item Revisão da Literatura e Contribuição
+  \item Arcabouço Teórico: Especificação das Ineficiências no Custo
+  \item Ineficiência Alocativa: Equações de Participação e Integrabilidade
+  \item Função de Verossimilhança e Método de Estimação
+  \item Dados: Painel de Companhias Aéreas dos EUA (1970--1978)
+  \item Resultados: Ineficiência Técnica
+  \item Resultados: Ineficiência Alocativa e Discussão
+  \item Conclusão, Limitações e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item Fronteira de custo (Farrell, 1957): custo mínimo possível para dado produto e preços de insumos — como mensurar o desvio de cada firma em relação a essa fronteira?
+  \item Abordagem padrão (Christensen--Greene, 1976): SUR do translog assume firmas eficientes — único erro é ruído branco
+  \item Omitir \textbf{ineficiência alocativa} (dependente de preços) $\Rightarrow$ estimativas \textit{inconsistentes} dos parâmetros
+  \item Omitir \textbf{ineficiência técnica} (independente de preços via definição de Farrell) $\Rightarrow$ afeta apenas o intercepto, sem comprometer consistência
+\end{itemize}
+\vspace{0.2cm}
+\textbf{Objetivos:} (i) especificar translog com ambas as ineficiências e ligação teoricamente consistente entre $U_i$ e $\ln C_a$; (ii) estimar por MV e decompor a ineficiência de custo.
+\end{frame}
+
+%================================================
+\begin{frame}{2. Revisão da Literatura e Contribuição}
+\begin{itemize}
+  \item \textbf{Literatura de fronteiras:} Aigner et al.\ (1977), Forsund et al.\ (1980); Schmidt (1985--6) e Bauer (1990) fornecem surveys
+  \item \textbf{Schmidt (1984):} propõe $\ln C_a = U'AU$ mas escolha de $A$ é arbitrária e a condição de integrabilidade não é imposta
+  \item \textbf{Bauer (1985) e Ferrier--Lovell (1990):} assumem $K$ diagonal e estimam seus elementos como parâmetros adicionais — sem integrabilidade
+  \item \textbf{Este artigo:} impõe integrabilidade ($\partial(\ln C_a)/\partial\ln w_i = U_i$) $\Rightarrow$ $K = -\tfrac{1}{2}B_0^{-1}$ sem parâmetros adicionais, estimativas MV consistentes
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{3. Arcabouço Teórico: Especificação das Ineficiências no Custo}
+Custo observado decomposto em:
+\begin{equation}
+  \ln C = \ln C^* + \varepsilon, \quad \varepsilon = \ln C_\tau + \ln C_a + \ln C_v
+\end{equation}
+
+\begin{itemize}
+  \item $\ln C^*$: custo mínimo (fronteira determinística) — especificado como translog
+  \item $\ln C_\tau \geq 0$: ineficiência \textbf{técnica} (falha em produzir o máximo dado os insumos)
+  \item $\ln C_a \geq 0$: ineficiência \textbf{alocativa} (proporções subótimas de insumos)
+  \item $\ln C_v$: ruído branco — pode aumentar ou reduzir custo
+\end{itemize}
+\vspace{0.2cm}
+\textbf{Intuição geométrica:} os pontos $E$ (observado), $F$ (tecnicamente eficiente) e $I$ estão na mesma reta pela origem $\Rightarrow$ custo de ineficiência técnica e alocativa são ambos proporcionais a $C^*$, justificando a forma aditiva em logs.
+\end{frame}
+
+%================================================
+\begin{frame}{3. Arcabouço Teórico: Especificação das Ineficiências (cont.)}
+Fronteira de custo translog (equação 4):
+\begin{equation}
+  \ln C^* = \alpha_0 + \delta_y \ln y + \boldsymbol{\alpha}'\ln\mathbf{w} + \tfrac{1}{2}\ln\mathbf{w}'B\ln\mathbf{w} + \tfrac{1}{2}\delta_{yy}(\ln y)^2 + \boldsymbol{\lambda}'\ln\mathbf{w}\ln y + \cdots
+\end{equation}
+
+\begin{itemize}
+  \item Restrições de homogeneidade linear nos preços: $\boldsymbol{\alpha}'\mathbf{i}=1$, $B'\mathbf{i}=0$, $D'\mathbf{i}=0$, $\boldsymbol{\lambda}'\mathbf{i}=0$
+  \item $\mathbf{q}$: vetor de variáveis exógenas (stage length, load factor, pontos servidos, tempo)
+  \item Participações ótimas via Lema de Shephard: $S^*_i = \alpha_i + \sum_j \beta_{ij}\ln w_j + \sum_k d_{ik}\ln q_k + \lambda_i\ln y$
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{4. Ineficiência Alocativa: Equações de Participação e Integrabilidade}
+Ineficiência alocativa (Forsund et al., 1980):
+\begin{equation}
+  S_i = S^*_i + U_i, \quad i = 1,\ldots,n, \quad \textstyle\sum U_i = 0
+\end{equation}
+
+Aplicando Shephard ao sistema com ineficiência:
+\begin{equation}
+  S_i = S^*_i + \frac{\partial \ln C_a}{\partial \ln w_i} \implies \frac{\partial \ln C_a}{\partial \ln w_i} = U_i
+\end{equation}
+
+\textbf{Condição de integrabilidade:} usando $\ln C_a = \mathbf{u}'K\mathbf{u}$ (com $\sum U_i = 0$), a condição acima exige $KB_0 = -\tfrac{1}{2}I$, logo:
+\begin{equation}
+  K = -\tfrac{1}{2}B_0^{-1} \implies \boxed{\ln C_a = -\tfrac{1}{2}\,\mathbf{u}'\,B_0^{-1}\,\mathbf{u}}
+\end{equation}
+
+Nenhum parâmetro adicional em $K$ — determinado pela própria estrutura de segunda ordem do translog. Restrição: $B_0^{-1}$ deve ser negativa definida.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Função de Verossimilhança e Método de Estimação}
+\textbf{Hipóteses distribucionais:}
+\begin{itemize}
+  \item $\mathbf{u} \sim N_{n-1}(\mathbf{0},\,\Sigma)$ (alocativo, normal multivariada)
+  \item $\ln C_v \sim N(0,\sigma_v^2)$ i.i.d. (ruído branco)
+  \item $\ln C_\tau \sim N^+(0,\sigma_\tau^2)$ i.i.d. (half-normal, truncada em zero)
+  \item $\ln C_v$, $\ln C_\tau$ e $\mathbf{u}$ mutuamente independentes
+\end{itemize}
+
+\vspace{0.2cm}
+Log-verossimilhança para uma firma (equação 10):
+\begin{equation}
+  L = \mathrm{const} - \tfrac{1}{2}\ln|\Sigma| - \tfrac{1}{2}\mathbf{u}'\Sigma^{-1}\mathbf{u} + \ln\sigma - \ln\sigma_v - \ln\sigma_\tau - \ln\Phi\!\left(\tfrac{\mu}{\sigma}\right) - \frac{z^2}{2(\sigma_v^2+\sigma_\tau^2)}
+\end{equation}
+onde $z = \varepsilon - \ln C_a$, $\mu = z\sigma_\tau^2/(\sigma_v^2+\sigma_\tau^2)$, $\sigma = \sigma_v\sigma_\tau/(\sigma_v^2+\sigma_\tau^2)^{1/2}$.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Função de Verossimilhança e Método de Estimação (cont.)}
+\textbf{Estimativa de $\Sigma$ (concentração da verossimilhança):}
+\begin{equation}
+  \hat{\sigma}_{ij} = \frac{1}{FT}\sum_f\sum_t (S_{ift}-S^*_{ift})(S_{jft}-S^*_{jft})
+\end{equation}
+
+\textbf{Estimativa individual da ineficiência técnica} (Jondrow et al., 1982):
+\begin{equation}
+  \widehat{\ln C_\tau} = \mu + \sigma\,\frac{\phi(\mu/\sigma)}{\Phi(\mu/\sigma)}
+\end{equation}
+
+\begin{itemize}
+  \item Usa a esperança condicional de $\ln C_\tau$ dado o erro composto observado $\varepsilon$
+  \item Modelo inclui \textit{fixed effects} por companhia aérea; equação de participação do capital omitida (singularidade de $\Sigma$)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Dados: Painel de Companhias Aéreas dos EUA (1970--1978)}
+\begin{itemize}
+  \item \textbf{Fonte:} CAB Form 41 via Christensen Associates; 10 companhias, 1970--1978 (período regulado): American, Delta, Eastern, Frontier, Ozark, Piedmont, TWA, United, US Air e Western
+  \item \textbf{Insumos:} trabalho (índice de 15 categorias), combustível (galões), capital (índice multilateral de equipamentos + propriedade + materiais)
+  \item \textbf{Produto:} índice multilateral de RPM regular, RPM fretamento, RTM correspondência e RTM carga
+  \item \textbf{Controles ($\mathbf{q}$):} stage length médio, load factor médio, pontos servidos, tendência temporal
+\end{itemize}
+\vspace{0.2cm}
+Normalização: Delta Airlines em 1977. Observações de Ozark (1973) e TWA (1973) excluídas por greves $>25$ dias.
+\end{frame}
+
+%================================================
+\begin{frame}{7. Resultados: Ineficiência Técnica}
+\textbf{Testes de hipóteses — Razão de Verossimilhança (Tabela 1):}
+
+{\small
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Modelo & Restrições & $\chi^2$ calculado & Crítico 1\% \\
+\midrule
+II (homotético)        & 6 & 58,62 & 16,81 \\
+III (CRS)              & 8 & 87,28 & 20,09 \\
+IV (Hicks neutro)      & 7 & 29,42 & 18,47 \\
+\bottomrule
+\end{tabular}
+\end{center}
+}
+
+Todos os modelos restritos rejeitados a 1\% $\Rightarrow$ dados suportam Modelo I (translog irrestrito).
+
+\vspace{0.15cm}
+\textbf{Elasticidades de custo (Modelo I, Delta 1977):} trabalho = 0,376; combustível = 0,177; produto = 0,781; tempo = $-$0,017 ($-$1,7\%/ano); load factor = $-$0,110.
+\end{frame}
+
+%================================================
+\begin{frame}{7. Resultados: Ineficiência Técnica (cont.)}
+\textbf{Custo de ineficiência técnica} $= [\exp(\ln C_\tau)-1]\times 100$ (Tabela 2):
+
+\begin{itemize}
+  \item Mais eficientes (1970): Frontier e Piedmont, 4,10\% acima da fronteira
+  \item Menos eficiente (1970): TWA, 5,13\% acima
+  \item Médias (1970--78): Frontier 4,19\%, Piedmont 4,21\%; TWA 5,22\%, American 5,17\%
+  \item Tendência: ineficiência cresceu de 1970 a 1975 para a maioria; reverteu após 1977
+  \item Amplitude em 1978: 4,28\% (Piedmont) a 5,29\% (TWA)
+\end{itemize}
+\vspace{0.15cm}
+$\hat{\sigma}_\tau$ significativo em todos os modelos (rejeita $\sigma_\tau = 0$); $\hat{\sigma}_\tau < \hat{\sigma}_v$ em todos os modelos.
+\end{frame}
+
+%================================================
+\begin{frame}{8. Resultados: Ineficiência Alocativa e Discussão}
+\textbf{Custo médio de ineficiência alocativa} (Tabela 4, Modelo I):
+
+{\small
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Companhia & Modelo I (média) & D.P. \\
+\midrule
+United    & 0,034 & (0,044) \\
+Frontier  & 0,048 & (0,035) \\
+TWA       & 0,050 & (0,045) \\
+Eastern   & 0,056 & (0,059) \\
+Ozark     & 0,072 & (0,079) \\
+American  & 0,090 & (0,051) \\
+Western   & 0,163 & (0,145) \\
+US Air    & 0,249 & (0,108) \\
+Piedmont  & 0,288 & (0,439) \\
+\bottomrule
+\end{tabular}
+\end{center}
+}
+\end{frame}
+
+%================================================
+\begin{frame}{8. Resultados: Ineficiência Alocativa e Discussão (cont.)}
+\begin{itemize}
+  \item Custos de ineficiência alocativa são muito baixos em todos os modelos — companhias eram \textbf{alocativamente eficientes} (1970--1978)
+  \item Ineficiência técnica ($\approx$4--5\%) domina ineficiência alocativa ($<$0,3\%) — falha gerencial supera erro de otimização de proporções
+  \item \textbf{Limitação:} $\ln C_a = -\tfrac{1}{2}\mathbf{u}'B_0^{-1}\mathbf{u}$ é apenas uma aproximação; $U_i < 1$ em valor absoluto $\Rightarrow$ estimativas de $\ln C_a$ possivelmente viesadas para baixo
+  \item Indústria regulada, produção demand-constrained: coerente com baixa ineficiência alocativa (firmas minimizam custos dado o nível exógeno de produto)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{9. Conclusão, Limitações e Legado}
+\textbf{Resultados principais:}
+\begin{itemize}
+  \item Nenhuma companhia operou na fronteira de custo em nenhum ano; ineficiência técnica robusta entre modelos
+  \item Variação temporal da ineficiência técnica é pequena; variação entre companhias também é limitada (4--5\%)
+  \item Ineficiência alocativa virtualmente nula em todos os modelos
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{9. Conclusão, Limitações e Legado (cont.)}
+\textbf{Limitações:}
+\begin{itemize}
+  \item $\ln C_a$ como média ponderada de quadrados dos resíduos pode ser viesado para zero
+  \item Modelo assume ineficiência i.i.d. no tempo — relaxado em Kumbhakar (1990) e Cornwell, Schmidt e Sickles (1990)
+  \item Propriedades do translog (simetria, homogeneidade) não testadas empiricamente
+\end{itemize}
+\vspace{0.2cm}
+\textbf{Legado:} contribuição metodológica central na literatura de fronteiras estocásticas de custo; a condição $K = -\tfrac{1}{2}B_0^{-1}$ resolve o problema de integrabilidade em aberto desde Schmidt (1984), sem parâmetros adicionais. Influenciou estudos de eficiência em bancos, energia e telecomunicações.
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell *)",
+      "Bash(python TEMP_word_26.py)",
+      "Bash(python TEMP_word_29.py)",
+      "Bash(python TEMP_word_30.py)",
+      "Bash(python TEMP_word_31.py)",
+      "Bash(python -c ' *)",
+      "Bash(python -c \"import sys; data=sys.stdin.buffer.read\\(\\); print\\(data.decode\\('utf-8','replace'\\)[:8000]\\)\")",
+      "Bash(python TEMP_word_32.py)",
+      "Bash(python *)",
+      "Bash(Compress-Archive *)",
+      "Bash(powershell.exe *)",
+      "Bash(python3 *)",
+      "Bash(git -C \"D:/Meu Drive/Academia/2026 - Doutorado FEA-USP/Primeiro Semestre 2026/Primeiro Bimestre/Organização Industrial Empírica \\(ouvinte\\)/Papers OI\" init)",
+      "Bash(git -C \"D:/Meu Drive/Academia/2026 - Doutorado FEA-USP/Primeiro Semestre 2026/Primeiro Bimestre/Organização Industrial Empírica \\(ouvinte\\)/Papers OI\" remote add origin https://github.com/OliveiraRafaelP/beamers_papers_OIE2026.git)"
+    ]
+  }
+}

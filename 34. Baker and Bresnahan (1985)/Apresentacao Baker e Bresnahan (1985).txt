@@ -1,0 +1,215 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Baker e Bresnahan (1985)]{The Gains from Merger or Collusion in Product-Differentiated Industries}
+\subtitle{{\Large}Baker e Bresnahan (1985)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1985}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item Arcabouço Teórico: Demanda Residual Parcial
+  \item Identificação e Estratégia Econométrica
+  \item Dados: Indústria Cervejeira EUA (1962--1983)
+  \item Resultados: Curvas de Demanda Residual
+  \item Resultados: Ganhos com Fusão ou Conluio
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item Fusão em indústria diferenciada: cada firma fusionada enfrenta curva de demanda residual \textbf{mais inclinada} — maior poder de mercado
+  \item Avaliar o aumento de poder de mercado parece exigir estimar $n^2$ elasticidades cruzadas — tarefa formidável
+\end{itemize}
+
+\textbf{Solução:} efeitos de todas as $n-2$ outras firmas podem ser \textbf{somados}. Estimam-se apenas as curvas de ``demanda residual parcial'' das duas firmas fusionadas.
+
+\vspace{0.2cm}
+\textbf{Observação:} fusão e conluio bilateral são tratados como equivalentes — o mesmo aumento de poder de mercado.
+
+\vspace{0.2cm}
+\textbf{Aplicação:} Anheuser-Busch (32,9\% share), Coors (7,5\%) e Pabst (7,0\%) nos EUA, 1962--1983.
+\end{frame}
+
+%================================================
+\begin{frame}{2. Arcabouço Teórico: Demanda Residual Parcial}
+Demanda inversa das firmas fusionadas (1 e 2) com $n-2$ outras firmas equilibradas:
+\begin{align}
+  P_1 &= r_1(Q_1,\, Q_2,\, Y,\, W;\; \eta_1,\, \eta_{-2},\, \beta) \\
+  P_2 &= r_2(Q_1,\, Q_2,\, Y,\, W;\; \eta_2,\, \eta_{-2},\, \beta)
+\end{align}
+
+Elasticidades da demanda residual \textit{parcial} (equações 12--15):
+\begin{equation}
+  \eta_{1,1}^{PR} = \eta_{11} + \sum_{j=3}^{n} \eta_{j1}\,\xi_{j1}
+\end{equation}
+
+onde $\xi_{ji}$ = elasticidade da função de reação da firma $j$ à firma $i$.
+
+\textbf{Intuição:} $\eta_{1,1}^{PR}$ captura (i) o efeito direto de demanda ($\eta_{11}$) e (ii) o efeito indireto via reações dos rivais. Toda a disciplina competitiva das $n-2$ firmas está resumida nesse número.
+\end{frame}
+
+%================================================
+\begin{frame}{2. Arcabouço Teórico (cont.)}
+\textbf{Demanda residual individual} (firma 1 atuando sozinha, equação 18):
+\begin{equation}
+  \eta_1^R = \eta_{11} + \eta_{21}\,\xi_{21} + \sum_{j=3}^{n} \eta_{j1}\,\xi_{j1}
+\end{equation}
+
+\textbf{Diferença entre demanda parcial e individual:}
+\begin{itemize}
+  \item Demanda residual \textit{parcial}: firma 2 mantém sua quantidade fixa, junto com as $n-2$ firmas equilibradas
+  \item Demanda residual \textit{individual}: firma 2 também é equilibrada junto com os demais
+  \item O ganho com a fusão é medido por $\eta_{1,1}^{PR} + \eta_{2,1}^{PR} - \eta_1^R$: a mudança na inclinação da curva de demanda
+\end{itemize}
+
+\textbf{Diagnóstico de conluio:} se $\eta_{1,1}^{PR} = \eta_1^R$, as duas firmas \textit{já estão} coordenando preços.
+\end{frame}
+
+%================================================
+\begin{frame}{3. Identificação e Estratégia Econométrica}
+\textbf{Especificação log-linear (equações 20--21):}
+\begin{align}
+  \ln P_1 &= \pi_{10} + \eta_{11}^{PR}\ln Q_1 + \eta_{12}^{PR}\ln Q_2 + \lambda_1 Y + A_1 W + v_1 \\
+  \ln P_2 &= \pi_{20} + \eta_{21}^{PR}\ln Q_1 + \eta_{22}^{PR}\ln Q_2 + \lambda_2 Y + A_2 W + v_2
+\end{align}
+
+\textbf{Problema:} $Q_1$ e $Q_2$ endógenos. \textbf{Solução:} variáveis de custo \textit{específicas à firma} ($W_1$, $W_2$) instrumentalizam as quantidades.
+
+\vspace{0.2cm}
+\textbf{Método:} 3SLS (três estágios MQO), estimando as curvas conjuntamente.
+
+\vspace{0.2cm}
+\textbf{Variáveis instrumentais / exógenas incluídas:}
+\begin{itemize}
+  \item SRAVC (custo médio variável), PK (preço do capital), APS (tamanho médio das plantas)
+  \item EKTI (capacidade ociosa das outras firmas), TIME, dummy LITE (1975), PCDI
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{4. Dados: Indústria Cervejeira EUA 1962--1983}
+\begin{itemize}
+  \item CR2 (A-B + Miller) $> 50\%$ em 1983; CR6 $\approx 84\%$
+  \item Evidência de diferenciação: tendências de longo prazo em preços relativos por tipo de cerveja
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+ & $P_{A\text{-}B}$ & $P_{\text{Coors}}$ & $P_{\text{Pabst}}$ \\
+\midrule
+$P_{A\text{-}B}$     & 1,00 & 0,83 & 0,93 \\
+$P_{\text{Coors}}$   &      & 1,00 & 0,61 \\
+$P_{\text{Pabst}}$   &      &      & 1,00 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+{\footnotesize Correlações de log-preços reais, 1962--1983.}
+
+\vspace{0.2cm}
+Mudança estrutural relevante: Miller lança cerveja LITE em 1975 — dummy altera inclinação e intercepto da demanda de A-B.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Resultados: Elasticidades da Demanda Residual Individual}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Firma & $\hat\eta^R$ & (t-stat) \\
+\midrule
+Coors                 & $-0{,}633$ & $(-10{,}07)$ \\
+Pabst                 & $-0{,}028$ & $(-0{,}96)$  \\
+A-B, 1962--74         & $-0{,}313$ & $(-5{,}99)$  \\
+A-B, 1975--83 (LITE)  & $-0{,}002$ & $(-0{,}014)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Interpretação:}
+\begin{itemize}
+  \item Coors tem forte poder de mercado regional (oeste dos EUA)
+  \item Pabst é quase tomadora de preço — poder de mercado insignificante
+  \item A-B perdeu substancialmente poder de mercado individual após a entrada da LITE da Miller (mercado fragmentado por novas variedades)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Resultados: Ganhos com Fusão ou Conluio}
+\begin{center}
+{\small
+\begin{tabular}{lcc}
+\toprule
+Fusão & Firma & $\hat\eta^{PR}_1 + \hat\eta^{PR}_2$ \\
+\midrule
+A-B + Coors & A-B (1962--74)    & $-0{,}373$ \\
+            & A-B (1975--83)    & $-0{,}176$ \\
+            & Coors             & $-0{,}625$ \\
+\midrule
+A-B + Pabst & A-B (1962--74)    & $-0{,}338$ \\
+            & A-B (1975--83)    & $-0{,}151$ \\
+            & Pabst             & $+0{,}024$ \\
+\midrule
+Pabst + Coors & Coors           & $-0{,}676$ \\
+              & Pabst           & $+0{,}010$ \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\vspace{0.15cm}
+Ganho estimado (conservador): $\Delta \eta = 0{,}05$ para Budweiser $\Rightarrow$ lucros adicionais $\approx$ US\$105 milhões/ano.
+\end{frame}
+
+%================================================
+\begin{frame}{7. Conclusão e Legado}
+\textbf{Conclusão forte:} os três fabricantes \textbf{não} estão colluindo. Ganhos potenciais são enormes — se já colluissem, a mudança de comportamento seria trivialmente lucrativa.
+
+\textbf{Conclusão fraca:} Pabst e Coors (5--15\% share) exercem restrição competitiva importante sobre A-B.
+
+\vspace{0.2cm}
+\textbf{Contribuições metodológicas:}
+\begin{enumerate}
+  \item Demanda residual \textit{parcial}: reduz $n^2$ parâmetros a 4 elasticidades cruzadas relevantes
+  \item Identificação via custos firma-específicos (extensão de Bresnahan, 1982)
+  \item Diagnóstico de conluio: $\eta_{PR} = \eta_R$ implica coordenação plena
+\end{enumerate}
+
+\textbf{Legado:} método de demanda residual tornou-se ferramenta padrão em análise antitruste de fusões — DOJ, FTC, CADE; referência direta para simulação de fusões (Werden e Froeb, 1994) e Baker e Bresnahan (1988).
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

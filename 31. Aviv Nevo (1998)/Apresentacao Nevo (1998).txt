@@ -1,0 +1,223 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Nevo (1998)]{Identification of the Oligopoly Solution Concept in a Differentiated-Products Industry}
+\subtitle{{\Large}Nevo (1998)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{1998}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação e Problema de Pesquisa
+  \item O Modelo com Produtos Diferenciados
+  \item Identificação dos Parâmetros CV: Exemplo Simples ($J=2$)
+  \item Dificuldades Práticas e Caso Geral
+  \item A Abordagem por Menu (\textit{Menu Approach})
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa}
+\begin{itemize}
+  \item Bresnahan (1982) e Lau (1982): condições de identificação do parâmetro $\lambda$ em indústrias de \textbf{produto homogêneo}
+  \item Nevo (1998) estende ao caso de \textbf{produtos diferenciados}: múltiplas variedades por firma, elasticidades cruzadas fundamentais
+  \item Duas questões centrais:
+    \begin{enumerate}
+      \item Os parâmetros de variação conjectural (CV) são identificados em indústrias diferenciadas?
+      \item Usar CVs é a melhor abordagem para testar conceitos de solução de oligopólio?
+    \end{enumerate}
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação e Problema de Pesquisa (cont.)}
+\textbf{Resultado principal:}
+\begin{itemize}
+  \item Em \textit{teoria}: CVs são identificados (análogo ao caso homogêneo)
+  \item Na \textit{prática}: restrições de exclusão necessárias são difíceis de satisfazer com muitos produtos diferenciados
+  \item \textbf{Alternativa preferível}: a ``abordagem por menu'' — testar entre modelos de conduta predefinidos sem exigir instrumentos adicionais
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{2. O Modelo com Produtos Diferenciados}
+\textbf{Demanda agregada} (equação 1):
+\begin{equation}
+  Q_j = D(p_1, \ldots, p_J,\; Y_j,\; \alpha), \quad j = 1, \ldots, J
+\end{equation}
+
+\textbf{Lucros da firma $f$} (equação 2):
+\begin{equation}
+  \Pi_f = \sum_{j \in F_f} (p_j - mc_j(W, \beta))\,Q_j - C_f
+\end{equation}
+
+\textbf{CPO — Bertrand-Nash em preços} (equação 3):
+\begin{equation}
+  Q_j(p) + \sum_{r \in F_f} (p_r - mc_r)\,\frac{\partial Q_r}{\partial p_j} = 0
+\end{equation}
+\end{frame}
+
+%================================================
+\begin{frame}{2. O Modelo com Produtos Diferenciados (cont.)}
+\textbf{Notação matricial} (equações 4--6): defina $S_{jr} = -\partial Q_r/\partial p_j$ e a matriz de conduta $\Theta$:
+\begin{equation}
+  \Theta_{jr} = \begin{cases} 1 & \text{se } \{r,j\} \text{ produzidos pela mesma firma} \\ 0 & \text{caso contrário} \end{cases}
+\end{equation}
+
+Com $\Omega_{jr} = \Theta_{jr} \cdot S_{jr}$, as CPOs tornam-se:
+\begin{equation}
+  Q(p) - \Omega\,(p - mc) = 0 \;\;\Rightarrow\;\; p = mc + \Omega^{-1}\,Q(p)
+\end{equation}
+
+\textbf{Casos especiais de $\Theta$:}
+\begin{itemize}
+  \item $\Theta = I$: Nash-Bertrand com firmas monoproduto
+  \item $\Theta$ com blocos de 1s: Nash-Bertrand multiproduto
+  \item $\Theta = \mathbf{1}$: conluio perfeito / monopólio
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{3. Identificação dos CVs: Exemplo Simples ($J=2$)}
+\textbf{Caso $J=2$}: duas firmas monoproduto, demanda e custo lineares.
+
+\textbf{Demanda} (equação 7):
+\begin{equation}
+  Q_j = \alpha_{j0} + \alpha_{j1}p_1 + \alpha_{j2}p_2 + Y'\alpha_{j3} + \varepsilon_j
+\end{equation}
+
+\textbf{Custo marginal} (equação 8):
+\begin{equation}
+  mc_j = \beta_{j0} + W'\beta_{j1}
+\end{equation}
+
+\textbf{Relação de oferta} (equação 9) após substituição:
+\begin{equation}
+  p_j = \beta_{j0} + W'\beta_{j1} - A\,(\theta_{ii}\,\alpha_{ii}\,Q_j - \theta_{ij}\,\alpha_{ji}\,Q_i) + \eta
+\end{equation}
+onde $A = (\theta_{11}\theta_{22}\alpha_{22}\alpha_{11} - \theta_{12}\theta_{21}\alpha_{21}\alpha_{12})^{-1}$
+\end{frame}
+
+%================================================
+\begin{frame}{3. Identificação dos CVs: Exemplo Simples ($J=2$) (cont.)}
+\textbf{Condição necessária para identificação:}
+\begin{itemize}
+  \item Para identificar $(\theta_{11}, \theta_{12}, \theta_{21}, \theta_{22})$, a dimensão das variáveis exógenas $Y$ na equação de demanda deve ser \textbf{pelo menos 2}
+\end{itemize}
+
+\textbf{Generalização para $J$ produtos:}
+\begin{itemize}
+  \item Para $J$ produtos: $\dim(Y) \geq J$
+  \item Em indústrias com muitos produtos diferenciados (cereais, cervejas): dezenas de variáveis exógenas de demanda válidas são necessárias
+  \item Na prática, esse requisito é virtualmente impossível de satisfazer
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{4. Dificuldades Práticas e Caso Geral}
+\textbf{Problemas com instrumentos em indústrias diferenciadas:}
+\begin{itemize}
+  \item Variáveis de \textit{marketing} (publicidade, promoções): correlacionadas com decisões de precificação — instrumentos inválidos
+  \item Variáveis sazonais: potencialmente válidas, mas raramente de dimensão suficiente para $J$ produtos
+  \item Instrumentos tradicionais (custos de insumos, custos de rivais): excluídos da demanda, mas não fornecem \textit{rotação} da curva de demanda
+\end{itemize}
+
+\textbf{Custo marginal variável com quantidade:}
+\begin{itemize}
+  \item Se $mc_j = mc_j(Q, W)$, termos adicionais entram na equação de precificação
+  \item Exige instrumentos que \textbf{rotem} (não apenas desloquem) a curva de demanda — argumento de Bresnahan (1982) e Lau (1982) ampliado
+  \item Identificação prática dos CVs torna-se virtualmente impossível em indústrias diferenciadas complexas
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{5. A Abordagem por Menu (\textit{Menu Approach})}
+\textbf{Definição:} em vez de estimar CVs contínuos, o pesquisador seleciona um conjunto finito de modelos de conduta predefinidos pela teoria e compara o ajuste de cada modelo.
+
+\textbf{Vantagens:}
+\begin{enumerate}
+  \item \textbf{Não} exige instrumentos adicionais além dos necessários para demanda e oferta
+  \item Permite testar entre modelos via testes de modelos não-aninhados (Bresnahan, 1987; Gasami et al., 1992)
+  \item Liga diretamente estimação e teoria: cada modelo de $\Theta$ corresponde a predições teóricas específicas
+  \item Todos os modelos de $\Theta$ são identificados pelos \textbf{mesmos} instrumentos usados na estimação dos parâmetros de demanda e custo
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{5. A Abordagem por Menu (cont.)}
+\textbf{Procedimento:}
+\begin{enumerate}
+  \item[(a)] Estimar o modelo para cada especificação de $\Theta$ (Nash-Bertrand, conluio, etc.)
+  \item[(b)] Para cada modelo, calcular markups implícitos e comparar com dados observados
+  \item[(c)] Testar qual modelo ajusta melhor os dados usando estatísticas de modelos não-aninhados
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Referências na literatura:}
+\begin{itemize}
+  \item Berry, Levinsohn e Pakes (1995): automóveis
+  \item Nevo (2001): cereais matinais
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Conclusão e Legado}
+\textbf{Síntese:}
+\begin{enumerate}
+  \item CVs são identificados em \textit{teoria} em indústrias diferenciadas, mas as restrições de exclusão são praticamente impossíveis de satisfazer
+  \item A \textbf{abordagem por menu} é preferível: testa modelos de conduta sem exigir instrumentos adicionais e liga diretamente estimação à teoria
+\end{enumerate}
+
+\textbf{Posição na literatura:}
+\begin{itemize}
+  \item ``Elo perdido'' entre Bresnahan/Lau (1982) e BLP (1995): confirma resultado de identificação, mas documenta as dificuldades que justificam o menu approach de BLP
+  \item Antecipa o trabalho empírico de Nevo (2001) sobre cereais: usa $\Theta$ para testar Nash-Bertrand vs.\ conluio discretamente
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Conclusão e Legado (cont.)}
+\textbf{Legado:}
+\begin{itemize}
+  \item Justifica metodologicamente a escolha de toda a literatura BLP-NEIO de usar menu approach em vez de CVs contínuos
+  \item Referência para:
+    \begin{itemize}
+      \item Por que estudos de produtos diferenciados (Berry, 1994; BLP, 1995) não tentam identificar $\lambda$ de forma contínua
+      \item Por que o procedimento padrão é testar entre Nash-Bertrand e conluio discretamente
+    \end{itemize}
+  \item \textbf{Advertência metodológica:} pesquisadores que afirmam identificar lambdas contínuos em indústrias diferenciadas devem justificar suas hipóteses de exclusão
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}

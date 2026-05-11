@@ -1,0 +1,222 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Aguirregabiria e Mira (2002)]{Swapping the Nested Fixed Point Algorithm}
+\subtitle{{\Large}Aguirregabiria e Mira (2002)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2002}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação: NFXP, CCP e o Dilema Eficiência-Velocidade
+  \item Modelo de Decisão Markoviana Discreta
+  \item Operador de Iteração de Política e Propriedade Zero-Jacobiana
+  \item Algoritmo NPL e Equivalência com NFXP
+  \item Estimadores K-Estágio de Iteração de Política
+  \item Resultados: Modelo de Rust e Monte Carlo
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação: NFXP, CCP e o Dilema Eficiência-Velocidade}
+
+\textbf{Dois extremos na literatura DDC:}
+\begin{itemize}
+  \item \textbf{NFXP} (Rust 1987): resolve PD completo a cada avaliação de $\mathcal{L}(\theta)$ — eficiente, mas computacionalmente caro
+  \item \textbf{CCP} (Hotz-Miller 1993): inverte CCPs não-paramétricas para obter funções valor sem resolver PD — rápido, reputadamente ineficiente
+\end{itemize}
+
+\textbf{Contribuição deste paper:}
+\begin{itemize}
+  \item Um CCP estimador bem construído é \textbf{assintoticamente equivalente} ao MLE
+  \item Propõe família de estimadores $K$-PI que vai de CCP ($K=1$) ao MLE ($K\to\infty$)
+  \item Todos assintoticamente equivalentes; trade-off é apenas em \textbf{amostras finitas}
+  \item Algoritmo NPL: 5 a 15 vezes mais rápido que NFXP no modelo de Rust
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{2. Modelo de Decisão Markoviana Discreta}
+\textbf{Pressupostos centrais:}
+\begin{itemize}
+  \item \textbf{(A1) Aditividade:} $u(s,a) = u(x,a) + \varepsilon(a)$
+  \item \textbf{(A2) Independência Condicional:} $p(x',\varepsilon'|x,a,\varepsilon) = g(\varepsilon'|x')f(x'|x,a)$
+\end{itemize}
+
+\textbf{Equação de Bellman suavizada:}
+\begin{equation}
+  V_\sigma(x) = \int \max_a\!\bigl[u(x,a)+\varepsilon(a)+\beta\!\sum_{x'}V_\sigma(x')f(x'|x,a)\bigr]g(d\varepsilon|x)
+\end{equation}
+
+\textbf{CCPs e representação de Hotz-Miller:}
+\begin{equation}
+  V_\sigma = \varphi(P) = \bigl(I_M - \beta F^u(P)\bigr)^{-1}\!\sum_a P(a)\odot\bigl[u(a)+e(a,P)\bigr]
+\end{equation}
+\begin{itemize}
+  \item $F^u(P) = \sum_a P(a)\odot F(a)$: transição incondicional induzida por $P$
+  \item Para extreme value: $e(a,P) = \gamma - \ln P(a)$ (forma fechada)
+  \item \textbf{Invertibilidade de Hotz-Miller:} $P \mapsto \tilde{v}$ é bijeção $\Rightarrow$ $V_\sigma = \varphi(P)$
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{3. Operador de Iteração de Política e Propriedade Zero-Jacobiana}
+\textbf{Operador de iteração de política $\Psi$:}
+\begin{equation}
+  P = \Psi(P) \equiv \Lambda\!\bigl(\varphi(P)\bigr)
+\end{equation}
+$\varphi(P)$: avaliação de política (CCPs $\to$ funções valor); $\Lambda(V)$: melhoria de política (funções valor $\to$ CCPs)
+
+\textbf{Proposição 1:} $\Psi$ tem único ponto fixo $\bar{P}$; sequência $P^K = \Psi(P^{K-1})$ converge para $\bar{P}$
+
+\textbf{Proposição 2 — Zero-Jacobiana (chave do paper):}
+\begin{equation}
+  \frac{\partial\Psi(\bar{P})}{\partial P} = 0
+\end{equation}
+\textbf{Implicações:}
+\begin{itemize}
+  \item Matriz de pseudo-informação é bloco-diagonal em $\theta$ e $P^*$ (parâmetros de perturbação)
+  \item Score e pseudo-score \textbf{idênticos} nos verdadeiros parâmetros
+  \item $\Rightarrow$ distribuição assintótica de todo $K$-PI é igual à do MLE
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{4. Algoritmo NPL e Equivalência com NFXP}
+\textbf{Algoritmo NPL (inversão do aninhamento do NFXP):}
+
+Inicializar $P^0 \in [0,1]^{MJ}$. Para $K \geq 1$:
+\begin{align}
+  \hat{\theta}^K &= \arg\max_\theta \sum_i \ln \Psi_{(\theta,\hat{\theta}_f)}(P^{K-1})(a_i|x_i) \tag{inner}\\
+  P^K &= \Psi_{(\hat{\theta}^K,\hat{\theta}_f)}(P^{K-1}) \tag{outer}
+\end{align}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & NFXP & NPL \\
+\midrule
+Inner loop & Resolve DP ($V = F(V)$) & Maximiza pseudo-$\mathcal{L}$ \\
+Outer loop & Maximiza $\mathcal{L}(\theta)$ & Itera $P$ até ponto fixo \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Proposição 3:} Se NPL converge, converge a uma raiz das equações de verossimilhança (mesmo resultado do NFXP). Decorre diretamente da Proposição 2.
+\end{frame}
+
+%================================================
+\begin{frame}{5. Estimadores K-Estágio de Iteração de Política}
+\textbf{K-PI Estimator} (NPL inicializado com $P^0$ consistente):
+\begin{equation}
+  \hat{\theta}^K = \arg\max_\theta \sum_i \ln \Psi_{(\theta,\hat{\theta}_f)}(P^{K-1})(a_i|x_i), \quad P^K = \Psi_{(\hat{\theta}^K,\hat{\theta}_f)}(P^{K-1})
+\end{equation}
+
+Família de estimadores: $K=1$ (CCP de Hotz-Miller) $\to$ $K\to\infty$ (MLE de Rust)
+
+\vspace{0.5cm}
+\textbf{Proposição 4 — Resultado Principal:}
+\begin{equation}
+  \sqrt{n}\,(\hat{\theta}^K - \theta^*) \xrightarrow{d} \mathcal{N}(0, V^*)
+\end{equation}
+$V^*$ = variância assintótica do MLE parcial; independente de $K$ e da precisão de $P^0$
+
+\textbf{Trade-off amostras finitas:}
+\begin{itemize}
+  \item $K=1$: muito impreciso quando $P^0$ é ruidoso
+  \item $K=2$: captura quase toda a ganho do MLE com custo muito menor
+  \item $K\geq 3$: ganhos marginais pequenos em relação ao MLE
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Resultados: Velocidade e Precisão (Modelo de Rust)}
+\textbf{Experimento 1 — Velocidade (NPL vs.\ NFXP):}
+\begin{itemize}
+  \item Iterações de política $\approx 100\%$ do tempo com $>200$ estados
+  \item Razão de iterações NFXP/NPL: $5{,}5\times$ (2 parâmetros); $9\times$ (4 parâmetros)
+  \item Com valores iniciais ruins: razão chega a $10$–$15\times$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Experimento 2 — Monte Carlo (Tabela I, $n=1.000$, 1.000 réplicas):}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Estatística & 1-PI & 2-PI & 3-PI \\
+\midrule
+$\theta_0$: erro abs.\ médio (rel.\ MLE) & $+4{,}7\%$ & $+1{,}6\%$ & $+0{,}3\%$ \\
+$\theta_0$: desvio-padrão (rel.\ MLE)    & $+6{,}8\%$ & $+1{,}2\%$ & $+0{,}3\%$ \\
+$\theta_1$: erro abs.\ médio (rel.\ MLE) & $+18{,}7\%$ & $+1{,}5\%$ & $+0{,}2\%$ \\
+$\theta_1$: desvio-padrão (rel.\ MLE)    & $+11{,}0\%$ & $+1{,}3\%$ & $+0{,}2\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{itemize}
+  \item 2-PI já captura quase todo o ganho do MLE; EP assintótico do 1-PI é viesado
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{7. Conclusão e Legado}
+\textbf{Resultados:}
+\begin{enumerate}
+  \item CCP bem construído (usando $\varphi(P)$) é assintoticamente equivalente ao MLE — quebrando a sabedoria convencional de ineficiência do CCP
+  \item Família K-PI unifica CCP e NFXP; o 2-PI oferece o melhor custo-benefício
+  \item NPL é 5–15$\times$ mais rápido que NFXP sem sacrifício assintótico
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Limitações:}
+\begin{itemize}
+  \item Requer CCPs não-paramétricas consistentes — difícil com heterogeneidade não-observada time-invariant ou choques agregados
+  \item Resultados para horizonte infinito com domínio discreto finito; extensões contínuas requerem métodos de aproximação
+\end{itemize}
+
+\end{frame}
+
+%================================================
+\begin{frame}{7. Conclusão e Legado}
+
+\textbf{Legado:}
+\begin{itemize}
+  \item Base para Aguirregabiria e Mira (2007): extensão para \textit{jogos} dinâmicos com múltiplos agentes
+  \item NPL tornou-se o algoritmo padrão para estimação de DDC games na literatura de OI
+  \item Estabelece a abordagem two-step como metodologia dominante em modelos estruturais dinâmicos
+\end{itemize}
+\end{frame}
+
+%================================================
+
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}
+

@@ -1,0 +1,218 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+\usepackage{setspace}
+\usepackage{appendixnumberbeamer}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{mathtools}
+
+\title[Aguirregabiria e Mira (2007)]{Sequential Estimation of Dynamic Discrete Games}
+\subtitle{{\Large}Aguirregabiria e Mira (2007)}
+\author[Rafael Pereira Oliveira]{Rafael Pereira Oliveira}
+\institute[FEA-USP]{\normalsize{Faculdade de Economia, Administração e Contabilidade (FEA-USP)}}
+\date{2007}
+
+\begin{document}
+
+\maketitle
+
+%================================================
+\begin{frame}{Sumário}
+\begin{enumerate}
+  \item Motivação: Multiplicidade de Equilíbrios e Custo Computacional
+  \item Modelo de Jogo Dinâmico Discreto e MPE
+  \item Mapeamento Alternativo e Estimação PML
+  \item Estimador NPL para Jogos e Heterogeneidade Não-Observada
+  \item Monte Carlo: Desempenho dos Estimadores
+  \item Aplicação Empírica: Varejo no Chile
+  \item Conclusão e Legado
+\end{enumerate}
+\end{frame}
+
+%================================================
+\begin{frame}{1. Motivação: Dois Desafios em Jogos Dinâmicos}
+\textbf{Problema 1 — Multiplicidade de Equilíbrios:}
+\begin{itemize}
+  \item MPE não é único em quase todos os jogos com funções de melhor resposta não-lineares
+  \item MLE exige computar \textit{todos} os equilíbrios para cada $\theta$ — inviável
+  \item Abordagem padrão: impor restrições que garantem unicidade (Bresnahan-Reiss) ou agregação em $N$
+\end{itemize}
+
+\textbf{Problema 2 — Custo Computacional:}
+\begin{itemize}
+  \item Cada equilíbrio resolve $N$ problemas de PD acoplados
+  \item Maldição da dimensionalidade: custo cresce exponencialmente com $N$
+  \item NFXP resolve o jogo completo a cada avaliação de $\mathcal{L}(\theta)$
+\end{itemize}
+
+\textbf{Contribuição:} Classe de estimadores PML que resolve ambos os problemas:
+\begin{itemize}
+  \item 2S-PML: simples mas enviesado em amostras finitas
+  \item NPL: extensão recursiva com melhor precisão e eficiência assintótica
+  \item Aplicação: entrada/saída em 5 indústrias de varejo no Chile (1994-1999)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{2. Modelo de Jogo Dinâmico e MPE}
+\textbf{Pressupostos centrais:}
+\begin{itemize}
+  \item (A1) Separabilidade: $\Pi_i(a_t,x_t,\varepsilon_{it}) = H_i(a_t,x_t) + \varepsilon_{it}(a_{it})$
+  \item (A2) Independência condicional: $p(x',\varepsilon'|a,x,\varepsilon) = \tilde{p}(\varepsilon')f(x'|a,x)$
+  \item (A3) Valores privados independentes entre firmas
+\end{itemize}
+
+\textbf{Exemplo — lucro de firma ativa em mercado local:}
+\begin{equation}
+  \Pi_{imt}(1) = \theta^{RS}\ln(S_{mt}) - \theta^{RN}\ln\!\bigl(1+\textstyle\sum_{j\neq i}a_{jmt}\bigr) - \theta^{FC} - \theta^{EC}(1-a_{i,t-1}) + \varepsilon_{imt}
+\end{equation}
+
+\textbf{MPE em espaço de probabilidades:}
+\begin{equation}
+  P^* = \Lambda(P^*), \quad \Lambda_i(a_i|x;P_{-i}) = \int\!\mathbf{1}\!\bigl\{a_i=\arg\max[v_i^P(a,x)+\varepsilon_i(a)]\bigr\}g_i(d\varepsilon_i)
+\end{equation}
+
+Em geral \textbf{não único} $\Rightarrow$ multiplicidade de equilíbrios
+\end{frame}
+
+%================================================
+\begin{frame}{3. Mapeamento Alternativo e Estimadores PML}
+\textbf{Mapeamento $\Psi$ (evita resolver $N$ DPs):}
+\begin{equation}
+  (I-\beta F^P)V_i^P = \textstyle\sum_a P_i(a)\odot[\pi_i^P(a)+e_i^P(a)]
+  \;\Rightarrow\; V_i^P = F_i(P)
+\end{equation}
+\textbf{Representation Lemma:} pontos fixos de $\Lambda$ e $\Psi$ idênticos — MPE $\equiv$ ponto fixo de $\Psi$
+
+\textbf{Pseudo-verossimilhança:}
+\begin{equation}
+  Q_M(\theta, P) = \frac{1}{M}\sum_{m,t,i}\ln\Psi_i(a_{imt}|x_{mt}; P,\theta)
+\end{equation}
+
+\textbf{2S-PML (Proposição 1):}
+$\hat{\theta}_{2S} = \arg\max_\theta Q_M(\theta, \hat{P}_0)$ com $\hat{P}_0$ não-paramétrico.
+$\sqrt{M}(\hat{\theta}_{2S}-\theta_0)\to\mathcal{N}(0,V_{2S})$ com $V_{2S} \geq \Omega^{-1}$ (ineficiente)
+
+\textbf{Limitações do 2S-PML:}
+\begin{itemize}
+  \item Assintoticamente ineficiente; sério viés em amostras finitas
+  \item $\hat{P}_0$ consistente nem sempre disponível (ex.: heterogeneidade de mercado)
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{4. Algoritmo NPL para Jogos}
+\textbf{NPL:} extensão recursiva do 2S-PML, inicializada com qualquer $P^0$:
+\begin{align}
+  \hat{\theta}^K &= \arg\max_\theta Q_M(\theta, P^{K-1}) \\
+  P^K &= \Psi(\hat{\theta}^K, P^{K-1})
+\end{align}
+
+\textbf{Proposição 2 (Consistência):} sob condições adicionais, incluindo que o Jacobiano do operador NPL não tenha autovalores no círculo unitário, o NPL converge e é consistente independente de $P^0$
+
+\textbf{Multiplicidade equilíbrios $\neq$ multiplicidade pontos fixos NPL:}
+\begin{itemize}
+  \item Modelo com múltiplos MPE pode ter único ponto fixo NPL
+  \item Modelo exatamente identificado: ponto fixo NPL sempre único e estável
+\end{itemize}
+
+\textbf{NPL com heterogeneidade não-observada $\omega_m$ (A6):}
+\begin{equation}
+  \ln\Pr(\text{dados}|\theta,P) = \textstyle\sum_m \ln\sum_l p_l(\bar{x}_m)\Pr(\mathbf{a}_m|\bar{x}_m,\omega_l;\theta,P)
+\end{equation}
+Permite múltiplos equilíbrios no DGP via mecanismo ``sunspot''
+\end{frame}
+
+%================================================
+\begin{frame}{5. Monte Carlo: Desempenho dos Estimadores (Tabela IV)}
+Modelo: $N=5$ firmas; 160 estados; 800 CCPs; $M=400$; 1.000 réplicas; 6 experimentos
+
+\textbf{Resultados para $\theta^{FC,1}=-1{,}90$, $\theta^{RS}=1{,}00$, $\theta^{EC}=1{,}00$, $\theta^{RN}=1{,}00$ (Exp. 2):}
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+Estimador & $\hat{\theta}^{FC,1}$ & $\hat{\theta}^{RS}$ & $\hat{\theta}^{EC}$ & $\hat{\theta}^{RN}$ \\
+\midrule
+2S-True (benchmark) & $-1{,}894$ & $1{,}002$ & $1{,}007$ & $1{,}007$ \\
+2S-Freq             & $-0{,}919$ & $0{,}351$ & $0{,}886$ & $0{,}095$ \\
+NPL                 & $-1{,}893$ & $1{,}016$ & $0{,}998$ & $1{,}050$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Conclusões (Tabela V):}
+\begin{itemize}
+  \item 2S-Freq: MSE 2–7$\times$ o do benchmark em todos os experimentos
+  \item NPL: MSE nunca mais de 27\% acima do benchmark; pode ser \textit{menor} quando $\theta^{RN}$ grande
+  \item NPL converge sempre ao mesmo ponto fixo independente de $P^0$ (todos os 6.000 DGPs)
+  \item Interação estratégica mais forte $\Rightarrow$ mais iterações NPL e maiores ganhos sobre 2S-Freq
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{6. Aplicação Empírica: 5 Indústrias de Varejo no Chile}
+\textbf{Dados:} censo fiscal chileno 1994–1999; 189 comunas; painel anual de todas as firmas com imposto sobre vendas
+
+\textbf{Resultado-chave — sem $\omega_m$:} $\hat{\theta}^{RN} < 0$ em várias indústrias (implausível)
+\begin{itemize}
+  \item Omissão de variável: municípios com $\omega_m$ alto têm mais firmas E mais lucros
+  \item $\Rightarrow$ viés de simultaneidade para baixo em $\theta^{RN}$
+\end{itemize}
+
+\textbf{Com heterogeneidade de mercado não-observada ($\omega_m$, $L=21$ pontos):} $\hat{\theta}^{RN} > 0$ em todas as indústrias
+
+\textbf{Estrutura de mercado comparada:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Indústria & Firmas/10.000 hab. & Herfindahl \\
+\midrule
+Restaurantes  & 14{,}6 & 0{,}17 \\
+Postos gas.   & 1{,}0  & 0{,}74 \\
+Livrarias     & 1{,}9  & 0{,}66 \\
+Sapatarias    & 0{,}9  & 0{,}70 \\
+Peixarias     & 0{,}7  & 0{,}73 \\
+\bottomrule
+\end{tabular}
+\end{center}
+Custos de entrada $\hat{\theta}^{EC}$ de 1–4$\times$ o lucro anual de monopolista médio
+\end{frame}
+
+%================================================
+\begin{frame}{7. Conclusão e Legado}
+\textbf{Resultados:}
+\begin{enumerate}
+  \item NPL resolve os dois desafios centrais: multiplicidade de equilíbrios e custo computacional
+  \item 2S-Freq: grande viés em amostras finitas; NPL: preciso e eficiente
+  \item Heterogeneidade não-observada de mercado é essencial para estimar corretamente $\theta^{RN}$
+\end{enumerate}
+
+\textbf{Legado metodológico:}
+\begin{itemize}
+  \item Estabelece PML/NPL como paradigma para estimação de DDC games em OI
+  \item Lida com múltiplos equilíbrios sem especificar mecanismo de seleção
+  \item Base para Bajari-Benkard-Levin (2007), Pakes-Ostrovsky-Berry (2007), Pesendorfer-Schmidt-Dengler (2010)
+  \item Aplicação pioneira de DDC games com heterogeneidade não-observada em dados de painel
+\end{itemize}
+\end{frame}
+
+%================================================
+\begin{frame}{Obrigado}
+  \centering
+  \Large Obrigado!
+\end{frame}
+
+\end{document}
