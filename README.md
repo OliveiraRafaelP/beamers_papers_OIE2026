@@ -51,12 +51,12 @@ O código LaTeX produzido pode ser colado diretamente no [Overleaf](https://www.
    ```
    pip install pdfplumber python-docx
    ```
-3. Copie os arquivos da skill para o seu usuário:
+3. Baixe os arquivos da skill em **[OliveiraRafaelP/claude-beamer-skill](https://github.com/OliveiraRafaelP/claude-beamer-skill)** e copie para o seu usuário:
    - `commands/beamer.md` → `~/.claude/commands/beamer.md`
    - `templates/beamer_latex.md` → `~/.claude/templates/beamer_latex.md`
 4. No Claude Code, digite `/beamer` e informe o caminho da pasta do artigo
 
-Os arquivos da skill estão disponíveis no pacote `beamer_skill_setup.zip` — solicite ao autor.
+O repositório [claude-beamer-skill](https://github.com/OliveiraRafaelP/claude-beamer-skill) contém a documentação completa da skill, instruções de instalação e personalização.
 
 ---
 
